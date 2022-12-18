@@ -12,4 +12,4 @@ main_login_user.sql
 # thêm thư viện
 npm install i
 # chạy
-npm run watch-server
+npm run watch-server.
