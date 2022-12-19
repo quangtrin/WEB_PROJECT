@@ -1,8 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
-import {Alert} from "react-bootstrap"
-import {LoadingButton} from '@mui/lab';
 const useStyle = createUseStyles({
   login: {
     padding: "50px 75px",
@@ -78,50 +74,38 @@ const useStyle = createUseStyles({
     textDecoration: "none",
   },
 });
-const Login = () => {
-  const classes = useStyle();
-  const [account, setAccount] = useState();
-  const [password, setPassword] = useState();
-  const [isLoginSucces, setIsLoginSucces] = useState(true);
-  const [isLogining, setIsLogining] = useState(false);
-  const handleChangeAccount = (e) => {
-    setAccount(e.target.value);
-  }
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
-  const handleClickSubmit = async (e) => {
-    if(account && password){
-      setIsLogining(true);
-      const res = await axios.post("/api/user/signUp", {
-        account: account,
-        password: password
-      })
-      setIsLogining(false);
-      if(res.data.login) setIsLoginSucces(true);
-      else setIsLoginSucces(false);
-    }
-  }
-  useEffect(() => {
-  }, []);
-  
+const Register = () => {
+    const classes = useStyle();
   return (
     <>
-    {!isLoginSucces ?  <Alert variant="danger">Tài khoản hoặc mật khẩu không đúng!</Alert> : <></>}
       <div className={classes.login}>
-        <h1 className={classes.login_heading}>Đăng nhập</h1>
-        <div className={classes.login_form}>
-          <label htmlFor="email" className={classes.login_label}>
-            Tên đăng nhập
+        <h1 className={classes.login_heading}>Đăng ký</h1>
+        <form action="#" className={classes.login_form}>
+          <label htmlFor="username" className={classes.login_label}>
+            Tên người dùng
           </label>
           <input
             type="text"
-            id="account"
+            id="username"
             required
-            name="account"
+            name="username"
             className={classes.login_input}
+            minLength={3}
+            maxLength={200}
+            placeholder="Nguyễn Văn A"
+          />
+          <label htmlFor="email" className={classes.login_label}>
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            required
+            name="email"
+            className={classes.login_input}
+            minLength={3}
+            maxLength={200}
             placeholder="user@gmail.com"
-            onChange={handleChangeAccount}
           />
           <label htmlFor="password" className={classes.login_label}>
             Mật khẩu
@@ -132,15 +116,42 @@ const Login = () => {
             required
             name="password"
             className={classes.login_input}
+            minLength={6}
+            maxLength={30}
             placeholder="*********"
-            onChange={handleChangePassword}
           />
-          { !isLogining ? <button className={classes.login_submit} onClick = {handleClickSubmit}>Đăng nhập</button>: <LoadingButton className={classes.login_submit} loading></LoadingButton>}
-        </div>
+          <label htmlFor="phone" className={classes.login_label}>
+            Số điện thoại
+          </label>
+          <input
+            type="text"
+            id="phone"
+            required
+            name="phone"
+            className={classes.login_input}
+            minLength={10}
+            maxLength={10}
+            placeholder="0123456789"
+          />
+          <label htmlFor="adds" className={classes.login_label}>
+            Địa chỉ
+          </label>
+          <input
+            type="text"
+            id="adds"
+            required
+            name="adds"
+            className={classes.login_input}
+            minLength={3}
+            maxLength={200}
+            placeholder="Name Address"
+          />
+          <button className={classes.login_submit}>Đăng nhập</button>
+        </form>
         <p className={classes.login_already}>
-          <span>Bạn chưa có tài khoản?</span>
-          <a href="/Register" className={classes.register_link}>
-            Đăng ký
+          <span>Bạn đã có tài khoản?</span>
+          <a href="/login" className={classes.login_link}>
+            Đăng nhập
           </a>
         </p>
       </div>
@@ -148,4 +159,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
