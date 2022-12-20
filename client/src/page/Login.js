@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
-import {Alert} from "react-bootstrap"
-import {LoadingButton} from '@mui/lab';
+import { Alert } from "react-bootstrap";
+import { Button } from "antd";
+import Swal from "sweetalert2";
 const useStyle = createUseStyles({
   login: {
     padding: "50px 75px",
@@ -44,22 +45,12 @@ const useStyle = createUseStyles({
   },
 
   login_submit: {
-    padding: "25px",
-    color: "white",
     fontSize: "18px",
-    textAlign: "center",
-    border: "0",
-    outline: "none",
-    display: "inline-block",
+    color: "white",
     width: "100%",
+    height: "50px",
     borderRadius: "15px",
     backgroundColor: "#82c91e",
-    fontFamily: "'Poppins', sans-serif",
-    fontWeight: "600",
-    cursor: "pointer",
-    boxShadow: "0 5px 10px 0 rgba(130, 201, 30, 0.5)",
-    marginTop: "25px",
-    marginBottom: "15px",
   },
 
   login_already: {
@@ -86,29 +77,41 @@ const Login = () => {
   const [isLogining, setIsLogining] = useState(false);
   const handleChangeAccount = (e) => {
     setAccount(e.target.value);
-  }
+  };
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
-  }
+  };
   const handleClickSubmit = async (e) => {
-    if(account && password){
+    e.preventDefault();
+    if (account && password) {
       setIsLogining(true);
       const res = await axios.post("/api/user/signUp", {
         account: account,
-        password: password
-      })
+        password: password,
+      });
       setIsLogining(false);
-      if(res.data.login) setIsLoginSucces(true);
-      else setIsLoginSucces(false);
+      if (res.data.login) {
+        const text = "Welcome " + res.data.userName;
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: text,
+          confirmButtonText: '<a class="fa fa-thumbs-up" href ="#"></a> OK',
+        });
+        setIsLoginSucces(true);
+      } else setIsLoginSucces(false);
     }
-  }
-  useEffect(() => {
-  }, []);
-  
+  };
+  useEffect(() => {}, []);
+
   return (
     <>
-    {!isLoginSucces ?  <Alert variant="danger">Tài khoản hoặc mật khẩu không đúng!</Alert> : <></>}
-      <div className={classes.login}>
+      {!isLoginSucces ? (
+        <Alert variant="danger">Tài khoản hoặc mật khẩu không đúng!</Alert>
+      ) : (
+        <></>
+      )}
+      <form id="form" className={classes.login} onSubmit={handleClickSubmit}>
         <h1 className={classes.login_heading}>Đăng nhập</h1>
         <div className={classes.login_form}>
           <label htmlFor="email" className={classes.login_label}>
@@ -135,7 +138,15 @@ const Login = () => {
             placeholder="*********"
             onChange={handleChangePassword}
           />
-          { !isLogining ? <button className={classes.login_submit} onClick = {handleClickSubmit}>Đăng nhập</button>: <LoadingButton className={classes.login_submit} loading></LoadingButton>}
+          <Button
+            type="Call to Action"
+            className={classes.login_submit}
+            onClick={handleClickSubmit}
+            loading={isLogining}
+          >
+            {!isLogining ? <>Đăng nhập</> : <></>}
+          </Button>
+          <input type="submit" value="Submit" hidden />
         </div>
         <p className={classes.login_already}>
           <span>Bạn chưa có tài khoản?</span>
@@ -143,7 +154,7 @@ const Login = () => {
             Đăng ký
           </a>
         </p>
-      </div>
+      </form>
     </>
   );
 };

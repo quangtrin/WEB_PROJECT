@@ -75,10 +75,10 @@ const useStyle = createUseStyles({
   },
 });
 const Register = () => {
-    const classes = useStyle();
+  const classes = useStyle();
   return (
     <>
-      <div className={classes.login}>
+      <form className={classes.login}>
         <h1 className={classes.login_heading}>Đăng ký</h1>
         <form action="#" className={classes.login_form}>
           <label htmlFor="username" className={classes.login_label}>
@@ -151,10 +151,10 @@ const Register = () => {
         <p className={classes.login_already}>
           <span>Bạn đã có tài khoản?</span>
           <a href="/login" className={classes.login_link}>
-            Đăng nhập
+            Đăng ký
           </a>
         </p>
-      </div>
+      </form>
     </>
   );
 };
