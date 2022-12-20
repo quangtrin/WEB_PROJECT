@@ -22,6 +22,6 @@ app.use(express.urlencoded());
 app.use(express.json());
 user(app);
 
-app.listen(5000, () => {
+app.listen(4000, () => {
   console.log("Server started on port 5000");
 });
