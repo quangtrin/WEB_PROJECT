@@ -18,7 +18,8 @@ connect.connect((err) => {
 // app.get("/", (req, res) => {
 //   res.json({ users: ["userOne", "userTwo", "userThress"] });
 // });
-
+app.use(express.urlencoded());
+app.use(express.json());
 user(app);
 
 app.listen(4000, () => {
