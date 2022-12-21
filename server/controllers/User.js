@@ -8,16 +8,33 @@ var connect = mysql.createConnection({
   database: "main",
 });
 
-const User = {
+const userController = {
   signUp: async (req, res) => {
     const { account, password } = req.body;
     await userModel.signUp(connect, account, password, (err, data) => {
       if (err) console.log(err);
       else if (data[0] != null) {
-        res.json({ login: true, id: data[0].idLoginUser, userName: data[0].userName});
-      }
-      else res.json({ login: false });
+        res.json({
+          login: true,
+          id: data[0].idLoginUser,
+          userName: data[0].userName,
+        });
+      } else res.json({ login: false });
     });
+  },
+  register: async (req, res) => {
+    const { account, password, userName, avatarUrl } = req.body;
+    await userModel.register(
+      connect,
+      account,
+      password,
+      userName,
+      avatarUrl,
+      (err, data) => {
+        if (err) console.log(err);
+        else res.json({ register: data });
+      }
+    );
   },
   getThongTin: async (req, res) => {
     await userModel.getThongTin(connect, (err, data) => {
@@ -27,4 +44,4 @@ const User = {
     });
   },
 };
-module.exports = User;
+module.exports = userController;

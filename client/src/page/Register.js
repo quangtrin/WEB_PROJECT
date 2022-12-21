@@ -1,4 +1,9 @@
+import axios from "axios";
+import { useState } from "react";
 import { createUseStyles } from "react-jss";
+import { Alert } from "react-bootstrap";
+import Swal from "sweetalert2";
+import userImg from "../imgs/user_default.png";
 const useStyle = createUseStyles({
   login: {
     padding: "50px 75px",
@@ -76,11 +81,52 @@ const useStyle = createUseStyles({
 });
 const Register = () => {
   const classes = useStyle();
+  const [account, setAccount] = useState("");
+  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [accountExist, setAccountExist] = useState(false);
+  const handleChangeAccount = (e) => {
+    setAccount(e.target.value);
+  };
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleChangeUserName = (e) => {
+    setUserName(e.target.value);
+  };
+  const handleClickSubmit = async (e) => {
+    e.preventDefault();
+    if (account && userName && password) {
+      const res = await axios.post("/api/user/register", {
+        account: account,
+        password: password,
+        userName: userName,
+        avatarUrl: userImg,
+      });
+      if (!res?.data?.register) {
+        setAccountExist(true);
+      } else {
+        setAccountExist(false);
+
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Đăng ký thành công",
+          confirmButtonText: '<a class="fa fa-thumbs-up" href ="#"></a> OK',
+        });
+      }
+    }
+  };
   return (
     <>
-      <form className={classes.login}>
+      {accountExist ? (
+        <Alert variant="danger">Tài khoản đã tồn tại</Alert>
+      ) : (
+        <></>
+      )}
+      <div className={classes.login}>
         <h1 className={classes.login_heading}>Đăng ký</h1>
-        <form action="#" className={classes.login_form}>
+        <form className={classes.login_form} onSubmit={handleClickSubmit}>
           <label htmlFor="username" className={classes.login_label}>
             Tên người dùng
           </label>
@@ -93,12 +139,13 @@ const Register = () => {
             minLength={3}
             maxLength={200}
             placeholder="Nguyễn Văn A"
+            onChange={handleChangeUserName}
           />
           <label htmlFor="email" className={classes.login_label}>
             Email
           </label>
           <input
-            type="email"
+            type="text"
             id="email"
             required
             name="email"
@@ -106,6 +153,7 @@ const Register = () => {
             minLength={3}
             maxLength={200}
             placeholder="user@gmail.com"
+            onChange={handleChangeAccount}
           />
           <label htmlFor="password" className={classes.login_label}>
             Mật khẩu
@@ -119,8 +167,9 @@ const Register = () => {
             minLength={6}
             maxLength={30}
             placeholder="*********"
+            onChange={handleChangePassword}
           />
-          <label htmlFor="phone" className={classes.login_label}>
+          {/* <label htmlFor="phone" className={classes.login_label}>
             Số điện thoại
           </label>
           <input
@@ -132,8 +181,8 @@ const Register = () => {
             minLength={10}
             maxLength={10}
             placeholder="0123456789"
-          />
-          <label htmlFor="adds" className={classes.login_label}>
+          /> */}
+          {/* <label htmlFor="adds" className={classes.login_label}>
             Địa chỉ
           </label>
           <input
@@ -145,16 +194,16 @@ const Register = () => {
             minLength={3}
             maxLength={200}
             placeholder="Name Address"
-          />
-          <button className={classes.login_submit}>Đăng nhập</button>
+          /> */}
+          <button className={classes.login_submit}>Đăng ký</button>
         </form>
         <p className={classes.login_already}>
           <span>Bạn đã có tài khoản?</span>
           <a href="/login" className={classes.login_link}>
-            Đăng ký
+            Đăng nhập
           </a>
         </p>
-      </form>
+      </div>
     </>
   );
 };
