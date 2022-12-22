@@ -1,17 +1,53 @@
-import { createUseStyles } from "react-jss";
-const useStyle = createUseStyles({
-    // css
-    test: {
-        color: "blue"
-    }
-  });
+import axios from "axios";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import userImg from "../imgs/user_default.png";
+import imgLogo from "../imgs/logo-pops.png";
+import imgIconSearch from "../imgs/search.png";
+
+import "./Header.css";
 
 const Header = () => {
-    const classes = useStyle();
     return (
         // html
         <>
-        <div className={classes.test}> quang </div>
+            <header className="header">
+                <img src={imgLogo} alt="logo" />
+                <nav className="container">
+                    <ul className="header_nav_links">
+                        <li>
+                            <a href="#">Thiếu nhi</a>
+                        </li>
+                        <li>
+                            <a href="#">Comics</a>
+                        </li>
+                        <li>
+                            <a href="#">Anime</a>
+                        </li>
+                        <li>
+                            <a href="#">Phim</a>
+                        </li>
+                        <li>
+                            <a href="#">Âm nhạc</a>
+                        </li>
+                        <li>
+                            <a href="#">Thêm</a>
+                        </li>
+                    </ul>
+                </nav>
+                <form className="header_form" action="#">
+                    <input className="header_search" type="text" placeholder="Search..." />
+                    <button type="submit">
+                        <img src={imgIconSearch} alt="" />
+                    </button>
+                </form>
+                <a className="cta" href="#">
+                    <button className="header_register">ĐĂNG KÝ</button>
+                </a>
+                <a className="cta" href="#">
+                    <button className="header_login">ĐĂNG NHẬP</button>
+                </a>
+            </header>
         </>
     )
 }
