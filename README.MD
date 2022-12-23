@@ -1,34 +1,16 @@
-# cài đặt client
-
-cd client (..../WEB_PROJECT/client)
-
 # thêm thư viện
-
 npm i
-
-# chạy
-
-npm run watch-client
-
-# cài đặt server
-
-cd server (..../WEB_PROJECT/server)
-
-# cài đặt auth mysql
-
-tạo file .env tạo các biến global với tên (DATABASTE_HOST, DATABASE_USER, DATABASE_PORT, DATABASE_NAME, DATABASE_PASSWORD)
-
-=> có thể copy từ file .env.examp và thay đổi giá trị biến
-
 # import data mySQL
-
 main_login_user.sql
+# cài đặt auth mysql
+cd server
 
-# thêm thư viện
-
-npm i
-
-# chạy
-
+tạo file .env trong thư mục server tạo các biến global với tên (DATABASTE_HOST, DATABASE_USER, DATABASE_PORT, DATABASE_NAME, DATABASE_PASSWORD)
+=> có thể copy từ file .env.examp và thay đổi giá trị biến
+# chạy client
+cd client
+npm run watch-client
+# chạy server
+cd server
 npm run watch-server
 

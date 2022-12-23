@@ -8,13 +8,13 @@ import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <div>
-      {/* <Header></Header> */}
+      <Header></Header>
       <Routes>
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/test" element={<Test />} />
       </Routes>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 }
