@@ -1,11 +1,7 @@
-import axios from "axios";
-import { useState } from "react";
-import Swal from "sweetalert2";
-import userImg from "../imgs/user_default.png";
 import imgLogo from "../imgs/logo-pops.png";
 import imgIconSearch from "../imgs/search.png";
 
-import "./Header.css";
+import "./Style.css";
 
 const Header = () => {
     return (
