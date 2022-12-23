@@ -272,6 +272,8 @@ header {
 
 .footer_icon a {
     margin: 0 10 0 0px;
+    padding: 10px;
+    
 }
 
 .footer_icon img {
