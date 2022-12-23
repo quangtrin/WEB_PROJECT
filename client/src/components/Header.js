@@ -1,7 +1,7 @@
 import imgLogo from "../imgs/logo-pops.png";
 import imgIconSearch from "../imgs/search.png";
 
-import "./Style.css";
+import "./Header.css";
 
 const Header = () => {
     return (

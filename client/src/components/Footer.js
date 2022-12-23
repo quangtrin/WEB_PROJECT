@@ -3,7 +3,7 @@ import imgIconGooglePlay from "../imgs/googleplay.png";
 import imgIconSmartTV from "../imgs/smartTV.png";
 import imgIconAppStore from "../imgs/appstore.png";
 
-import "./Style.css";
+import "./Footer.css";
 
 const Footer = () => {
     return (

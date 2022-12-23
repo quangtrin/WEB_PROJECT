@@ -4,6 +4,7 @@ import Test from "./page/test";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Register from "./page/Register";
+import "./App.css";
 function App() {
   return (
     <div>
