@@ -1,77 +1,15 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { createUseStyles } from "react-jss";
+import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Button } from "antd";
 import Swal from "sweetalert2";
 
-const useStyle = createUseStyles({
-  login: {
-    padding: "50px 75px",
-    backgroundColor: "#fff",
-    width: "100%",
-    maxWidth: "600px",
-    borderRadius: "15px",
-  },
+import styles from "./Login.module.scss";
+import classNames from "classnames/bind";
 
-  login_heading: {
-    fontSize: "40px",
-    fontWeight: "bold",
-    color: "#373941",
-    textAlign: "center",
-    marginBottom: "35px",
-  },
+const cx = classNames.bind(styles);
 
-  login_label: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    color: "#373941",
-    marginBottom: "10px",
-    display: "inline-block",
-    cursor: "pointer",
-  },
-
-  login_input: {
-    display: "block",
-    width: "100%",
-    padding: "20px",
-    borderRadius: "15px",
-    backgroundColor: "#f2f3f5",
-    outline: "none",
-    fontFamily: "'Poppins', sans-serif",
-    fontSize: "18px",
-    marginBottom: "30px",
-    border: "1px solid white",
-    boxShadow: "0 5px 10px 0 rgba(55, 57, 65, 0.5)",
-  },
-
-  login_submit: {
-    fontSize: "18px",
-    color: "white",
-    width: "100%",
-    height: "50px",
-    borderRadius: "15px",
-    backgroundColor: "#82c91e",
-  },
-
-  login_already: {
-    textAlign: "center",
-    fontSize: "16px",
-    color: "#999",
-  },
-
-  register_link: {
-    color: "#2979ff",
-    textDecoration: "none",
-  },
-
-  login_link: {
-    color: "red",
-    textDecoration: "none",
-  },
-});
 const Login = () => {
-  const classes = useStyle();
   const [account, setAccount] = useState();
   const [password, setPassword] = useState();
   const [isLoginSucces, setIsLoginSucces] = useState(true);
@@ -103,7 +41,6 @@ const Login = () => {
       } else setIsLoginSucces(false);
     }
   };
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -112,22 +49,22 @@ const Login = () => {
       ) : (
         <></>
       )}
-      <form id="form" className={classes.login} onSubmit={handleClickSubmit}>
-        <h1 className={classes.login_heading}>Đăng nhập</h1>
-        <div className={classes.login_form}>
-          <label htmlFor="email" className={classes.login_label}>
+      <form id="form" className={cx("login")} onSubmit={handleClickSubmit}>
+        <h1 className={cx("login_heading")}>Đăng nhập</h1>
+        <div className={cx("login_form")}>
+          <label htmlFor="account" className={cx("login_label")}>
             Tên đăng nhập
           </label>
           <input
-            type="text"
+            type="email"
             id="account"
             required
             name="account"
-            className={classes.login_input}
+            className={cx("login_input")}
             placeholder="user@gmail.com"
             onChange={handleChangeAccount}
           />
-          <label htmlFor="password" className={classes.login_label}>
+          <label htmlFor="password" className={cx("login_label")}>
             Mật khẩu
           </label>
           <input
@@ -135,23 +72,23 @@ const Login = () => {
             id="password"
             required
             name="password"
-            className={classes.login_input}
+            className={cx("login_input")}
             placeholder="*********"
             onChange={handleChangePassword}
           />
           <Button
             type="Call to Action"
-            className={classes.login_submit}
+            className={cx("login_submit")}
             onClick={handleClickSubmit}
             loading={isLogining}
           >
-            {!isLogining ? <>Đăng nhập</> : <></>}
+            {!isLogining ? "Đăng nhập" : <></>}
           </Button>
           <input type="submit" value="Submit" hidden />
         </div>
-        <p className={classes.login_already}>
+        <p className={cx("login_already")}>
           <span>Bạn chưa có tài khoản?</span>
-          <a href="/Register" className={classes.register_link}>
+          <a href="/Register" className={cx("register_link")}>
             Đăng ký
           </a>
         </p>
