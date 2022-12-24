@@ -1,5 +1,5 @@
 .footer {
-	background-color: #111111;
+	background-color: var(--footer-background-color);
     padding: 16px 5%;
     padding-top: 50px;
     width: 100%;
@@ -16,7 +16,7 @@
 
 .footer h6 {
 	font-size: 20px;
-    color: white;
+    color: var(--white);
     margin-bottom: 15px;
 }
 
