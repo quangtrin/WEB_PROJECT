@@ -91,7 +91,7 @@ const Login = () => {
           </div>
           <Button
             type="Call to Action"
-            className={cx("login_submit")}
+            className={cx("login_submit", account && password ? "primary" : "")}
             onClick={handleClickSubmit}
             loading={isLogining}
           >

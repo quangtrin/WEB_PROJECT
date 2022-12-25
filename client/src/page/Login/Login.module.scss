@@ -66,11 +66,13 @@
   border-radius: 8px;
   background-color: #929292;
   box-shadow: 1px 2px transparent;
-
   &:hover {
     opacity: 0.9;
-    background-color: var(--primary);
   }
+}
+
+.login_submit.primary {
+  background-color: var(--primary);
 }
 
 .login_already {

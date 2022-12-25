@@ -137,7 +137,14 @@ const Register = () => {
             maxLength={200}
             placeholder="Name Address"
           /> */}
-          <button className={cx("register_submit")}>Đăng ký</button>
+          <button
+            className={cx(
+              "register_submit",
+              account && userName && password ? "primary" : ""
+            )}
+          >
+            Đăng ký
+          </button>
         </form>
         <p className={cx("register_already")}>
           <span>Bạn đã có tài khoản?</span>

@@ -72,6 +72,10 @@
   }
 }
 
+.register_submit.primary {
+  background-color: var(--primary);
+}
+
 .register_already {
   text-align: center;
   font-size: 1.6rem;
