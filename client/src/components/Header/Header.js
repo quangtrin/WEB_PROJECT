@@ -1,0 +1,57 @@
+import imgLogo from "../../imgs/logo-pops.png";
+import imgIconSearch from "../../imgs/search.png";
+import classNames from "classnames/bind";
+import styles from "./Header.module.scss";
+
+const cx = classNames.bind(styles);
+
+const Header = () => {
+  return (
+    // html
+    <>
+      <header className={cx("header")}>
+        <img src={imgLogo} alt="logo" />
+        <nav className={cx("container")}>
+          <ul className={cx("header_nav_links")}>
+            <li>
+              <a href="#">Thiếu nhi</a>
+            </li>
+            <li>
+              <a href="#">Comics</a>
+            </li>
+            <li>
+              <a href="#">Anime</a>
+            </li>
+            <li>
+              <a href="#">Phim</a>
+            </li>
+            <li>
+              <a href="#">Âm nhạc</a>
+            </li>
+            <li>
+              <a href="#">Thêm</a>
+            </li>
+          </ul>
+        </nav>
+        <form className={cx("header_form")} action="#">
+          <input
+            className={cx("header_search")}
+            type="text"
+            placeholder="Search..."
+          />
+          <button type="submit">
+            <img src={imgIconSearch} alt="" />
+          </button>
+        </form>
+        <a className={cx("cta")} href="#">
+          <button className={cx("header_register")}>ĐĂNG KÝ</button>
+        </a>
+        <a className={cx("cta")} href="#">
+          <button className={cx("header_login")}>ĐĂNG NHẬP</button>
+        </a>
+      </header>
+    </>
+  );
+};
+
+export default Header;
