@@ -15,7 +15,7 @@ const Footer = () => {
       <footer className={cx("footer")}>
         <div className={cx("footer_content")}>
           <div className={cx("footer_overview")}>
-            <a href="#">
+            <a href="/">
               <img className={cx("footer_logo")} src={imgLogo} alt="" />
             </a>
             <p>
