@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
 import userImg from "../../imgs/user_default.png";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
@@ -14,6 +15,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [accountExist, setAccountExist] = useState(false);
+  const [isHidePass, setIsHidePass] = useState(true);
+
   const handleChangeAccount = (e) => {
     setAccount(e.target.value);
   };
@@ -48,13 +51,13 @@ const Register = () => {
   };
   return (
     <>
-      {accountExist ? (
-        <Alert variant="danger">Tài khoản đã tồn tại</Alert>
-      ) : (
-        <></>
-      )}
       <div className={cx("register")}>
         <h1 className={cx("register_heading")}>Đăng ký</h1>
+        {accountExist ? (
+          <Alert variant="danger">Tài khoản đã tồn tại</Alert>
+        ) : (
+          <></>
+        )}
         <form className={cx("register_form")} onSubmit={handleClickSubmit}>
           <label htmlFor="username" className={cx("register_label")}>
             Tên người dùng
@@ -87,17 +90,27 @@ const Register = () => {
           <label htmlFor="password" className={cx("register_label")}>
             Mật khẩu
           </label>
-          <input
-            type="password"
-            id="password"
-            required
-            name="password"
-            className={cx("register_input")}
-            minLength={6}
-            maxLength={30}
-            placeholder="*********"
-            onChange={handleChangePassword}
-          />
+          <div className={cx("password_input")}>
+            <input
+              type={isHidePass ? "password" : "text"}
+              id="password"
+              required
+              name="password"
+              className={cx("register_input")}
+              minLength={6}
+              maxLength={30}
+              placeholder="*********"
+              onChange={handleChangePassword}
+            />
+            <div className={cx("hide_icon")}>
+              {isHidePass ? (
+                <EyeFilled onClick={() => setIsHidePass(false)} />
+              ) : (
+                <EyeInvisibleFilled onClick={() => setIsHidePass(true)} />
+              )}
+            </div>
+          </div>
+
           {/* <label htmlFor="phone" className={cx('login_label')}>
             Số điện thoại
           </label>

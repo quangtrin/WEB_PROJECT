@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Button } from "antd";
 import Swal from "sweetalert2";
-
+import React from "react";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
 
@@ -14,6 +15,8 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [isLoginSucces, setIsLoginSucces] = useState(true);
   const [isLogining, setIsLogining] = useState(false);
+  const [isHidePass, setIsHidePass] = useState(true);
+
   const handleChangeAccount = (e) => {
     setAccount(e.target.value);
   };
@@ -44,17 +47,18 @@ const Login = () => {
 
   return (
     <>
-      {!isLoginSucces ? (
-        <Alert variant="danger">Tài khoản hoặc mật khẩu không đúng!</Alert>
-      ) : (
-        <></>
-      )}
       <form id="form" className={cx("login")} onSubmit={handleClickSubmit}>
         <h1 className={cx("login_heading")}>Đăng nhập</h1>
+        {!isLoginSucces ? (
+          <p className={cx("notify")}>Tài khoản hoặc mật khẩu không đúng!</p>
+        ) : (
+          <></>
+        )}
         <div className={cx("login_form")}>
           <label htmlFor="account" className={cx("login_label")}>
             Tên đăng nhập
           </label>
+
           <input
             type="email"
             id="account"
@@ -67,15 +71,24 @@ const Login = () => {
           <label htmlFor="password" className={cx("login_label")}>
             Mật khẩu
           </label>
-          <input
-            type="password"
-            id="password"
-            required
-            name="password"
-            className={cx("login_input")}
-            placeholder="*********"
-            onChange={handleChangePassword}
-          />
+          <div className={cx("password_input")}>
+            <input
+              type={isHidePass ? "password" : "text"}
+              id="password"
+              required
+              name="password"
+              className={cx("login_input")}
+              placeholder="*********"
+              onChange={handleChangePassword}
+            />
+            <div className={cx("hide_icon")}>
+              {isHidePass ? (
+                <EyeFilled onClick={() => setIsHidePass(false)} />
+              ) : (
+                <EyeInvisibleFilled onClick={() => setIsHidePass(true)} />
+              )}
+            </div>
+          </div>
           <Button
             type="Call to Action"
             className={cx("login_submit")}
@@ -86,12 +99,15 @@ const Login = () => {
           </Button>
           <input type="submit" value="Submit" hidden />
         </div>
-        <p className={cx("login_already")}>
+        <div className={cx("login_already")}>
+          <a href="#" className={cx("forgotpass_link")}>
+            Quên mật khẩu?
+          </a>
           <span>Bạn chưa có tài khoản?</span>
           <a href="/Register" className={cx("register_link")}>
             Đăng ký
           </a>
-        </p>
+        </div>
       </form>
     </>
   );
