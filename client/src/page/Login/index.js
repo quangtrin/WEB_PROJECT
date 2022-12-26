@@ -89,15 +89,27 @@ const Login = () => {
               )}
             </div>
           </div>
-          <Button
-            type="Call to Action"
-            className={cx("login_submit", account && password ? "primary" : "")}
-            onClick={handleClickSubmit}
-            loading={isLogining}
-          >
-            {!isLogining ? "Đăng nhập" : <></>}
-          </Button>
-          <input type="submit" value="Submit" hidden />
+          {!isLogining ? (
+            <button
+              className={cx(
+                "login_submit",
+                account && password ? "primary" : ""
+              )}
+            >
+              Đăng nhập
+            </button>
+          ) : (
+            <Button
+              type="Call to Action"
+              className={cx(
+                "login_submit",
+                account && password ? "primary" : ""
+              )}
+              loading
+            >
+              <></>
+            </Button>
+          )}
         </div>
         <div className={cx("login_already")}>
           <a href="#" className={cx("forgotpass_link")}>
