@@ -10,7 +10,9 @@ const Header = () => {
     // html
     <>
       <header className={cx("header")}>
+        <a href="/">
         <img src={imgLogo} alt="logo" />
+        </a>
         <nav className={cx("container")}>
           <ul className={cx("header_nav_links")}>
             <li>
@@ -43,10 +45,10 @@ const Header = () => {
             <img src={imgIconSearch} alt="" />
           </button>
         </form>
-        <a className={cx("cta")} href="#">
+        <a className={cx("cta")} href="/Register">
           <button className={cx("header_register")}>ĐĂNG KÝ</button>
         </a>
-        <a className={cx("cta")} href="#">
+        <a className={cx("cta")} href="/Login">
           <button className={cx("header_login")}>ĐĂNG NHẬP</button>
         </a>
       </header>
