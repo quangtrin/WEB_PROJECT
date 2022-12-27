@@ -37,12 +37,14 @@ const userController = {
       }
     );
   },
-  getThongTin: async (req, res) => {
-    await userModel.getThongTin(connect, (err, data) => {
-      if (err) {
-        console.log(err);
-      } else res.json(data);
-    });
+  getFilm: async (req, res) => {
+    await userModel.getFilm(
+      connect,
+      (err, data) => {
+        if (err) {
+          console.log(err);
+        } else res.json(data);
+      });
   },
 };
 module.exports = userController;

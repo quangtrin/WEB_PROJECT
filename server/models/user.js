@@ -53,8 +53,8 @@ const userModel = {
       } else callback(null, false);
     });
   },
-  getThongTin: async (connection, callback) => {
-    var sql = "SELECT * FROM login_user";
+  getFilm: async (connection, callback) => {
+    var sql = "SELECT * FROM main.film ";
     await connection.query(sql, (err, result, fields) => {
       if (err) {
         callback(err, null);
