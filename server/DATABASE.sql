@@ -113,7 +113,7 @@ CREATE TABLE `film` (
   `otherName` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `status` tinyint DEFAULT NULL,
   `point` float DEFAULT NULL,
-  `release` int DEFAULT NULL,
+  `year` int DEFAULT NULL,
   `duration` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `description` text NOT NULL,
   `categoryID` int DEFAULT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE `film` (
   PRIMARY KEY (`filmID`),
   KEY `categoryID_idx` (`categoryID`),
   CONSTRAINT `categoryID` FOREIGN KEY (`categoryID`) REFERENCES `categoryFilm` (`categoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,6 +131,7 @@ CREATE TABLE `film` (
 
 LOCK TABLES `film` WRITE;
 /*!40000 ALTER TABLE `film` DISABLE KEYS */;
+INSERT INTO `film` VALUES ('ONE PIECE','DAO HAI TAC',1,9.8,NULL,'thang 1','La phim hay nhat',NULL,'https://animehay.pro/thong-tin-phim/one-piece-special-7-episode-of-merry-mou-hitori-no-nakama-no-monogatari-1095.html',1);
 /*!40000 ALTER TABLE `film` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +182,7 @@ CREATE TABLE `login_user` (
   `status` tinyint DEFAULT NULL,
   `create_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,6 +191,7 @@ CREATE TABLE `login_user` (
 
 LOCK TABLES `login_user` WRITE;
 /*!40000 ALTER TABLE `login_user` DISABLE KEYS */;
+INSERT INTO `login_user` VALUES ('ONE PIECE','DAO HAI TAC','La phim hay nhat',1,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `login_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-26  0:15:33
+-- Dump completed on 2022-12-27 20:58:53
