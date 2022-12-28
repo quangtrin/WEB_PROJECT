@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className={cx("background-login")}>
       <form id="form" className={cx("login")} onSubmit={handleClickSubmit}>
         <h1 className={cx("login_heading")}>Đăng nhập</h1>
         {!isLoginSucces ? (
@@ -121,7 +121,7 @@ const Login = () => {
           </a>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

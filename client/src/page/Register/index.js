@@ -50,7 +50,7 @@ const Register = () => {
     }
   };
   return (
-    <>
+    <div className={cx("background-register")}>
       <div className={cx("register")}>
         <h1 className={cx("register_heading")}>Đăng ký</h1>
         {accountExist ? (
@@ -166,7 +166,7 @@ const Register = () => {
           </a>
         </p>
       </div>
-    </>
+    </div>
   );
 };
 
