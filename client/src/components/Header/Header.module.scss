@@ -11,6 +11,7 @@ header {
   right: 0;
   border-bottom: 1px solid #272727;
   transition: all 0.5s ease-in-out;
+  z-index: 10;
 }
 
 .header img {
@@ -154,3 +155,5 @@ header {
     box-shadow: 0 5px 10px 0 var(--header-box-shadow-button-hover);
   }
 }
+
+//navbar

@@ -1,3 +1,8 @@
+.background-register{
+  background-image: var(--gradient-to-bottom-black),url("https://wallpapercave.com/wp/wp4916205.jpg");
+  padding: 76px 0px;
+  height: 100vh;
+}
 .register {
   padding: 50px 75px;
   background-color: #242424;
@@ -7,7 +12,8 @@
   font-weight: bold;
   color: var(--white);
   font-size: 1.8rem;
-  margin: 76px auto;
+  margin: 0px auto;
+  box-shadow: 0px 0px 10px #666;
 
   .notify {
     color: red;

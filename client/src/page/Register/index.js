@@ -4,7 +4,7 @@ import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
 import userImg from "../../imgs/user_default.png";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
-
+import { Button } from "antd";
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
 
@@ -16,7 +16,7 @@ const Register = () => {
   const [userName, setUserName] = useState("");
   const [accountExist, setAccountExist] = useState(false);
   const [isHidePass, setIsHidePass] = useState(true);
-
+  const [isRegistering, setIsRegistering] = useState(false);
   const handleChangeAccount = (e) => {
     setAccount(e.target.value);
   };
@@ -50,11 +50,11 @@ const Register = () => {
     }
   };
   return (
-    <>
+    <div className={cx("background-register")}>
       <div className={cx("register")}>
         <h1 className={cx("register_heading")}>Đăng ký</h1>
         {accountExist ? (
-          <Alert variant="danger">Tài khoản đã tồn tại</Alert>
+          <p className={cx("notify")}>Tài khoản đã tồn tại</p>
         ) : (
           <></>
         )}
@@ -137,14 +137,27 @@ const Register = () => {
             maxLength={200}
             placeholder="Name Address"
           /> */}
-          <button
-            className={cx(
-              "register_submit",
-              account && userName && password ? "primary" : ""
-            )}
-          >
-            Đăng ký
-          </button>
+          {!isRegistering ? (
+            <button
+              className={cx(
+                "register_submit",
+                account && userName && password ? "primary" : ""
+              )}
+            >
+              Đăng ký
+            </button>
+          ) : (
+            <Button
+              type="Call to Action"
+              className={cx(
+                "login_submit",
+                account && password ? "primary" : ""
+              )}
+              loading
+            >
+              <></>
+            </Button>
+          )}
         </form>
         <p className={cx("register_already")}>
           <span>Bạn đã có tài khoản?</span>
@@ -153,7 +166,7 @@ const Register = () => {
           </a>
         </p>
       </div>
-    </>
+    </div>
   );
 };
 
