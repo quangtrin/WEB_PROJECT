@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 function cardFilm({ props }) {
   console.log(props);
   return (
-    <a key={props.id} href="" className={cx("more__content")}>
+    <a key={props.id} href={props.href} className={cx("more__content")}>
       <div className={cx("more__content-img")}>
         <img src={props.img} alt="" />
       </div>
