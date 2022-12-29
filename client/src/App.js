@@ -9,14 +9,14 @@ import ListEpisode from "./page/ListEpisode/index";
 function App() {
   return (
     <div>
-      {/* <Header></Header> */}
+      <Header></Header>
       <Routes>
         <Route path="/ListEpisode" element={<ListEpisode />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Test" element={<Test />} />
       </Routes>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 }
