@@ -1,7 +1,7 @@
 const userModel = {
   signUp: async (connection, account, password, callback) => {
     var sql =
-      "SELECT idLoginUser, userName FROM login_user WHERE account = " +
+      "SELECT userID, userName FROM login_user WHERE account = " +
       "'" +
       account +
       "'" +
@@ -21,20 +21,18 @@ const userModel = {
     account,
     password,
     userName,
+    dateOfBirth,
     avatarUrl,
     callback
   ) => {
     var sql =
-      "SELECT idLoginUser FROM login_user WHERE account = " +
-      "'" +
-      account +
-      "'";
+      "SELECT userID FROM login_user WHERE account = " + "'" + account + "'";
     await connection.query(sql, (err, result, fields) => {
       if (err) callback(err, null);
       else if (result[0] == null) {
         callback(null, true);
         sql =
-          "INSERT INTO login_user(account, password, userName, avatarUrl) VALUES " +
+          "INSERT INTO login_user(account, password, userName, dateOfBirth, avatar, status) VALUES " +
           "('" +
           account +
           "'," +
@@ -45,8 +43,11 @@ const userModel = {
           userName +
           "'," +
           "'" +
+          dateOfBirth +
+          "'," +
+          "'" +
           avatarUrl +
-          "')";
+          "',0)";
         connection.query(sql, (err, result) => {
           if (err) console.log(err);
         });
