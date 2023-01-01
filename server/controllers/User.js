@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const userModel = require("../models/user");
-require('dotenv').config({ path: '.env' })
+require("dotenv").config({ path: ".env" });
 var connect = mysql.createConnection({
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USER,
@@ -34,6 +34,26 @@ const userController = {
       (err, data) => {
         if (err) console.log(err);
         else res.json({ register: data });
+      }
+    );
+  },
+  comment: async (req, res) => {
+    const { comment, userID, commentParentID, likeCount, filmID, episodeID } =
+      req.body;
+    await userModel.comment(
+      connect,
+      comment,
+      userID,
+      commentParentID,
+      likeCount,
+      filmID,
+      episodeID,
+      (err, data) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        res.json(data);
       }
     );
   },
