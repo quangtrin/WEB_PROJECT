@@ -38,10 +38,10 @@ const userController = {
       }
     );
   },
-  comment: async (req, res) => {
+  addComment: async (req, res) => {
     const { comment, userID, commentParentID, likeCount, filmID, episodeID } =
       req.body;
-    await userModel.comment(
+    await userModel.addComment(
       connect,
       comment,
       userID,
@@ -58,8 +58,8 @@ const userController = {
       }
     );
   },
-  getThongTin: async (req, res) => {
-    await userModel.getThongTin(connect, (err, data) => {
+  getComment: async (req, res) => {
+    await userModel.getComment(connect, (err, data) => {
       if (err) {
         console.log(err);
       } else res.json(data);
