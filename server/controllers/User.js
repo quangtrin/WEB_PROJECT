@@ -38,6 +38,26 @@ const userController = {
       }
     );
   },
+  comment: async (req, res) => {
+    const { comment, userID, commentParentID, likeCount, filmID, episodeID } =
+      req.body;
+    await userModel.comment(
+      connect,
+      comment,
+      userID,
+      commentParentID,
+      likeCount,
+      filmID,
+      episodeID,
+      (err, data) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        res.json(data);
+      }
+    );
+  },
   getThongTin: async (req, res) => {
     await userModel.getThongTin(connect, (err, data) => {
       if (err) {

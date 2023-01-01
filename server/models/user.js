@@ -54,6 +54,33 @@ const userModel = {
       } else callback(null, false);
     });
   },
+  comment: async (
+    connect,
+    comment,
+    userID,
+    commentParentID,
+    likeCount,
+    filmID,
+    episodeID,
+    callback
+  ) => {
+    var sql =
+      "INSERT INTO comment( comment, userID, commentParentID, likeCount, filmID, episodeID ) VALUES ?";
+    const VALUES = [
+      [
+        comment,
+        Number(userID),
+        commentParentID ? Number(commentParentID) : null,
+        Number(likeCount),
+        Number(filmID),
+        episodeID ? Number(episodeID) : null,
+      ],
+    ];
+    connect.query(sql, [VALUES], (err, result) => {
+      if (err) callback(err, null);
+      else callback(null, true);
+    });
+  },
   getThongTin: async (connection, callback) => {
     var sql = "SELECT * FROM login_user";
     await connection.query(sql, (err, result, fields) => {
