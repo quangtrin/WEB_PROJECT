@@ -1,23 +1,25 @@
 import { Container, Row, Col } from "react-bootstrap";
 import TextInformation from "../../components/Text/TextInformation";
-
+import Header from "../../components/Header/Header";
 import Navbar from "../../components/Navbar";
 import classNames from "classnames/bind";
 import styles from "./ListEpisode.module.scss";
+import Footer from "../../components/Footer/Footer";
 
 const cx = classNames.bind(styles);
 const ListEpisode = () => {
   return (
     <div>
+      <Header></Header>
       <div className={cx("layout")}>
-         <div className={cx("layout_back")}>
+        <div className={cx("layout_back")}>
           <div className={cx("img_film_layout")}>
             <img
               className={cx("img_film")}
               src="https://animehay.pro//upload/poster/3598.jpg"
             ></img>
           </div>
-        </div> 
+        </div>
         <div className={cx("layout_up")}>
           <Container style={{ paddingLeft: "10%" }}>
             <div className={cx("title_films")}>one piece</div>
@@ -94,6 +96,7 @@ const ListEpisode = () => {
         </div>
         <Navbar className={cx("navbar")}></Navbar>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

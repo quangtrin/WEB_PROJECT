@@ -24,12 +24,13 @@ const userController = {
     });
   },
   register: async (req, res) => {
-    const { account, password, userName, avatarUrl } = req.body;
+    const { account, password, userName, dateOfBirth, avatarUrl } = req.body;
     await userModel.register(
       connect,
       account,
       password,
       userName,
+      dateOfBirth,
       avatarUrl,
       (err, data) => {
         if (err) console.log(err);
