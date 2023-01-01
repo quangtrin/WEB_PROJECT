@@ -1,8 +1,10 @@
-.background-register{
-  background-image: var(--gradient-to-bottom-black),url("https://wallpapercave.com/wp/wp4916205.jpg");
-  padding: 76px 0px;
+.background-register {
+  background-image: var(--gradient-to-bottom-black), url("https://wallpapercave.com/wp/wp4916205.jpg");
   height: 100vh;
+  display: flex;
+  align-items: center;
 }
+
 .register {
   padding: 50px 75px;
   background-color: #242424;
@@ -92,4 +94,27 @@
 
 .login_link {
   color: var(--primary) !important;
+}
+
+.register_input_date {
+  display: block;
+  height: 44px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #353434;
+  color: var(--white);
+  padding: 20px;
+  outline: none;
+  margin: 8px 0 30px;
+  border: 1px solid var(--while);
+
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+
+  // box-shadow: 0 5px 10px 0 rgba(55, 57, 65, 0.5);
+
+  &:focus {
+    border: 1px solid var(--primary);
+  }
 }
