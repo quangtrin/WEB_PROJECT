@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
 import userImg from "../../imgs/user_default.png";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
