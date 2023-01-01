@@ -54,7 +54,7 @@ const userModel = {
       } else callback(null, false);
     });
   },
-  comment: async (
+  addComment: async (
     connect,
     comment,
     userID,
@@ -81,8 +81,9 @@ const userModel = {
       else callback(null, true);
     });
   },
-  getThongTin: async (connection, callback) => {
-    var sql = "SELECT * FROM login_user";
+  getComment: async (connection, callback) => {
+    var sql =
+      "SELECT commentID, comment, userID, commentParentID, DATE_FORMAT(time, '%H:%i %d-%m-%Y') AS time, likeCount, filmID, episodeID FROM comment";
     await connection.query(sql, (err, result, fields) => {
       if (err) {
         callback(err, null);
