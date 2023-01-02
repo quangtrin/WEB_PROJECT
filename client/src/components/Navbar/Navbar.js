@@ -5,13 +5,18 @@ import { SendOutlined } from "@ant-design/icons";
 import styles from "./Navbar.module.scss";
 import CardFilm from "./cardFilm";
 import Comment from "./Comment";
+import Episode from "./episode/Episode";
+import { Col, Row } from "antd";
 
 const cx = classNames.bind(styles);
 
 function Navbar() {
   const [key, setKey] = useState("comment");
   const [comment, setcomment] = useState("");
-
+  const episode = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 28, 29,
+  ];
   const comments = [
     {
       id: 1,
@@ -83,6 +88,12 @@ function Navbar() {
     <div className={cx("wrapper")}>
       <div className={cx("Tabs")}>
         <div
+          className={cx("Tab", key === "episode" ? "active" : "")}
+          onClick={() => setKey("episode")}
+        >
+          <span className={cx("Label")}>Tập</span>
+        </div>
+        <div
           className={cx("Tab", key === "more" ? "active" : "")}
           onClick={() => setKey("more")}
         >
@@ -102,6 +113,9 @@ function Navbar() {
             return <CardFilm key={film.id} props={film}></CardFilm>;
           })
         ) : (
+          <></>
+        )}
+        {key === "comment" ? (
           <div>
             <div className={cx("user-comment")}>
               <div className={cx("user-comment-avatar")}>
@@ -138,6 +152,21 @@ function Navbar() {
               })}
             </div>
           </div>
+        ) : (
+          <></>
+        )}
+        {key === "episode" ? (
+          <Row gutter={[6, 6]}>
+            {episode.map((index) => {
+              return (
+                <Col span={4}>
+                  <Episode href="#" episode={index}></Episode>
+                </Col>
+              );
+            })}
+          </Row>
+        ) : (
+          <></>
         )}
       </div>
     </div>
