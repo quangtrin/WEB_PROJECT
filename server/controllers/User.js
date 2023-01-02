@@ -63,7 +63,7 @@ const userController = {
       if (err) {
         console.log(err);
       } else res.json(data);
-    });
+    })},
   getFilm: async (req, res) => {
     await userModel.getFilm(
       connect,
@@ -71,7 +71,7 @@ const userController = {
         if (err) {
           console.log(err);
         } else res.json(data);
-      });
+      })
   },
 };
 module.exports = userController;
