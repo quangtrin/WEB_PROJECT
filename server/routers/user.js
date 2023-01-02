@@ -8,6 +8,7 @@ const user = (app) => {
   router.post("/register", userController.register);
   router.post("/comment", userController.addComment);
   router.get("/comment", userController.getComment);
+  router.get("/getEpisodeFilm", userController.getEpisodeFilm);
 };
 
 module.exports = user;

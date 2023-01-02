@@ -65,5 +65,14 @@ const userController = {
       } else res.json(data);
     });
   },
+  getEpisodeFilm: async (req, res) => {
+    await userModel.getEpisodeFilm(
+      connect,
+      (err, data) => {
+        if (err) {
+          console.log(err);
+        } else res.json(data);
+      })
+  },
 };
 module.exports = userController;
