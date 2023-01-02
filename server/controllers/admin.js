@@ -30,7 +30,6 @@ const adminController = {
   addFilm: async (req, res) => {
     const {
       filmName,
-      otherName,
       status,
       point,
       year,
@@ -42,7 +41,6 @@ const adminController = {
     await adminModel.addFilm(
       connect,
       filmName,
-      otherName,
       status,
       point,
       year,

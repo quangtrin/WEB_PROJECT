@@ -10,7 +10,6 @@ const adminModel = {
   addFilm: async (
     connect,
     filmName,
-    otherName,
     status,
     point,
     year,
@@ -21,11 +20,10 @@ const adminModel = {
     callback
   ) => {
     var sql =
-      "INSERT INTO film( filmName, otherName, status, point, year, duration, description, categoryID, url ) VALUES ?";
+      "INSERT INTO film( filmName, status, point, year, duration, description, categoryID, url ) VALUES ?";
     const VALUES = [
       [
         filmName,
-        otherName,
         Number(status),
         Number(point),
         Number(year),
