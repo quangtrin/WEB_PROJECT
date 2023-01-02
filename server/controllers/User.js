@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const userModel = require("../models/user");
-require('dotenv').config({ path: '.env' })
+require("dotenv").config({ path: ".env" });
 var connect = mysql.createConnection({
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USER,
@@ -24,12 +24,13 @@ const userController = {
     });
   },
   register: async (req, res) => {
-    const { account, password, userName, avatarUrl } = req.body;
+    const { account, password, userName, dateOfBirth, avatarUrl } = req.body;
     await userModel.register(
       connect,
       account,
       password,
       userName,
+      dateOfBirth,
       avatarUrl,
       (err, data) => {
         if (err) console.log(err);
@@ -37,6 +38,32 @@ const userController = {
       }
     );
   },
+  addComment: async (req, res) => {
+    const { comment, userID, commentParentID, likeCount, filmID, episodeID } =
+      req.body;
+    await userModel.addComment(
+      connect,
+      comment,
+      userID,
+      commentParentID,
+      likeCount,
+      filmID,
+      episodeID,
+      (err, data) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        res.json(data);
+      }
+    );
+  },
+  getComment: async (req, res) => {
+    await userModel.getComment(connect, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else res.json(data);
+    });
   getFilm: async (req, res) => {
     await userModel.getFilm(
       connect,

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const user = require("./routers/user");
+const admin = require("./routers/admin")
 const mysql = require("mysql");
 require('dotenv').config({ path: '.env' })
 var connect = mysql.createConnection({
@@ -22,7 +23,7 @@ connect.connect((err) => {
 app.use(express.urlencoded());
 app.use(express.json());
 user(app);
-
+admin(app);
 app.listen(4000, () => {
   console.log("Server started on port 4000");
 });

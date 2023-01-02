@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
-import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
 import userImg from "../../imgs/user_default.png";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
-
+import { Button } from "antd";
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
 
@@ -14,9 +13,10 @@ const Register = () => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [accountExist, setAccountExist] = useState(false);
   const [isHidePass, setIsHidePass] = useState(true);
-
+  const [isRegistering, setIsRegistering] = useState(false);
   const handleChangeAccount = (e) => {
     setAccount(e.target.value);
   };
@@ -26,6 +26,9 @@ const Register = () => {
   const handleChangeUserName = (e) => {
     setUserName(e.target.value);
   };
+  const handleChangeDateOfBirth = (e) => {
+    setDateOfBirth(e.target.value);
+  };
   const handleClickSubmit = async (e) => {
     e.preventDefault();
     if (account && userName && password) {
@@ -33,6 +36,7 @@ const Register = () => {
         account: account,
         password: password,
         userName: userName,
+        dateOfBirth: dateOfBirth,
         avatarUrl: userImg,
       });
       if (!res?.data?.register) {
@@ -50,11 +54,11 @@ const Register = () => {
     }
   };
   return (
-    <>
+    <div className={cx("background-register")}>
       <div className={cx("register")}>
         <h1 className={cx("register_heading")}>Đăng ký</h1>
         {accountExist ? (
-          <Alert variant="danger">Tài khoản đã tồn tại</Alert>
+          <p className={cx("notify")}>Tài khoản đã tồn tại</p>
         ) : (
           <></>
         )}
@@ -110,41 +114,40 @@ const Register = () => {
               )}
             </div>
           </div>
-
-          {/* <label htmlFor="phone" className={cx('login_label')}>
-            Số điện thoại
+          <label htmlFor="dateOfBirth" className={cx("register_label")}>
+            Ngày sinh
           </label>
           <input
-            type="text"
-            id="phone"
+            type="date"
+            id="dateOfBirth"
             required
-            name="phone"
-            className={cx('login_input')}
-            minLength={10}
-            maxLength={10}
-            placeholder="0123456789"
-          /> */}
-          {/* <label htmlFor="adds" className={cx('login_label')}>
-            Địa chỉ
-          </label>
-          <input
-            type="text"
-            id="adds"
-            required
-            name="adds"
-            className={cx('login_input')}
+            name="dateOfBirth"
+            className={cx("register_input_date")}
             minLength={3}
             maxLength={200}
-            placeholder="Name Address"
-          /> */}
-          <button
-            className={cx(
-              "register_submit",
-              account && userName && password ? "primary" : ""
-            )}
-          >
-            Đăng ký
-          </button>
+            onChange={handleChangeDateOfBirth}
+          />
+          {!isRegistering ? (
+            <button
+              className={cx(
+                "register_submit",
+                account && userName && password ? "primary" : ""
+              )}
+            >
+              Đăng ký
+            </button>
+          ) : (
+            <Button
+              type="Call to Action"
+              className={cx(
+                "login_submit",
+                account && password ? "primary" : ""
+              )}
+              loading
+            >
+              <></>
+            </Button>
+          )}
         </form>
         <p className={cx("register_already")}>
           <span>Bạn đã có tài khoản?</span>
@@ -153,7 +156,7 @@ const Register = () => {
           </a>
         </p>
       </div>
-    </>
+    </div>
   );
 };
 

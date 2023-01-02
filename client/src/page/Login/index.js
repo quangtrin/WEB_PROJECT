@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import { Alert } from "react-bootstrap";
 import { Button } from "antd";
 import Swal from "sweetalert2";
 import React from "react";
@@ -46,7 +45,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className={cx("background-login")}>
       <form id="form" className={cx("login")} onSubmit={handleClickSubmit}>
         <h1 className={cx("login_heading")}>Đăng nhập</h1>
         {!isLoginSucces ? (
@@ -89,15 +88,27 @@ const Login = () => {
               )}
             </div>
           </div>
-          <Button
-            type="Call to Action"
-            className={cx("login_submit", account && password ? "primary" : "")}
-            onClick={handleClickSubmit}
-            loading={isLogining}
-          >
-            {!isLogining ? "Đăng nhập" : <></>}
-          </Button>
-          <input type="submit" value="Submit" hidden />
+          {!isLogining ? (
+            <button
+              className={cx(
+                "login_submit",
+                account && password ? "primary" : ""
+              )}
+            >
+              Đăng nhập
+            </button>
+          ) : (
+            <Button
+              type="Call to Action"
+              className={cx(
+                "login_submit",
+                account && password ? "primary" : ""
+              )}
+              loading
+            >
+              <></>
+            </Button>
+          )}
         </div>
         <div className={cx("login_already")}>
           <a href="#" className={cx("forgotpass_link")}>
@@ -109,7 +120,7 @@ const Login = () => {
           </a>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
