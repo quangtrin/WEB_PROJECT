@@ -54,6 +54,14 @@ const userModel = {
       } else callback(null, false);
     });
   },
+  getFilm: async (connection, callback) => {
+    var sql = "SELECT * FROM film ";
+    await connection.query(sql, (err, result, fields) => {
+      if (err) {
+        callback(err, null);
+      } else callback(null, result);
+    });
+  },
   addComment: async (
     connect,
     comment,
