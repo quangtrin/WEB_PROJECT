@@ -17,7 +17,7 @@ const userController = {
       else if (data[0] != null) {
         res.json({
           login: true,
-          id: data[0].idLoginUser,
+          id: data[0].userID,
           userName: data[0].userName,
         });
       } else res.json({ login: false });
