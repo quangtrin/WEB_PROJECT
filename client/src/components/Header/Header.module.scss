@@ -91,20 +91,20 @@ header {
   font-size: 16px;
   padding: 7px 10px;
   color: var(--black);
-  border: 2px solid var(--primary);
+  border: 2px solid;
   border-radius: 50px;
   margin-right: 10px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
 
   &:hover {
-    border: 2px solid var(--primary);
-    color: var(--primary);
     box-shadow: 0 5px 10px 0 var(--header-box-shadow-button-hover);
   }
 
   :focus {
+    outline: none !important;
     border-color: var(--primary);
+    color: rgb(234 96 22);
   }
 }
 
