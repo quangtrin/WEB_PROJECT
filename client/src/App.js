@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./page/Login";
 import Register from "./page/Register";
-import ListEpisode from "./page/ListEpisode/index";
+import ListEpisode from "./page/ListEpisode/ListEpisode";
 
 function App() {
   return (

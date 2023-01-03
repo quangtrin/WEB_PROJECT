@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import TextInformation from "../../components/Text/TextInformation";
 import Header from "../../components/Header/Header";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import classNames from "classnames/bind";
 import styles from "./ListEpisode.module.scss";
 import Footer from "../../components/Footer/Footer";
