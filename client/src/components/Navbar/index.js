@@ -5,34 +5,36 @@ import { SendOutlined } from "@ant-design/icons";
 import styles from "./Navbar.module.scss";
 import CardFilm from "./cardFilm";
 import Comment from "./Comment";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
 function Navbar() {
   const [key, setKey] = useState("comment");
-  const [comment, setcomment] = useState("");
+  const [comments, setComments] = useState([]);
+  const [userComment, setUserComment] = useState("");
 
-  const comments = [
-    {
-      id: 1,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Cha",
-      commentMessage: "Comment cha",
-      time: "21h",
-      likes: 0,
-      commentChildren: [1],
-    },
-    {
-      id: 2,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Cha",
-      commentMessage: "Comment cha",
-      time: "21h",
-      likes: 1,
-    },
-  ];
+  const getComment = async () => {
+    try {
+      const res = await (await axios.get("/api/user/comment")).data;
+      setComments(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSendComment = async (comment) => {
+    if (comment.trim()) {
+      const req = await axios.post("/api/user/comment", {
+        userID: 6,
+        comment: comment,
+        filmID: 10,
+        likeCount: 0,
+      });
+      setComments((prev) => [...prev, req]);
+      setUserComment("");
+    }
+  };
 
   const commentChilds = [
     {
@@ -79,6 +81,14 @@ function Navbar() {
     },
   ];
 
+  useEffect(() => {
+    getComment();
+  }, [comments]);
+
+  // useEffect(() => {
+  //   handleSendComment();
+  // }, []);
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("Tabs")}>
@@ -114,13 +124,19 @@ function Navbar() {
                 <input
                   type="text"
                   placeholder="Gửi bình luận"
-                  onChange={(e) => setcomment(e.target.value)}
+                  onChange={(e) => setUserComment(e.target.value)}
+                  value={userComment}
                 />
               </div>
               <div className={cx("user-comment-send_icon")}>
                 <SendOutlined
-                  className={cx(comment.length > 0 ? "active" : "")}
+                  className={cx(userComment.trim() ? "active" : "")}
                   style={{ transform: "rotate(-45deg)" }}
+                  onClick={
+                    userComment.trim()
+                      ? () => handleSendComment(userComment)
+                      : null
+                  }
                 />
               </div>
             </div>
@@ -130,9 +146,9 @@ function Navbar() {
               {comments.map((comment) => {
                 return (
                   <Comment
-                    key={comment.id}
+                    key={comment.commentID}
                     data={comment}
-                    commentChilds={commentChilds}
+                    // commentChilds={commentChilds}
                   ></Comment>
                 );
               })}

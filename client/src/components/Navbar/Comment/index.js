@@ -9,12 +9,18 @@ function Comment({ data, commentChilds }) {
   return (
     <div key={data.id} className={cx("comment")}>
       <div className={cx("comment-avatar")}>
-        <img src={data.commentAvartar} alt="Avatar" />
+        <img
+          src={
+            data.commentAvartar ||
+            "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
+          }
+          alt="Avatar"
+        />
       </div>
       <div className={cx("comment-body")}>
         <div className={cx("comment-body_message")}>
-          <span className={cx("message-name")}>{data.commentName}</span>
-          <span className={cx("message-main")}>{data.commentName}</span>
+          <span className={cx("message-name")}>{data.comment}</span>
+          <span className={cx("message-main")}>{data.comment}</span>
         </div>
         <div className={cx("comment-body_options")}>
           <div>
@@ -22,11 +28,11 @@ function Comment({ data, commentChilds }) {
             <span className={cx("option")}>Thích</span>
             <span className={cx("option")}>Trả lời</span>
           </div>
-          {data.likes <= 0 ? (
+          {data.likeCount <= 0 ? (
             <></>
           ) : (
             <span className={cx("option", "icon")}>
-              {data.likes}
+              {data.likeCount}
               <svg
                 viewBox="0 0 16 16"
                 fill="none"
