@@ -1,5 +1,16 @@
+.container {
+  padding: 16px 5%;
+  margin: 0px auto;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .home {
   width: 100%;
+  background-color: #151515;
 }
 
 .slider {
@@ -34,14 +45,14 @@
   z-index: 2;
   display: flex;
   width: 100%;
-  margin-top: 180px;
+  margin-top: 146px;
   justify-content: right;
 }
 
 .navigation-manual ul li {
   list-style: none;
   padding: 0px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .navigation-manual label {
@@ -356,3 +367,5 @@ color: #fff;
 padding-left: 10px;
 padding-right: 15px;
 }
+
+/* End Content */

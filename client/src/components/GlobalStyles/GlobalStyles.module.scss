@@ -28,7 +28,6 @@ html {
   color: var(--text-color);
 }
 
-// Scrollbar
 ::-webkit-scrollbar {
   width: 6px;
   background-color: #1d1d1d;
@@ -50,11 +49,6 @@ html {
   padding: 0;
 }
 
-.container {
-  padding: 16px 5%;
-  margin: 0px auto;
-}
-
 ul {
   list-style: none;
 }
@@ -65,9 +59,4 @@ a {
 
 button {
   border: none;
-}
-
-.flex-container {
-  display: flex;
-  justify-content: space-between;
 }
