@@ -91,7 +91,7 @@ const userModel = {
     });
   },
   getEpisodeFilm: async (connection, callback) => {
-    var sql = "SELECT * FROM main.episode_film ";
+    var sql = "SELECT * FROM episode_film ";
     await connection.query(sql, (err, result, fields) => {
       if (err) {
         callback(err, null);
