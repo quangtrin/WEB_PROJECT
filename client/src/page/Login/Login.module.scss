@@ -1,8 +1,10 @@
-.background-login{
-  background-image: var(--gradient-to-bottom-black),url("../../imgs/background_login.jpg");
-  padding: 76px 0px;
+.background-login {
+  background-image: var(--gradient-to-bottom-black), url("../../imgs/background_login.jpg");
   height: 100vh;
+  display: flex;
+  align-items: center;
 }
+
 .login {
   padding: 50px 75px;
   background-color: #242424;
@@ -72,6 +74,7 @@
   border-radius: 8px;
   background-color: #929292;
   box-shadow: 1px 2px transparent;
+
   &:hover {
     opacity: 0.9;
   }

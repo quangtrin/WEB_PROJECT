@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
 import userImg from "../../imgs/user_default.png";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
@@ -14,6 +13,7 @@ const Register = () => {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [accountExist, setAccountExist] = useState(false);
   const [isHidePass, setIsHidePass] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
@@ -26,6 +26,9 @@ const Register = () => {
   const handleChangeUserName = (e) => {
     setUserName(e.target.value);
   };
+  const handleChangeDateOfBirth = (e) => {
+    setDateOfBirth(e.target.value);
+  };
   const handleClickSubmit = async (e) => {
     e.preventDefault();
     if (account && userName && password) {
@@ -33,6 +36,7 @@ const Register = () => {
         account: account,
         password: password,
         userName: userName,
+        dateOfBirth: dateOfBirth,
         avatarUrl: userImg,
       });
       if (!res?.data?.register) {
@@ -110,33 +114,19 @@ const Register = () => {
               )}
             </div>
           </div>
-
-          {/* <label htmlFor="phone" className={cx('login_label')}>
-            Số điện thoại
+          <label htmlFor="dateOfBirth" className={cx("register_label")}>
+            Ngày sinh
           </label>
           <input
-            type="text"
-            id="phone"
+            type="date"
+            id="dateOfBirth"
             required
-            name="phone"
-            className={cx('login_input')}
-            minLength={10}
-            maxLength={10}
-            placeholder="0123456789"
-          /> */}
-          {/* <label htmlFor="adds" className={cx('login_label')}>
-            Địa chỉ
-          </label>
-          <input
-            type="text"
-            id="adds"
-            required
-            name="adds"
-            className={cx('login_input')}
+            name="dateOfBirth"
+            className={cx("register_input_date")}
             minLength={3}
             maxLength={200}
-            placeholder="Name Address"
-          /> */}
+            onChange={handleChangeDateOfBirth}
+          />
           {!isRegistering ? (
             <button
               className={cx(

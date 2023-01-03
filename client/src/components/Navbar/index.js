@@ -1,12 +1,50 @@
-import classNames from "classnames/bind";
-import styles from "./Navbar.module.scss";
 import React, { useEffect, useState } from "react";
+import classNames from "classnames/bind";
+import { SendOutlined } from "@ant-design/icons";
+
+import styles from "./Navbar.module.scss";
 import CardFilm from "./cardFilm";
+import Comment from "./Comment";
 
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const [key, setKey] = useState("more");
+  const [key, setKey] = useState("comment");
+  const [comment, setcomment] = useState("");
+
+  const comments = [
+    {
+      id: 1,
+      commentAvartar:
+        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
+      commentName: "Cha",
+      commentMessage: "Comment cha",
+      time: "21h",
+      likes: 0,
+      commentChildren: [1],
+    },
+    {
+      id: 2,
+      commentAvartar:
+        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
+      commentName: "Cha",
+      commentMessage: "Comment cha",
+      time: "21h",
+      likes: 1,
+    },
+  ];
+
+  const commentChilds = [
+    {
+      id: 1,
+      commentAvartar:
+        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
+      commentName: "Con",
+      commentMessage: "Comment Con",
+      time: "21h",
+      likes: 1,
+    },
+  ];
 
   const Films = [
     {
@@ -54,17 +92,52 @@ function Navbar() {
           className={cx("Tab", key === "comment" ? "active" : "")}
           onClick={() => setKey("comment")}
         >
-          <span className={cx("Label")}>Bình luận (327)</span>
+          <span className={cx("Label")}>Bình luận ({comments.length})</span>
         </div>
       </div>
 
       <div className={cx("container")}>
         {key === "more" ? (
           Films.map((film) => {
-            return <CardFilm props={film}></CardFilm>;
+            return <CardFilm key={film.id} props={film}></CardFilm>;
           })
         ) : (
-          <></>
+          <div>
+            <div className={cx("user-comment")}>
+              <div className={cx("user-comment-avatar")}>
+                <img
+                  src="https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
+                  alt="Avatar"
+                />
+              </div>
+              <div className={cx("user-comment-input")}>
+                <input
+                  type="text"
+                  placeholder="Gửi bình luận"
+                  onChange={(e) => setcomment(e.target.value)}
+                />
+              </div>
+              <div className={cx("user-comment-send_icon")}>
+                <SendOutlined
+                  className={cx(comment.length > 0 ? "active" : "")}
+                  style={{ transform: "rotate(-45deg)" }}
+                />
+              </div>
+            </div>
+
+            {/* List comment */}
+            <div className={cx("list-container")}>
+              {comments.map((comment) => {
+                return (
+                  <Comment
+                    key={comment.id}
+                    data={comment}
+                    commentChilds={commentChilds}
+                  ></Comment>
+                );
+              })}
+            </div>
+          </div>
         )}
       </div>
     </div>
