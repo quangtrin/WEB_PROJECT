@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classNames from "classnames/bind";
 import { SendOutlined } from "@ant-design/icons";
 
@@ -11,7 +11,7 @@ import { Col, Row } from "antd";
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const [key, setKey] = useState("comment");
+  const [key, setKey] = useState("episode");
   const [comment, setcomment] = useState("");
   const episode = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
