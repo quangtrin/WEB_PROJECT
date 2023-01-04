@@ -1,3 +1,4 @@
+import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
 import Header from "../../components/Header/Header";
 import styles from "./Home.module.scss";
@@ -208,46 +209,55 @@ const Home = () => {
               <span>Phim Mới</span>
             </h3>
           </div>
-          <div className={cx("mySlides", "card-content")}>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-          </div>
-          <div className={cx("mySlides", "card-content")}>
-          <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={20} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={10} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} name={"One Piece" } episode={50} duration={50}/>
-            <CardFilm imgUrl={imgCard} episode={50} duration={50}/>
-          </div>
-          <div className={cx("pagination")}>
-            <a href="#">&lt;&lt;</a>
-            <a className={cx("active")} href="#">
-              1
-            </a>
-            <a href="#">2</a>
-            <span>...</span>
-            <a href="#">3</a>
-            <a href="#">&gt;&gt;</a>
-          </div>
+          <Container fluid="md">
+          <Row>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+          </Row>
+          <Row>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+          </Row>
+          <Row>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+          </Row>
+          <Row>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+          </Row>
+          <Row>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+          </Row>
+        </Container>
+        <div className={cx("pagination")}>
+          <a href="#">&lt;&lt;</a>
+          <a className={cx("active")} href="#">
+            1
+          </a>
+          <a href="#">2</a>
+          <span>...</span>
+          <a href="#">3</a>
+          <a href="#">&gt;&gt;</a>
         </div>
       </div>
+    </div>
       {/* {
         var counter = 1;
         setInterval(function () {
@@ -258,8 +268,8 @@ const Home = () => {
             }
         }, 5000);
       } */}
-      <Footer></Footer>
-    </div>
+  <Footer></Footer>
+    </div >
   );
 };
 export default Home;

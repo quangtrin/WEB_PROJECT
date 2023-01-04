@@ -3,7 +3,7 @@ import styles from "./CardFilm.module.scss";
 const cx = classNames.bind(styles);
 const CardFilm = (props) => {
   return (
-    <div className={cx("film-card")}>
+    <a href="#" className={cx("film-card")}>
       <div className={cx("content-card")}>
         <button className={cx("practice")}>{props.episode}/{props.duration}</button>
       </div>
@@ -13,7 +13,7 @@ const CardFilm = (props) => {
       <div className={cx("text-card")}>
         <span className={cx("name")}>{props.name}</span>
       </div>
-    </div>
+      </a>
   );
 };
 

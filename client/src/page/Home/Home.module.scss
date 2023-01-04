@@ -45,14 +45,15 @@
   z-index: 2;
   display: flex;
   width: 100%;
-  margin-top: 146px;
+  margin-top: 185px;
   justify-content: right;
 }
 
 .navigation-manual ul li {
+  display: block;
   list-style: none;
   padding: 0px;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .navigation-manual label {
@@ -139,7 +140,7 @@
 
 .slider-text {
   text-align: left;
-  margin-top: -45%;
+  margin-top: -35%;
 }
 
 .text-heading h3 {
@@ -147,6 +148,7 @@
   font-size: 36px;
   color: #fff;
   margin-bottom: 30px;
+  display: block;
 }
 
 .text-description p {
@@ -180,16 +182,10 @@
   width: 100%;
 }
 
-
 .text-hot-series h3 {
   font-family: "Roboto", sans-serif;
   font-size: 36px;
   color: #fff;
-}
-
-.text-hot-series h3 span {
-  padding: 0px;
-  margin: 0;
 }
 
 .text-hot-series h3 button {
@@ -212,27 +208,12 @@
   text-align: center;
   object-fit: cover;
   padding: 10px;
-  justify-content: space-between;
   cursor: pointer;
 }
 
 .mySlides-img:hover {
   width: 225px;
   height: 225px;
-}
-
-.text-content h3 {
-  font-family: "Roboto", sans-serif;
-  font-size: 36px;
-  color: #fff;
-}
-
-.shadow {
-  position: relative;
-  width: 100%;
-  height: 1px;
-  background-color: red;
-  box-shadow: 0 -20px 0 15px red;
 }
 
 .adds {
@@ -249,9 +230,11 @@
   background-color: #151515;
 }
 
-.text-content h3 span {
-  padding: 0px;
-  margin: 0;
+.text-content h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  color: #fff;
+  padding-bottom: 30px;
 }
 
 .text-content h3 button {
@@ -263,109 +246,39 @@
   transform: translateY(20%);
 }
 
-/* Card */
-
-.card-content {
-  padding-top: 30px;
-  padding-bottom: 90px;
-}
-
-.film-card {
-  width: 210px;
-  height: 320px;
-  padding-top: 30px;
-  cursor: pointer;
-}
-
-.image-card {
-  margin-bottom: 10px;
-}
-
-.image-card .film-img {
-  width: 210px;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 3px solid rgb(234 96 22);
-}
-
-.image-card .film-img:hover {
-  width: 215px;
-  height: 325px;
-  box-shadow: 0 3px 20px 0 rgba(234, 96, 22, 0.5);
-}
-
-.text-card {
-  text-align: center;
-  padding-top: 10px;
-}
-
-.text-card .name {
-  font-size: 22px;
-  font-weight: 500;
-  color: #fff;
-}
-
-.content-card {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.practice {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 400;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  background-color: rgb(234 96 22);
-  transition: all 0.3s ease;
-}
-
-.practice:hover {
-  background-color: rgb(236, 120, 57);
-}
-
-/* Card */
-
 .pagination {
-padding: 25px 0;
-text-align: center;
+  padding: 25px 0;
+  text-align: center;
   background-color: #151515;
 }
 
 .pagination a {
-display: inline-block;
-font-size: 16px;
-font-weight: 700;
-color: #fff;
-height: 30px;
-width: 30px;
-border: 1px solid transparent;
-border-radius: 50%;
-line-height: 30px;
-text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  line-height: 30px;
+  text-align: center;
 }
 
 .pagination a.active {
   color: rgb(234 96 22);
-border-color: rgb(234 96 22);
+  border-color: rgb(234 96 22);
 }
 
 .pagination a:hover {
-border-color: #fff;
+  border-color: #fff;
 }
 
 .pagination span {
-display: inline-block;
-font-size: 16px;
-font-weight: 700;
-color: #fff;
-padding-left: 10px;
-padding-right: 15px;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 15px;
 }
-
-/* End Content */
