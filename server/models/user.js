@@ -54,6 +54,14 @@ const userModel = {
       } else callback(null, false);
     });
   },
+  getFilm: async (connection, callback) => {
+    var sql = "SELECT * FROM film ";
+    await connection.query(sql, (err, result, fields) => {
+      if (err) {
+        callback(err, null);
+      } else callback(null, result);
+    });
+  },
   addComment: async (
     connect,
     comment,
@@ -84,6 +92,14 @@ const userModel = {
   getComment: async (connection, callback) => {
     var sql =
       "SELECT commentID, comment, userID, commentParentID, DATE_FORMAT(time, '%H:%i %d-%m-%Y') AS time, likeCount, filmID, episodeID FROM comment";
+    await connection.query(sql, (err, result, fields) => {
+      if (err) {
+        callback(err, null);
+      } else callback(null, result);
+    });
+  },
+  getEpisodeFilm: async (connection, callback) => {
+    var sql = "SELECT * FROM episode_film ";
     await connection.query(sql, (err, result, fields) => {
       if (err) {
         callback(err, null);

@@ -15,12 +15,12 @@ const adminModel = {
     year,
     duration,
     description,
-    categoryID,
+    category,
     url,
     callback
   ) => {
     var sql =
-      "INSERT INTO film( filmName, status, point, year, duration, description, categoryID, url ) VALUES ?";
+      "INSERT INTO film( filmName, status, point, year, duration, description, category, url ) VALUES ?";
     const VALUES = [
       [
         filmName,
@@ -29,19 +29,11 @@ const adminModel = {
         Number(year),
         duration,
         description,
-        Number(categoryID),
+        category,
         url,
       ],
     ];
     connect.query(sql, [VALUES], (err, result) => {
-      if (err) callback(err, null);
-      else callback(null, true);
-    });
-  },
-  addCategory: async (connect, category, callback) => {
-    var sql =
-      "INSERT INTO category_film( category ) VALUES('" + category + "')";
-    connect.query(sql, (err, result) => {
       if (err) callback(err, null);
       else callback(null, true);
     });

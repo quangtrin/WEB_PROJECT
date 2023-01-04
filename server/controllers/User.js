@@ -62,6 +62,35 @@ const userController = {
     await userModel.getComment(connect, (err, data) => {
       if (err) {
         console.log(err);
+      } else {
+        var comment = [];
+        const commentParent = data.filter((comment) => {
+          return comment.commentParentID === null;
+        });
+        commentParent.map((commentParent) => {
+          const commentChild = data.filter((comment) => {
+            return comment.commentParentID === commentParent.commentID;
+          });
+          comment.push({
+            commentParent,
+            commentChild,
+          });
+        });
+        res.json(comment);
+      }
+    });
+  },
+  getFilm: async (req, res) => {
+    await userModel.getFilm(connect, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else res.json(data);
+    });
+  },
+  getEpisodeFilm: async (req, res) => {
+    await userModel.getEpisodeFilm(connect, (err, data) => {
+      if (err) {
+        console.log(err);
       } else res.json(data);
     });
   },
