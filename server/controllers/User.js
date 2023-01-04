@@ -17,7 +17,7 @@ const userController = {
       else if (data[0] != null) {
         res.json({
           login: true,
-          id: data[0].idLoginUser,
+          id: data[0].userID,
           userName: data[0].userName,
         });
       } else res.json({ login: false });
@@ -60,6 +60,35 @@ const userController = {
   },
   getComment: async (req, res) => {
     await userModel.getComment(connect, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        var comment = [];
+        const commentParent = data.filter((comment) => {
+          return comment.commentParentID === null;
+        });
+        commentParent.map((commentParent) => {
+          const commentChild = data.filter((comment) => {
+            return comment.commentParentID === commentParent.commentID;
+          });
+          comment.push({
+            commentParent,
+            commentChild,
+          });
+        });
+        res.json(comment);
+      }
+    });
+  },
+  getFilm: async (req, res) => {
+    await userModel.getFilm(connect, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else res.json(data);
+    });
+  },
+  getEpisodeFilm: async (req, res) => {
+    await userModel.getEpisodeFilm(connect, (err, data) => {
       if (err) {
         console.log(err);
       } else res.json(data);

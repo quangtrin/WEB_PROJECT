@@ -5,9 +5,14 @@ import styles from "./Comment.module.scss";
 
 const cx = classNames.bind(styles);
 
-function Comment({ data, commentChilds }) {
+function Comment({ data, commentChilds, callBack, inputElement }) {
+  const handleRep = () => {
+    inputElement.current.focus();
+    callBack[0](data.commentID);
+    callBack[1](data.comment);
+  };
   return (
-    <div key={data.id} className={cx("comment")}>
+    <div key={data.commentID} className={cx("comment")}>
       <div className={cx("comment-avatar")}>
         <img
           src={
@@ -26,7 +31,9 @@ function Comment({ data, commentChilds }) {
           <div>
             <span className={cx("option", "disable")}>{data.time}</span>
             <span className={cx("option")}>Thích</span>
-            <span className={cx("option")}>Trả lời</span>
+            <span className={cx("option")} onClick={handleRep}>
+              Trả lời
+            </span>
           </div>
           {data.likeCount <= 0 ? (
             <></>
@@ -48,10 +55,10 @@ function Comment({ data, commentChilds }) {
           )}
         </div>
         <div className={cx("show-comment")}>
-          {data.commentChildren ? (
-            commentChilds.map((commentChild) => {
+          {commentChilds.length > 0 ? (
+            commentChilds.map((commentChild, index) => {
               return (
-                <CommentChild key={data.id} data={commentChild}></CommentChild>
+                <CommentChild key={index} data={commentChild}></CommentChild>
               );
             })
           ) : (

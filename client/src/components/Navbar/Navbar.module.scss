@@ -33,7 +33,7 @@
 //Tab item
 .container {
   width: 770px;
-  min-height: 400px;
+  min-height: 150px;
   margin: 0 auto;
   padding: 32px;
   background-color: var(--main-background-color);
@@ -111,6 +111,7 @@
 // comment content
 
 .user-comment {
+  position: relative;
   height: 44px;
   width: 706px;
   font-size: 1.6rem;
@@ -134,6 +135,8 @@
   height: 100%;
   margin: 0 8px;
   flex: 1;
+  z-index: 1;
+
   input {
     width: 100%;
     margin: 2px 0;
@@ -157,12 +160,43 @@
   font-size: 2.8rem;
   display: flex;
   align-items: center;
-  cursor: pointer;
 
   .active {
     color: var(--primary);
+    cursor: pointer;
   }
 }
+
+.notify {
+  position: absolute;
+  top: -28px;
+  left: 60px;
+  right: 0;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  height: 32px;
+  padding: 8px;
+  background-color: rgb(20, 20, 20);
+  font-size: 1.4rem;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+
+  .notify-label {
+    padding-left: 8px;
+  }
+
+  .notify-icon {
+    padding-right: 8px;
+    cursor: pointer;
+  }
+}
+
+.notify.show {
+  display: flex;
+}
+
 // List comment
 .list-container {
   width: 688px;
@@ -176,6 +210,3 @@
   overflow: auto;
   overflow-x: hidden;
 }
-
-
-

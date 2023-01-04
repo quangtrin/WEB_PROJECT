@@ -35,7 +35,7 @@ const adminController = {
       year,
       duration,
       description,
-      categoryID,
+      category,
       url,
     } = req.body;
     await adminModel.addFilm(
@@ -46,7 +46,7 @@ const adminController = {
       year,
       duration,
       description,
-      categoryID,
+      category,
       url,
       (err, data) => {
         if (err) {
@@ -56,16 +56,6 @@ const adminController = {
         res.json(data);
       }
     );
-  },
-  addCategory: async (req, res) => {
-    const { category } = req.body;
-    await adminModel.addCategory(connect, category, (err, data) => {
-      if (err) {
-        connect.log(err);
-        return;
-      }
-      res.json(data);
-    });
   },
 };
 module.exports = adminController;

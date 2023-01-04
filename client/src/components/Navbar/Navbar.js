@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames/bind";
-import { SendOutlined } from "@ant-design/icons";
+import { SendOutlined, CloseOutlined } from "@ant-design/icons";
 
 import styles from "./Navbar.module.scss";
 import CardFilm from "./cardFilm";
 import Comment from "./Comment";
 import axios from "axios";
+import Episode from "./episode/Episode";
+import { Col, Row } from "antd";
 
 const cx = classNames.bind(styles);
 
@@ -13,39 +15,14 @@ function Navbar() {
   const [key, setKey] = useState("comment");
   const [comments, setComments] = useState([]);
   const [userComment, setUserComment] = useState("");
+  const [commentParentID, setCommentParentID] = useState();
+  const [isRepping, setIsRepping] = useState("");
 
-  const getComment = async () => {
-    try {
-      const res = await (await axios.get("/api/user/comment")).data;
-      setComments(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const inputElement = useRef();
 
-  const handleSendComment = async (comment) => {
-    if (comment.trim()) {
-      const req = await axios.post("/api/user/comment", {
-        userID: 6,
-        comment: comment,
-        filmID: 10,
-        likeCount: 0,
-      });
-      setComments((prev) => [...prev, req]);
-      setUserComment("");
-    }
-  };
-
-  const commentChilds = [
-    {
-      id: 1,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Con",
-      commentMessage: "Comment Con",
-      time: "21h",
-      likes: 1,
-    },
+  const episode = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 28, 29,
   ];
 
   const Films = [
@@ -81,17 +58,42 @@ function Navbar() {
     },
   ];
 
+  const getComment = async () => {
+    try {
+      const res = await (await axios.get("/api/user/comment")).data;
+      setComments(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSendComment = async (comment) => {
+    const req = await axios.post("/api/user/comment", {
+      userID: 1,
+      commentParentID: commentParentID,
+      comment: comment,
+      filmID: 1,
+      likeCount: 0,
+    });
+    // setComments((prev) => [...prev, req]);
+    setCommentParentID();
+    setUserComment("");
+    setIsRepping("");
+  };
+
   useEffect(() => {
     getComment();
   }, [comments]);
 
-  // useEffect(() => {
-  //   handleSendComment();
-  // }, []);
-
   return (
     <div className={cx("wrapper")}>
       <div className={cx("Tabs")}>
+        <div
+          className={cx("Tab", key === "episode" ? "active" : "")}
+          onClick={() => setKey("episode")}
+        >
+          <span className={cx("Label")}>Tập</span>
+        </div>
         <div
           className={cx("Tab", key === "more" ? "active" : "")}
           onClick={() => setKey("more")}
@@ -112,6 +114,9 @@ function Navbar() {
             return <CardFilm key={film.id} props={film}></CardFilm>;
           })
         ) : (
+          <></>
+        )}
+        {key === "comment" ? (
           <div>
             <div className={cx("user-comment")}>
               <div className={cx("user-comment-avatar")}>
@@ -124,6 +129,7 @@ function Navbar() {
                 <input
                   type="text"
                   placeholder="Gửi bình luận"
+                  ref={inputElement}
                   onChange={(e) => setUserComment(e.target.value)}
                   value={userComment}
                 />
@@ -139,6 +145,17 @@ function Navbar() {
                   }
                 />
               </div>
+
+              <div className={cx("notify", isRepping ? "show" : "")}>
+                <span className={cx("notify-label")}>Trả lời {isRepping}</span>
+                <CloseOutlined
+                  className={cx("notify-icon")}
+                  onClick={() => {
+                    setCommentParentID();
+                    setIsRepping("");
+                  }}
+                />
+              </div>
             </div>
 
             {/* List comment */}
@@ -146,14 +163,31 @@ function Navbar() {
               {comments.map((comment) => {
                 return (
                   <Comment
-                    key={comment.commentID}
-                    data={comment}
-                    // commentChilds={commentChilds}
+                    key={comment.commentParent.commentID}
+                    data={comment.commentParent}
+                    commentChilds={comment.commentChild}
+                    callBack={[setCommentParentID, setIsRepping]}
+                    inputElement={inputElement}
                   ></Comment>
                 );
               })}
             </div>
           </div>
+        ) : (
+          <></>
+        )}
+        {key === "episode" ? (
+          <Row gutter={[6, 6]}>
+            {episode.map((index) => {
+              return (
+                <Col span={4}>
+                  <Episode href="#" episode={index}></Episode>
+                </Col>
+              );
+            })}
+          </Row>
+        ) : (
+          <></>
         )}
       </div>
     </div>
