@@ -6,6 +6,7 @@ const user = (app) => {
   app.use("/api/user", router);
   router.post("/signUp", userController.signUp);
   router.get("/getFilm", userController.getFilm);
+  router.get("/getFilm/:id", userController.getFilmById);
   router.post("/register", userController.register);
   router.post("/comment", userController.addComment);
   router.get("/comment", userController.getComment);

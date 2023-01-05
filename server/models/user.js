@@ -62,6 +62,14 @@ const userModel = {
       } else callback(null, result);
     });
   },
+  getFilmById: async (connection, filmID, callback) => {
+    var sql = "SELECT * FROM film WHERE filmID = " + filmID;
+    await connection.query(sql, (err, result, fields) => {
+      if (err) {
+        callback(err, null);
+      } else callback(null, result);
+    })
+  },
   addComment: async (
     connect,
     comment,
