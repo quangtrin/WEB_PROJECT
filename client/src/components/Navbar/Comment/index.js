@@ -16,7 +16,7 @@ function Comment({ data, commentChilds, callBack, inputElement }) {
       <div className={cx("comment-avatar")}>
         <img
           src={
-            data.commentAvartar ||
+            data.avatar ||
             "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
           }
           alt="Avatar"
@@ -24,7 +24,7 @@ function Comment({ data, commentChilds, callBack, inputElement }) {
       </div>
       <div className={cx("comment-body")}>
         <div className={cx("comment-body_message")}>
-          <span className={cx("message-name")}>{data.comment}</span>
+          <span className={cx("message-name")}>{data.userName}</span>
           <span className={cx("message-main")}>{data.comment}</span>
         </div>
         <div className={cx("comment-body_options")}>

@@ -9,7 +9,7 @@ function CommentChild({ data }) {
       <div className={cx("comment_child-avatar")}>
         <img
           src={
-            data.commentAvartar ||
+            data.avatar ||
             "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
           }
           alt="Avatar"
@@ -18,7 +18,7 @@ function CommentChild({ data }) {
       <div className={cx("comment_child-body")}>
         <div className={cx("comment_child-body_message")}>
           <span className={cx("comment_child-message-name")}>
-            {data.comment}
+            {data.userName}
           </span>
           <span className={cx("comment_child-message-main")}>
             {data.comment}
