@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import { useState, useEffect } from "react";
 import CardFilm from "../Home/CardFilm/CardFilm";
 import SlideHome from "../Home/SlideHome/SlideHome";
+import HotSlide from "./HotSlide/HotSlide";
 
 import imgBanner1 from "../../imgs/conan.jpg";
 import imgBanner2 from "../../imgs/doraemonbanner.jpg";
@@ -16,11 +17,7 @@ import imgAdds from "../../imgs/adds.jpg";
 import imgCard from "../../imgs/doraemon.jpg";
 
 import imgSlideUp1 from "../../imgs/down.png";
-import imgSlideUp2 from "../../imgs/down.png";
-import imgSlideUp3 from "../../imgs/down.png";
-import imgSlideUp4 from "../../imgs/down.png";
-import imgSlideUp5 from "../../imgs/down.png";
-import imgSlideUp6 from "../../imgs/down.png";
+
 
 const cx = classNames.bind(styles);
 const Home = () => {
@@ -141,12 +138,12 @@ const Home = () => {
             </div>
             <div className={cx("img-hot-series")}>
               <div className={cx("mySlides")}>
-                <img className={cx("mySlides-img")} src={imgSlideUp1} />
-                <img className={cx("mySlides-img")} src={imgSlideUp2} />
-                <img className={cx("mySlides-img")} src={imgSlideUp3} />
-                <img className={cx("mySlides-img")} src={imgSlideUp4} />
-                <img className={cx("mySlides-img")} src={imgSlideUp5} />
-                <img className={cx("mySlides-img")} src={imgSlideUp6} />
+                <HotSlide href="#" img={imgSlideUp1} />
+                <HotSlide href="#" img={imgSlideUp1} />
+                <HotSlide href="#" img={imgSlideUp1} />
+                <HotSlide href="#" img={imgSlideUp1} />
+                <HotSlide href="#" img={imgSlideUp1} />
+                <HotSlide href="#" img={imgSlideUp1} />
               </div>
             </div>
           </div>
@@ -164,55 +161,43 @@ const Home = () => {
             </h3>
           </div>
           <Container fluid="md">
-          <Row>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-          </Row>
-          <Row>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-          </Row>
-          <Row>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-          </Row>
-          <Row>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-          </Row>
-          <Row>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-            <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-          </Row>
-        </Container>
-        <div className={cx("pagination")}>
-          <a href="#">&lt;&lt;</a>
-          <a className={cx("active")} href="#">
-            1
-          </a>
-          <a href="#">2</a>
-          <span>...</span>
-          <a href="#">3</a>
-          <a href="#">&gt;&gt;</a>
+            <Row>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+            </Row>
+
+          </Container>
+          <div className={cx("pagination")}>
+            <a href="#">&lt;&lt;</a>
+            <a className={cx("active")} href="#">
+              1
+            </a>
+            <a href="#">2</a>
+            <span>...</span>
+            <a href="#">3</a>
+            <a href="#">&gt;&gt;</a>
+          </div>
         </div>
       </div>
-    </div>
-  <Footer></Footer>
+      <Footer></Footer>
     </div >
   );
 };
