@@ -210,3 +210,14 @@
   overflow: auto;
   overflow-x: hidden;
 }
+
+// Loanding Icon
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  .loading-icon {
+    font-size: 48px;
+    color: var(--white);
+  }
+}
