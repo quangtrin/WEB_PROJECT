@@ -20,7 +20,7 @@ import imgSlideUp1 from "../../imgs/down.png";
 
 
 const cx = classNames.bind(styles);
-const Home = () => {
+const Home = ({ user, setIsSignUp }) => {
   const [checkedRadio, setCheckedRadio] = useState("");
   const [countSlide, setCountSlide] = useState(1);
   const slideEffect = () => {
@@ -37,7 +37,7 @@ const Home = () => {
   }, [countSlide]);
   return (
     <div>
-      <Header></Header>
+      <Header user={user} setIsSignUp={setIsSignUp}></Header>
       <div className={cx("home")}>
         <div className={cx("slider")}>
           <div className={cx("slides-drop")}>

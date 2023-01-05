@@ -1,17 +1,18 @@
 import imgLogo from "../../imgs/logo-pops.png";
 import imgIconSearch from "../../imgs/search.png";
+import User from "./User/User";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 
 const cx = classNames.bind(styles);
 
-const Header = () => {
+const Header = ({ user, setIsSignUp }) => {
   return (
     // html
     <>
       <header className={cx("header")}>
         <a href="/">
-        <img src={imgLogo} alt="logo" />
+          <img src={imgLogo} alt="logo" />
         </a>
         <nav className={cx("container")}>
           <ul className={cx("header_nav_links")}>
@@ -45,12 +46,15 @@ const Header = () => {
             <img src={imgIconSearch} alt="" />
           </button>
         </form>
-        <a className={cx("cta")} href="/Register">
-          <button className={cx("header_register")}>ĐĂNG KÝ</button>
-        </a>
-        <a className={cx("cta")} href="/Login">
-          <button className={cx("header_login")}>ĐĂNG NHẬP</button>
-        </a>
+        {
+          user?.userId ? <User user={user} setIsSignUp={setIsSignUp}></User> :
+            (<><a className={cx("cta")} href="/Register">
+              <button className={cx("header_register")}>ĐĂNG KÝ</button>
+            </a>
+              <a className={cx("cta")} href="/Login">
+                <button className={cx("header_login")}>ĐĂNG NHẬP</button>
+              </a></>)
+        }
       </header>
     </>
   );

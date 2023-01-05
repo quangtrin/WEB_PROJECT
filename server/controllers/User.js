@@ -19,6 +19,7 @@ const userController = {
           login: true,
           id: data[0].userID,
           userName: data[0].userName,
+          avatar: data[0].avatar,
         });
       } else res.json({ login: false });
     });

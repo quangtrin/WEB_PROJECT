@@ -1,7 +1,7 @@
 const userModel = {
   signUp: async (connection, account, password, callback) => {
     var sql =
-      "SELECT userID, userName FROM login_user WHERE account = " +
+      "SELECT userID, userName, avatar FROM login_user WHERE account = " +
       "'" +
       account +
       "'" +

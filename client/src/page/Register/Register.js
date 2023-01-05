@@ -1,15 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import userImg from "../../imgs/user_default.png";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
-
+import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles);
 
 const Register = () => {
+  const navigate = useNavigate();
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
@@ -17,6 +18,7 @@ const Register = () => {
   const [accountExist, setAccountExist] = useState(false);
   const [isHidePass, setIsHidePass] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
+  const [success, setSuccess] = useState(false);
   const handleChangeAccount = (e) => {
     setAccount(e.target.value);
   };
@@ -32,6 +34,7 @@ const Register = () => {
   const handleClickSubmit = async (e) => {
     e.preventDefault();
     if (account && userName && password) {
+      setIsRegistering(true);
       const res = await axios.post("/api/user/register", {
         account: account,
         password: password,
@@ -39,20 +42,23 @@ const Register = () => {
         dateOfBirth: dateOfBirth,
         avatarUrl: userImg,
       });
+      setIsRegistering(false);
       if (!res?.data?.register) {
         setAccountExist(true);
       } else {
         setAccountExist(false);
-
         Swal.fire({
           icon: "success",
           title: "Success",
           text: "Đăng ký thành công",
-          confirmButtonText: '<a class="fa fa-thumbs-up" href ="#"></a> OK',
-        });
+          confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
+        }).then((result) => { if (result.isConfirmed) setSuccess(true) });
       }
     }
   };
+  useEffect(
+    () => { success ? navigate("/login") : <></> }
+    , [success]);
   return (
     <div className={cx("background-register")}>
       <div className={cx("register")}>
@@ -140,7 +146,7 @@ const Register = () => {
             <Button
               type="Call to Action"
               className={cx(
-                "login_submit",
+                "register_submit",
                 account && password ? "primary" : ""
               )}
               loading
