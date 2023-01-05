@@ -7,7 +7,7 @@ import styles from "./ListEpisode.module.scss";
 import Footer from "../../components/Footer/Footer";
 
 const cx = classNames.bind(styles);
-const ListEpisode = ({user, setIsSignUp}) => {
+const ListEpisode = ({ user, setIsSignUp }) => {
   return (
     <div>
       <Header user={user} setIsSignUp={setIsSignUp}></Header>
@@ -94,7 +94,7 @@ const ListEpisode = ({user, setIsSignUp}) => {
             </div>
           </Container>
         </div>
-        <Navbar className={cx("navbar")}></Navbar>
+        <Navbar className={cx("navbar")} user={user}></Navbar>
       </div>
       <Footer></Footer>
     </div>
