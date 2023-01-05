@@ -1,54 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames/bind";
-import { SendOutlined } from "@ant-design/icons";
+import { SendOutlined, CloseOutlined } from "@ant-design/icons";
 
 import styles from "./Navbar.module.scss";
 import CardFilm from "./cardFilm";
 import Comment from "./Comment";
+import axios from "axios";
 import Episode from "./episode/Episode";
 import { Col, Row } from "antd";
 
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const [key, setKey] = useState("episode");
-  const [comment, setcomment] = useState("");
+  const [key, setKey] = useState("comment");
+  const [comments, setComments] = useState([]);
+  const [userComment, setUserComment] = useState("");
+  const [commentParentID, setCommentParentID] = useState();
+  const [isRepping, setIsRepping] = useState("");
+
+  const inputElement = useRef();
+
   const episode = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29,
-  ];
-  const comments = [
-    {
-      id: 1,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Cha",
-      commentMessage: "Comment cha",
-      time: "21h",
-      likes: 0,
-      commentChildren: [1],
-    },
-    {
-      id: 2,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Cha",
-      commentMessage: "Comment cha",
-      time: "21h",
-      likes: 1,
-    },
-  ];
-
-  const commentChilds = [
-    {
-      id: 1,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Con",
-      commentMessage: "Comment Con",
-      time: "21h",
-      likes: 1,
-    },
   ];
 
   const Films = [
@@ -83,6 +57,33 @@ function Navbar() {
       des: "Doraemon được mua bản quyền và được cập nhật phát sóng mới nhất trên ứng dụng giải trí POPS. Đây là bộ phim hoạt hình chuyển thể từ truyện tranh hấp dẫn nhất Nhật Bản: Doraemon của tác giả Fujiko Fujio sáng tác từ năm 1969.Bộ truyện kể về một chú mèo máy tên Doraemon đến từ thế kỉ 22 để giúp một cậu bé lớp 5 hậu đậu tên là Nobi Nobita. Sewashi (Nobito), cháu ba đời của Nobita gửi Doraemon về quá khứ nhằm giúp đỡ ông mình, qua đó cải thiện được hoàn cảnh của con cháu Nobita sau này. Các tập phim Doraemon thường xoay quanh những rắc rối hay xảy ra với cậu bé Nobita. Cốt truyện thường gặp nhất là Nobita trở về nhà khóc lóc với Doraemon vì những rắc rối mà cậu gặp phải ở trường học hoặc với bạn bè. Sau khi bị cậu van nài hoặc thúc giục, Doraemon sẽ lấy ra một bảo bối trong chiếc túi thần kỳ trước bụng để giúp Nobita giải quyết rắc rối của mình.Nhưng Nobita sẽ lại thường đi quá xa so với dự định ban đầu của Doraemon. Cậu thường lấy sự ưu việt của bảo bối để trêu ghẹo mọi người nên cuối cùng bị phản tác dụng, bị bảo bối gây phiền phức. Có đôi khi những người bạn của Nobita, thường là Suneo hoặc Jaian lại lấy trộm những bảo bối và sử dụng chúng không đúng mục đích. Kết thúc mỗi câu chuyện, những ai sử dụng sai mục đích bảo bối sẽ phải chịu hậu quả do mình gây ra, từ đó khán giả sẽ rút ra được bài học cho riêng mình. Doraemon là bộ phim hoạt hình thiếu nhi mang lại cho khán giả những tràng cười thoải mái, những tình huống vui nhộn cùng những bài học giáo dục đầy ý nghĩa. Phim được lồng tiếng với chất lượng hình ảnh sắc nét mang lại trải nghiệm xem phim tuyệt vời. Xem trọn bộ Doraemon full HD ngay tại POPS bạn nhé.",
     },
   ];
+
+  const getComment = async () => {
+    try {
+      const res = await (await axios.get("/api/user/comment")).data;
+      setComments(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSendComment = async (comment) => {
+    const req = await axios.post("/api/user/comment", {
+      userID: 1,
+      commentParentID: commentParentID,
+      comment: comment,
+      filmID: 1,
+      likeCount: 0,
+    });
+    // setComments((prev) => [...prev, req]);
+    setCommentParentID();
+    setUserComment("");
+    setIsRepping("");
+  };
+
+  useEffect(() => {
+    getComment();
+  }, [comments]);
 
   return (
     <div className={cx("wrapper")}>
@@ -128,13 +129,31 @@ function Navbar() {
                 <input
                   type="text"
                   placeholder="Gửi bình luận"
-                  onChange={(e) => setcomment(e.target.value)}
+                  ref={inputElement}
+                  onChange={(e) => setUserComment(e.target.value)}
+                  value={userComment}
                 />
               </div>
               <div className={cx("user-comment-send_icon")}>
                 <SendOutlined
-                  className={cx(comment.length > 0 ? "active" : "")}
+                  className={cx(userComment.trim() ? "active" : "")}
                   style={{ transform: "rotate(-45deg)" }}
+                  onClick={
+                    userComment.trim()
+                      ? () => handleSendComment(userComment)
+                      : null
+                  }
+                />
+              </div>
+
+              <div className={cx("notify", isRepping ? "show" : "")}>
+                <span className={cx("notify-label")}>Trả lời {isRepping}</span>
+                <CloseOutlined
+                  className={cx("notify-icon")}
+                  onClick={() => {
+                    setCommentParentID();
+                    setIsRepping("");
+                  }}
                 />
               </div>
             </div>
@@ -144,9 +163,11 @@ function Navbar() {
               {comments.map((comment) => {
                 return (
                   <Comment
-                    key={comment.id}
-                    data={comment}
-                    commentChilds={commentChilds}
+                    key={comment.commentParent.commentID}
+                    data={comment.commentParent}
+                    commentChilds={comment.commentChild}
+                    callBack={[setCommentParentID, setIsRepping]}
+                    inputElement={inputElement}
                   ></Comment>
                 );
               })}

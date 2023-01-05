@@ -91,7 +91,7 @@ const userModel = {
   },
   getComment: async (connection, callback) => {
     var sql =
-      "SELECT commentID, comment, userID, commentParentID, DATE_FORMAT(time, '%H:%i %d-%m-%Y') AS time, likeCount, filmID, episodeID FROM comment";
+      "SELECT commentID, comment, comment.userID, login_user.avatar, userName, commentParentID, DATE_FORMAT(time, '%H:%i %d-%m-%Y') AS time, likeCount, filmID, episodeID FROM comment JOIN login_user ON comment.userID = login_user.userID ORDER BY time DESC";
     await connection.query(sql, (err, result, fields) => {
       if (err) {
         callback(err, null);

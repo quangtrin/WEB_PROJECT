@@ -5,28 +5,41 @@ import styles from "./Comment.module.scss";
 
 const cx = classNames.bind(styles);
 
-function Comment({ data, commentChilds }) {
+function Comment({ data, commentChilds, callBack, inputElement }) {
+  const handleRep = () => {
+    inputElement.current.focus();
+    callBack[0](data.commentID);
+    callBack[1](data.comment);
+  };
   return (
-    <div key={data.id} className={cx("comment")}>
+    <div key={data.commentID} className={cx("comment")}>
       <div className={cx("comment-avatar")}>
-        <img src={data.commentAvartar} alt="Avatar" />
+        <img
+          src={
+            data.avatar ||
+            "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
+          }
+          alt="Avatar"
+        />
       </div>
       <div className={cx("comment-body")}>
         <div className={cx("comment-body_message")}>
-          <span className={cx("message-name")}>{data.commentName}</span>
-          <span className={cx("message-main")}>{data.commentName}</span>
+          <span className={cx("message-name")}>{data.userName}</span>
+          <span className={cx("message-main")}>{data.comment}</span>
         </div>
         <div className={cx("comment-body_options")}>
           <div>
             <span className={cx("option", "disable")}>{data.time}</span>
             <span className={cx("option")}>Thích</span>
-            <span className={cx("option")}>Trả lời</span>
+            <span className={cx("option")} onClick={handleRep}>
+              Trả lời
+            </span>
           </div>
-          {data.likes <= 0 ? (
+          {data.likeCount <= 0 ? (
             <></>
           ) : (
             <span className={cx("option", "icon")}>
-              {data.likes}
+              {data.likeCount}
               <svg
                 viewBox="0 0 16 16"
                 fill="none"
@@ -42,10 +55,10 @@ function Comment({ data, commentChilds }) {
           )}
         </div>
         <div className={cx("show-comment")}>
-          {data.commentChildren ? (
-            commentChilds.map((commentChild) => {
+          {commentChilds.length > 0 ? (
+            commentChilds.map((commentChild, index) => {
               return (
-                <CommentChild key={data.id} data={commentChild}></CommentChild>
+                <CommentChild key={index} data={commentChild}></CommentChild>
               );
             })
           ) : (
