@@ -5,6 +5,8 @@ import styles from "./Home.module.scss";
 import Footer from "../../components/Footer/Footer";
 import { useState, useEffect } from "react";
 import CardFilm from "../Home/CardFilm/CardFilm";
+import SlideHome from "../Home/SlideHome/SlideHome";
+
 import imgBanner1 from "../../imgs/conan.jpg";
 import imgBanner2 from "../../imgs/doraemonbanner.jpg";
 import imgBanner3 from "../../imgs/conan.jpg";
@@ -83,57 +85,9 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
-            <div className={cx("slide")}>
-              <img src={imgBanner2} alt="" />
-              <div className={cx("slider-text")}>
-                <div className={cx("container")}>
-                  <div className={cx("text-heading")}>
-                    <h3>Doraemon: Cuộc phiêu lưu của Yasuo và Yone!</h3>
-                  </div>
-                  <div className={cx("text-description")}>
-                    <p>
-                      Năm phát hành: <span>1999</span>
-                    </p>
-                  </div>
-                  <button className={cx("button-slider")}>CHI TIẾT</button>
-                </div>
-              </div>
-            </div>
-
-            <div className={cx("slide")}>
-              <img src={imgBanner3} alt="" />
-              <div className={cx("slider-text")}>
-                <div className={cx("container")}>
-                  <div className={cx("text-heading")}>
-                    <h3>Doraemon: Cuộc phiêu lưu của Yasuo và Yone!</h3>
-                  </div>
-                  <div className={cx("text-description")}>
-                    <p>
-                      Năm phát hành: <span>1997</span>
-                    </p>
-                  </div>
-                  <button className={cx("button-slider")}>CHI TIẾT</button>
-                </div>
-              </div>
-            </div>
-
-            <div className={cx("slide")}>
-              <img src={imgBanner4} alt="" />
-              <div className={cx("slider-text")}>
-                <div className={cx("container")}>
-                  <div className={cx("text-heading")}>
-                    <h3>Doraemon: Cuộc phiêu lưu của Yasuo và Yone!</h3>
-                  </div>
-                  <div className={cx("text-description")}>
-                    <p>
-                      Năm phát hành: <span>1996</span>
-                    </p>
-                  </div>
-                  <button className={cx("button-slider")}>CHI TIẾT</button>
-                </div>
-              </div>
-            </div>
+            <SlideHome imgSlide={imgBanner3} nameTitle={"Doraemon: Cuộc phiêu lưu của Yasuo và Yone!"} releaseYear={"Năm phát hành:"} year={1998} detail={"Chi tiết"} />
+            <SlideHome imgSlide={imgBanner3} nameTitle={"Doraemon: Cuộc phiêu lưu của Yasuo và Yone!"} releaseYear={"Năm phát hành:"} year={1998} detail={"Chi tiết"} />
+            <SlideHome imgSlide={imgBanner3} nameTitle={"Doraemon: Cuộc phiêu lưu của Yasuo và Yone!"} releaseYear={"Năm phát hành:"} year={1998} detail={"Chi tiết"} />
 
             <div className={cx("navigation-manual", "container")}>
               <ul>
@@ -258,16 +212,6 @@ const Home = () => {
         </div>
       </div>
     </div>
-      {/* {
-        var counter = 1;
-        setInterval(function () {
-            document.getElementById('radio' + counter).checked = true;
-            counter++;
-            if (counter > 4) {
-                counter = 1;
-            }
-        }, 5000);
-      } */}
   <Footer></Footer>
     </div >
   );

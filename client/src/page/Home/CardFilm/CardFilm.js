@@ -16,5 +16,4 @@ const CardFilm = (props) => {
       </a>
   );
 };
-
 export default CardFilm;
