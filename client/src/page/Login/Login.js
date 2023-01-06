@@ -6,10 +6,12 @@ import React from "react";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
-const Login = () => {
+const Login = ({setIsSignUp}) => {
+  const navigate = useNavigate();
   const [account, setAccount] = useState();
   const [password, setPassword] = useState();
   const [isLoginSucces, setIsLoginSucces] = useState(true);
@@ -32,13 +34,12 @@ const Login = () => {
       });
       setIsLogining(false);
       if (res.data.login) {
+        localStorage.setItem("userId", res.data.id);
+        localStorage.setItem("userName", res.data.userName);
+        localStorage.setItem("avatar", res.data.avatar);
+        setIsSignUp(true);
         const text = "Welcome " + res.data.userName;
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: text,
-          confirmButtonText: '<a class="fa fa-thumbs-up" href ="#"></a> OK',
-        });
+        navigate("/");
         setIsLoginSucces(true);
       } else setIsLoginSucces(false);
     }

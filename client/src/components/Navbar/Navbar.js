@@ -1,54 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classNames from "classnames/bind";
-import { SendOutlined } from "@ant-design/icons";
+import {
+  SendOutlined,
+  CloseOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 
 import styles from "./Navbar.module.scss";
 import CardFilm from "./cardFilm";
 import Comment from "./Comment";
+import axios from "axios";
 import Episode from "./episode/Episode";
 import { Col, Row } from "antd";
 
 const cx = classNames.bind(styles);
 
-function Navbar() {
-  const [key, setKey] = useState("episode");
-  const [comment, setcomment] = useState("");
+function Navbar({ user }) {
+  const [key, setKey] = useState("comment");
+  const [comments, setComments] = useState([]);
+  const [userComment, setUserComment] = useState("");
+  const [commentParentID, setCommentParentID] = useState();
+  const [isRepping, setIsRepping] = useState("");
+  const [checkForComment, setCheckForComment] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const inputElement = useRef();
   const episode = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29,
-  ];
-  const comments = [
-    {
-      id: 1,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Cha",
-      commentMessage: "Comment cha",
-      time: "21h",
-      likes: 0,
-      commentChildren: [1],
-    },
-    {
-      id: 2,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Cha",
-      commentMessage: "Comment cha",
-      time: "21h",
-      likes: 1,
-    },
-  ];
-
-  const commentChilds = [
-    {
-      id: 1,
-      commentAvartar:
-        "https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png",
-      commentName: "Con",
-      commentMessage: "Comment Con",
-      time: "21h",
-      likes: 1,
-    },
   ];
 
   const Films = [
@@ -84,6 +63,39 @@ function Navbar() {
     },
   ];
 
+  const getComment = async () => {
+    setIsLoading(false);
+
+    try {
+      const res = await (await axios.get("/api/user/comment")).data;
+      setComments(res);
+      setIsLoading(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSendComment = async (comment) => {
+    if (user) {
+      const req = await axios.post("/api/user/comment", {
+        userID: user.userId,
+        commentParentID: commentParentID,
+        comment: comment,
+        filmID: 1,
+        likeCount: 0,
+      });
+      setCheckForComment(!checkForComment);
+
+      setCommentParentID();
+      setUserComment("");
+      setIsRepping("");
+    }
+  };
+
+  useEffect(() => {
+    getComment();
+  }, [checkForComment]);
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("Tabs")}>
@@ -117,40 +129,71 @@ function Navbar() {
         )}
         {key === "comment" ? (
           <div>
-            <div className={cx("user-comment")}>
-              <div className={cx("user-comment-avatar")}>
-                <img
-                  src="https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
-                  alt="Avatar"
-                />
+            {!isLoading ? (
+              <div className={cx("loading-wrapper")}>
+                <LoadingOutlined className={cx("loading-icon")} />
               </div>
-              <div className={cx("user-comment-input")}>
-                <input
-                  type="text"
-                  placeholder="Gửi bình luận"
-                  onChange={(e) => setcomment(e.target.value)}
-                />
-              </div>
-              <div className={cx("user-comment-send_icon")}>
-                <SendOutlined
-                  className={cx(comment.length > 0 ? "active" : "")}
-                  style={{ transform: "rotate(-45deg)" }}
-                />
-              </div>
-            </div>
+            ) : (
+              <div>
+                <div className={cx("user-comment")}>
+                  <div className={cx("user-comment-avatar")}>
+                    <img
+                      src="https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
+                      alt="Avatar"
+                    />
+                  </div>
+                  <div className={cx("user-comment-input")}>
+                    <input
+                      type="text"
+                      placeholder="Gửi bình luận"
+                      ref={inputElement}
+                      onChange={(e) => setUserComment(e.target.value)}
+                      onKeyUp={(e) => {
+                        if (e.key === "Enter") handleSendComment(userComment);
+                      }}
+                      value={userComment}
+                    />
+                  </div>
+                  <div className={cx("user-comment-send_icon")}>
+                    <SendOutlined
+                      className={cx(userComment.trim() ? "active" : "")}
+                      style={{ transform: "rotate(-45deg)" }}
+                      onClick={
+                        userComment.trim()
+                          ? () => handleSendComment(userComment)
+                          : null
+                      }
+                    />
+                  </div>
 
-            {/* List comment */}
-            <div className={cx("list-container")}>
-              {comments.map((comment) => {
-                return (
-                  <Comment
-                    key={comment.id}
-                    data={comment}
-                    commentChilds={commentChilds}
-                  ></Comment>
-                );
-              })}
-            </div>
+                  <div className={cx("notify", isRepping ? "show" : "")}>
+                    <span className={cx("notify-label")}>
+                      Trả lời {isRepping}
+                    </span>
+                    <CloseOutlined
+                      className={cx("notify-icon")}
+                      onClick={() => {
+                        setCommentParentID();
+                        setIsRepping("");
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className={cx("list-container")}>
+                  {comments.map((comment) => {
+                    return (
+                      <Comment
+                        key={comment.commentParent.commentID}
+                        data={comment.commentParent}
+                        commentChilds={comment.commentChild}
+                        callBack={[setCommentParentID, setIsRepping]}
+                        inputElement={inputElement}
+                      ></Comment>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <></>
