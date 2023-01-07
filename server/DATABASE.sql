@@ -77,7 +77,8 @@ CREATE TABLE `film` (
   `category` varchar(500) DEFAULT NULL,
   `url` text NOT NULL,
   `filmID` int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`filmID`)
+  PRIMARY KEY (`filmID`),
+  UNIQUE KEY `filmName` (`filmName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -97,6 +98,7 @@ CREATE TABLE `login_admin` (
   `create_at` timestamp NULL DEFAULT NULL,
   `ruleID` int DEFAULT NULL,
   PRIMARY KEY (`adminID`),
+  UNIQUE KEY `account` (`account`),
   KEY `ruleID_idx` (`ruleID`),
   CONSTRAINT `ruleID` FOREIGN KEY (`ruleID`) REFERENCES `rule_admin` (`ruleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -118,7 +120,8 @@ CREATE TABLE `login_user` (
   `avatar` text,
   `status` tinyint DEFAULT NULL,
   `create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`userID`)
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `account` (`account`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -145,4 +148,4 @@ CREATE TABLE `rule_admin` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-03 21:23:58
+-- Dump completed on 2023-01-07 17:25:13

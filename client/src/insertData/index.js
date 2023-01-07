@@ -1,8 +1,10 @@
 import axios from "axios";
 import film from "./FILE_URL/film.json"
+import episodeFilm from "./FILE_URL/episodeFilm.json"
+
 
 const InsertData = () => {
-    for (let i = 11; i <= 20; i++) {
+    for (let i = 1; i <= film.length; i++) {    // Insert film data 
         axios.post("/api/admin/addFilm", {
             filmName: film[i].filmName,
             status: "0",
@@ -14,5 +16,15 @@ const InsertData = () => {
             url: film[i].url,
         })
     }
+
+    // Insert episodeFilm data
+    for (let j = 1; j <= episodeFilm.length; j++) {
+        axios.post("/api/admin/addEpisode", {
+            filmID: episodeFilm[j].filmID,
+            episodeID: episodeFilm[j].episodeID,
+            url: episodeFilm[j].Url,
+        })
+    }
+
 }
 export default InsertData;
