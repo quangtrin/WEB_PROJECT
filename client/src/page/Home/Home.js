@@ -17,10 +17,12 @@ import imgAdds from "../../imgs/adds.jpg";
 
 import imgSlideUp1 from "../../imgs/down.png";
 import axios from "axios";
-
+import { useParams } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Home = ({ user, setIsSignUp }) => {
+  let { page } = useParams();
+  if (page === undefined) page = "1";
   const [checkedRadio, setCheckedRadio] = useState("");
   const [countSlide, setCountSlide] = useState(1);
   const [isHasData, setIsHasData] = useState(false);
@@ -175,22 +177,29 @@ const Home = ({ user, setIsSignUp }) => {
           <Container fluid="md">
             <Row>
               {
-                isHasData ? films.map((film) => {
-                  return <Col><CardFilm imgUrl={film.url} name={film.filmName} episode={1} duration={film.duration}></CardFilm></Col>
+                isHasData ? films.map((film, index) => {
+                  if (index >= (page * 30 - 30) && index <= (30 * page - 1))
+                    return <Col><CardFilm imgUrl={film.url} name={film.filmName} episode={1} duration={film.duration}></CardFilm></Col>
                 }) : <></>
               }
             </Row>
 
           </Container>
           <div className={cx("pagination")}>
-            <a href="#">&lt;&lt;</a>
-            <a className={cx("active")} href="#">
+            <a href={"/" + (Number(page) - 1)}>&lt;&lt;</a>
+            <a className={page === "1" ? cx("active") : <></>} href="/1">
               1
             </a>
-            <a href="#">2</a>
+            <a href="/2" className={page === "2" ? cx("active") : <></>}>2</a>
+            <a href="/3" className={page === "3" ? cx("active") : <></>}>3</a>
             <span>...</span>
-            <a href="#">3</a>
-            <a href="#">&gt;&gt;</a>
+            {page !== "1" && page !== "2" && page !== "3" ?
+              <>
+                <a href={"/" + page}>{page}</a>
+                <span>...</span>
+              </> : <></>
+            }
+            <a href={"/" + (Number(page) + 1)}>&gt;&gt;</a>
           </div>
         </div>
       </div>
