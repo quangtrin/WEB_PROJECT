@@ -176,7 +176,7 @@ const Home = ({ user, setIsSignUp }) => {
             <Row>
               {
                 isHasData ? films.map((film) => {
-                  return <Col><CardFilm imgUrl={film.url} name={film.filmName} episode={1} duration={film.duration}></CardFilm></Col>
+                  return <Col><CardFilm href={"/ListEpisode/" + film.filmName} imgUrl={film.url} name={film.filmName} episode={1} duration={film.duration}></CardFilm></Col>
                 }) : <></>
               }
             </Row>
