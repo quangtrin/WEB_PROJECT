@@ -7,10 +7,11 @@ import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import styles from "./Login.module.scss";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
+import imgLogo from "../../imgs/logo-pops.png";
 
 const cx = classNames.bind(styles);
 
-const Login = ({setIsSignUp}) => {
+const Login = ({ setIsSignUp }) => {
   const navigate = useNavigate();
   const [account, setAccount] = useState();
   const [password, setPassword] = useState();
@@ -47,6 +48,9 @@ const Login = ({setIsSignUp}) => {
 
   return (
     <div className={cx("background-login")}>
+      <a className={cx('logo_link')} href="/">
+        <img src={imgLogo} alt="logo" />
+      </a>
       <form id="form" className={cx("login")} onSubmit={handleClickSubmit}>
         <h1 className={cx("login_heading")}>Đăng nhập</h1>
         {!isLoginSucces ? (

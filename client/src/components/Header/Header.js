@@ -46,15 +46,18 @@ const Header = ({ user, setIsSignUp }) => {
             <img src={imgIconSearch} alt="" />
           </button>
         </form>
-        {
-          user?.userId ? <User user={user} setIsSignUp={setIsSignUp}></User> :
-            (<><a className={cx("cta")} href="/Register">
+        {user?.userId ? (
+          <User user={user} setIsSignUp={setIsSignUp}></User>
+        ) : (
+          <>
+            <a className={cx("cta")} href="/Register">
               <button className={cx("header_register")}>ĐĂNG KÝ</button>
             </a>
-              <a className={cx("cta")} href="/Login">
-                <button className={cx("header_login")}>ĐĂNG NHẬP</button>
-              </a></>)
-        }
+            <a className={cx("cta")} href="/Login">
+              <button className={cx("header_login")}>ĐĂNG NHẬP</button>
+            </a>
+          </>
+        )}
       </header>
     </>
   );
