@@ -5,7 +5,7 @@ import Home from "./page/Home/Home";
 import ListEpisode from "./page/ListEpisode/ListEpisode";
 import { useEffect, useState } from "react";
 import WatchFilm from "./page/WatchFilm/WatchFilm";
-
+import InsertData from "./insertData";
 function App() {
   const [user, setUser] = useState();
   const [isSignUp, setIsSignUp] = useState(false);
@@ -27,6 +27,7 @@ function App() {
       <Route path="/WatchFilm" element={<WatchFilm user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/Register" element={<Register />} />
       <Route path="/Login" element={<Login setIsSignUp={setIsSignUp} />} />
+      <Route path="InsertData" element={<InsertData />} />
     </Routes>
   );
 }
