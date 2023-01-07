@@ -85,8 +85,18 @@ const userController = {
     await userModel.getFilm(connect, (err, data) => {
       if (err) {
         console.log(err);
+        return;
       } else res.json(data);
     });
+  },
+  getFilmByName: async (req, res) => {
+    const  filmName  = req.params.name;
+    await userModel.getFilmByName(connect, filmName, (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      } else res.json(data);
+    })
   },
   getEpisodeFilm: async (req, res) => {
     await userModel.getEpisodeFilm(connect, (err, data) => {

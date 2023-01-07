@@ -62,6 +62,14 @@ const userModel = {
       } else callback(null, result);
     });
   },
+  getFilmByName: async (connection, filmName, callback) => {
+    var sql = "SELECT * FROM film WHERE filmName = " + "'" + filmName + "'";
+    await connection.query(sql, (err, result, fields) => {
+      if (err) {
+        callback(err, null);
+      } else callback(null, result);
+    })
+  },
   addComment: async (
     connect,
     comment,
