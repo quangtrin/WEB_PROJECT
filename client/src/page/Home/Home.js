@@ -14,15 +14,24 @@ import imgBanner3 from "../../imgs/conan.jpg";
 import imgBanner4 from "../../imgs/doraemonbanner.jpg";
 
 import imgAdds from "../../imgs/adds.jpg";
-import imgCard from "../../imgs/doraemon.jpg";
 
 import imgSlideUp1 from "../../imgs/down.png";
+import axios from "axios";
 
 
 const cx = classNames.bind(styles);
 const Home = ({ user, setIsSignUp }) => {
   const [checkedRadio, setCheckedRadio] = useState("");
   const [countSlide, setCountSlide] = useState(1);
+  const [isHasData, setIsHasData] = useState(false);
+  const [films, setFilms] = useState();
+  const getDataFilms = async () => {
+    setIsHasData(false);
+    const res = await axios.get("/api/user/getFilm");
+    setFilms(res.data);
+    console.log(films);
+    setIsHasData(true);
+  }
   const slideEffect = () => {
     setTimeout(function () {
       setCountSlide(countSlide + 1);
@@ -35,6 +44,9 @@ const Home = ({ user, setIsSignUp }) => {
   useEffect(() => {
     slideEffect();
   }, [countSlide]);
+  useEffect(() => {
+    getDataFilms();
+  }, []);
   return (
     <div>
       <Header user={user} setIsSignUp={setIsSignUp}></Header>
@@ -162,26 +174,11 @@ const Home = ({ user, setIsSignUp }) => {
           </div>
           <Container fluid="md">
             <Row>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
-              <Col><CardFilm imgUrl={imgCard} name={"One Piece"} episode={50} duration={50} /></Col>
+              {
+                isHasData ? films.map((film) => {
+                  return <Col><CardFilm imgUrl={film.url} name={film.filmName} episode={1} duration={film.duration}></CardFilm></Col>
+                }) : <></>
+              }
             </Row>
 
           </Container>
