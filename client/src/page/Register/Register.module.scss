@@ -1,8 +1,27 @@
 .background-register {
-  background-image: var(--gradient-to-bottom-black), url("https://wallpapercave.com/wp/wp4916205.jpg");
-  height: 100vh;
+  background-image: var(--gradient-to-bottom-black),
+    url("https://wallpapercave.com/wp/wp4916205.jpg");
+  height: 100%;
   display: flex;
   align-items: center;
+}
+
+.logo_link {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 80px;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+
+  :hover {
+    opacity: 0.9;
+  }
+
+  img {
+    height: 33px;
+    text-align: center;
+  }
 }
 
 .register {
@@ -76,7 +95,6 @@
 
   &:hover {
     opacity: 0.9;
-    background-color: var(--primary);
   }
 }
 

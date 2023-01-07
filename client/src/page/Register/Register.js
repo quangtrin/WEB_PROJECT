@@ -7,6 +7,8 @@ import { Button } from "antd";
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
+import imgLogo from "../../imgs/logo-pops.png";
+
 const cx = classNames.bind(styles);
 
 const Register = () => {
@@ -52,15 +54,20 @@ const Register = () => {
           title: "Success",
           text: "Đăng ký thành công",
           confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
-        }).then((result) => { if (result.isConfirmed) setSuccess(true) });
+        }).then((result) => {
+          if (result.isConfirmed) setSuccess(true);
+        });
       }
     }
   };
-  useEffect(
-    () => { success ? navigate("/login") : <></> }
-    , [success]);
+  useEffect(() => {
+    success ? navigate("/login") : <></>;
+  }, [success]);
   return (
     <div className={cx("background-register")}>
+      <a className={cx("logo_link")} href="/">
+        <img src={imgLogo} alt="logo" />
+      </a>
       <div className={cx("register")}>
         <h1 className={cx("register_heading")}>Đăng ký</h1>
         {accountExist ? (
@@ -137,7 +144,7 @@ const Register = () => {
             <button
               className={cx(
                 "register_submit",
-                account && userName && password ? "primary" : ""
+                account && userName && password && dateOfBirth ? "primary" : ""
               )}
             >
               Đăng ký

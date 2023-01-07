@@ -1,8 +1,28 @@
 .background-login {
-  background-image: var(--gradient-to-bottom-black), url("../../imgs/background_login.jpg");
+  position: relative;
+  background-image: var(--gradient-to-bottom-black),
+    url("../../imgs/background_login.jpg");
   height: 100vh;
   display: flex;
   align-items: center;
+}
+
+.logo_link {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 80px;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+
+  :hover {
+    opacity: 0.9;
+  }
+
+  img {
+    height: 33px;
+    text-align: center;
+  }
 }
 
 .login {
