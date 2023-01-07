@@ -23,6 +23,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home user={user} setIsSignUp={setIsSignUp} />} />
+      <Route path="/:page" element={<Home user={user} setIsSignUp={setIsSignUp} />} />
+      <Route path="/ListEpisode" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/ListEpisode/:filmName" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/WatchFilm" element={<WatchFilm user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/Register" element={<Register />} />

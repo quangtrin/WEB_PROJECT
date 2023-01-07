@@ -15,18 +15,28 @@ const ListEpisode = ({ user, setIsSignUp }) => {
   console.log(filmName);
   const [isHasData, setIsHasData] = useState(false);
   const [film, setFilm] = useState();
+
   const getDataFilms = async () => {
     setIsHasData(false);
     const res = await axios.get("/api/user/getFilm/" + filmName);
-    const res2 = await axios.get()
     setFilm(res.data);
-    console.log(res);
     setIsHasData(true);
   }
+  const getDataEpisodeFilm = async () => {
+    setIsHasData(false);
+    const res2 = await axios.get("/api/user/getEpisodeFilm/" + film?.filmID);
+    console.log(res2.data);
+    setIsHasData(true);
+  }
+
   useEffect(() => {
     getDataFilms();
   }, []);
-
+  
+  useEffect(() => {
+    getDataEpisodeFilm();
+  }, [film]);
+  
   return (
     <div>
       <Header user={user} setIsSignUp={setIsSignUp}></Header>
@@ -102,7 +112,7 @@ const ListEpisode = ({ user, setIsSignUp }) => {
                 </div>
               </Container>
             </div>
-            <Navbar className={cx("navbar")} user={user}></Navbar>
+            <Navbar className={cx("navbar")} user={user} ></Navbar>
           </div>
         </> : <></>
       }

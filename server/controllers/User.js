@@ -105,5 +105,14 @@ const userController = {
       } else res.json(data);
     });
   },
+  getEpisodeFilmById: async (req, res) => {
+    const filmID = req.params.id;
+    await userModel.getEpisodeFilmById(connect, filmID, (err, data) => {
+      if(err) {
+        console.log(err);
+        return;
+      } else res.json(data);
+    })
+  }
 };
 module.exports = userController;
