@@ -6,10 +6,6 @@ import classNames from "classnames/bind";
 import styles from "./WatchFilm.module.scss";
 import Footer from "../../components/Footer/Footer";
 
-import {FaThumbsUp} from "react-icons/fa";
-// import {FaPlay} from "react-icons/fa";
-// import {FaPlay} from "react-icons/fa";
-
 const cx = classNames.bind(styles);
 const WatchFilm = () => {
   return (
