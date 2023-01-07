@@ -7,10 +7,10 @@ import styles from "./WatchFilm.module.scss";
 import Footer from "../../components/Footer/Footer";
 
 const cx = classNames.bind(styles);
-const WatchFilm = () => {
+const WatchFilm = ({ user, setIsSignUp }) => {
   return (
     <div>
-      <Header></Header>
+      <Header user={user} setIsSignUp={setIsSignUp} ></Header>
       <div className={cx("layout")}>
         <div className={cx("layout_video", "container")}>
           <iframe className={cx("video")} src="https://suckplayer.xyz/video/08913a2e8cbcc8bf302a8554782add46"></iframe>
@@ -18,7 +18,7 @@ const WatchFilm = () => {
         <div className={cx("layout_up")}>
           <Container style={{ paddingLeft: "10%" }}>
             <div className={cx("title_films")}>
-                One Piece S20 - <span>Tập 921</span>
+              One Piece S20 - <span>Tập 921</span>
             </div>
             <div className={cx("under_line")}></div>
             <div className={cx("describe")}>

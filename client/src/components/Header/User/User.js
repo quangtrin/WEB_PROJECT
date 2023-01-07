@@ -6,9 +6,7 @@ const cx = classNames.bind(styles);
 const User = ({ user, setIsSignUp }) => {
     const navigate = useNavigate();
     const handleClickLogout = () => {
-        localStorage.removeItem("userId");
-        localStorage.removeItem("userName");
-        localStorage.removeItem("avatar");
+        localStorage.clear();
         setIsSignUp(false);
         navigate("/login");
     }
