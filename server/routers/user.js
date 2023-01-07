@@ -10,6 +10,7 @@ const user = (app) => {
   router.post("/comment", userController.addComment);
   router.get("/comment", userController.getComment);
   router.get("/getEpisodeFilm", userController.getEpisodeFilm);
+  router.get("/getEpisodeFilm/:id", userController.getEpisodeFilmById);
 };
 
 module.exports = user;
