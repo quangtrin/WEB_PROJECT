@@ -24,7 +24,6 @@ function App() {
     <Routes>
       <Route path="/" element={<Home user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/ListEpisode" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
-      <Route path="/ListEpisode" element={<ListEpisode />} />
       <Route path="/WatchFilm" element={<WatchFilm />} />
       <Route path="/Register" element={<Register />} />
       <Route path="/Login" element={<Login setIsSignUp={setIsSignUp} />} />
