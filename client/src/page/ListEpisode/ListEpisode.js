@@ -12,31 +12,30 @@ import axios from "axios";
 const cx = classNames.bind(styles);
 const ListEpisode = ({ user, setIsSignUp }) => {
   const { filmName } = useParams();
-  console.log(filmName);
   const [isHasData, setIsHasData] = useState(false);
   const [film, setFilm] = useState();
+  const [episodeFilm, setEpisodeFilm] = useState();
 
   const getDataFilms = async () => {
     setIsHasData(false);
     const res = await axios.get("/api/user/getFilm/" + filmName);
     setFilm(res.data);
-    setIsHasData(true);
   }
+
   const getDataEpisodeFilm = async () => {
-    setIsHasData(false);
     const res2 = await axios.get("/api/user/getEpisodeFilm/" + film?.filmID);
-    console.log(res2.data);
+    setEpisodeFilm(res2.data);
     setIsHasData(true);
   }
 
   useEffect(() => {
     getDataFilms();
   }, []);
-  
+
   useEffect(() => {
     getDataEpisodeFilm();
   }, [film]);
-  
+
   return (
     <div>
       <Header user={user} setIsSignUp={setIsSignUp}></Header>
@@ -112,7 +111,7 @@ const ListEpisode = ({ user, setIsSignUp }) => {
                 </div>
               </Container>
             </div>
-            <Navbar className={cx("navbar")} user={user} ></Navbar>
+            <Navbar className={cx("navbar")} user={user} episodeFilm={episodeFilm}></Navbar>
           </div>
         </> : <></>
       }
