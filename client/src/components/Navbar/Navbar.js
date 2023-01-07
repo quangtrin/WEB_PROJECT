@@ -25,7 +25,6 @@ function Navbar({ user }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const inputElement = useRef();
-
   const episode = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29,
@@ -149,6 +148,9 @@ function Navbar({ user }) {
                       placeholder="Gửi bình luận"
                       ref={inputElement}
                       onChange={(e) => setUserComment(e.target.value)}
+                      onKeyUp={(e) => {
+                        if (e.key === "Enter") handleSendComment(userComment);
+                      }}
                       value={userComment}
                     />
                   </div>
