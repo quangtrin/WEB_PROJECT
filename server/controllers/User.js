@@ -89,9 +89,9 @@ const userController = {
       } else res.json(data);
     });
   },
-  getFilmById: async (req, res) => {
-    const  filmID  = req.params.id;
-    await userModel.getFilmById(connect, filmID, (err, data) => {
+  getFilmByName: async (req, res) => {
+    const  filmName  = req.params.name;
+    await userModel.getFilmByName(connect, filmName, (err, data) => {
       if (err) {
         console.log(err);
         return;

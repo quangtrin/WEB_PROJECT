@@ -62,8 +62,8 @@ const userModel = {
       } else callback(null, result);
     });
   },
-  getFilmById: async (connection, filmID, callback) => {
-    var sql = "SELECT * FROM film WHERE filmID = " + filmID;
+  getFilmByName: async (connection, filmName, callback) => {
+    var sql = "SELECT * FROM film WHERE filmName = " + "'" + filmName + "'";
     await connection.query(sql, (err, result, fields) => {
       if (err) {
         callback(err, null);
