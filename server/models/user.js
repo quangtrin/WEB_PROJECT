@@ -120,6 +120,13 @@ const userModel = {
       if (err) callback(err, null);
       else callback(null, result);
     })
+  },
+  getEpisodeFilmByEpisodeId: async (connection, filmID, episodeID, callback) => {
+    var sql = "SELECT * FROM episode_film WHERE filmID = " + filmID + " AND episodeID = " + episodeID;
+    await connection.query(sql, (err, result, fields) => {
+      if (err) callback(err, null);
+      else callback(null, result);
+    })
   }
 };
 
