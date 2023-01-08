@@ -15,7 +15,7 @@ import { Col, Row } from "antd";
 
 const cx = classNames.bind(styles);
 
-function Navbar({ user , episodeFilm}) {
+function Navbar({ user, episodeFilm }) {
   const [key, setKey] = useState("comment");
   const [comments, setComments] = useState([]);
   const [userComment, setUserComment] = useState("");
@@ -25,12 +25,6 @@ function Navbar({ user , episodeFilm}) {
   const [isLoading, setIsLoading] = useState(false);
 
   const inputElement = useRef();
-  console.log(episodeFilm[episodeFilm.length - 1].episodeID);
-
-  const episode = [];
-  for (let i = 1; i <= episodeFilm[episodeFilm.length - 1].episodeID; i++) {
-    episode.push(i);
-  };
 
   const Films = [
     {
@@ -202,13 +196,10 @@ function Navbar({ user , episodeFilm}) {
         )}
         {key === "episode" ? (
           <Row gutter={[6, 6]}>
-            {episode.map((index) => {
+            {episodeFilm.map((episode) => {
               return (
                 <Col span={4}>
-                  <Episode href="#" episode={index}></Episode>
-                  {
-
-                  }
+                  <Episode href="#" episode={episode?.episodeID}></Episode>
                 </Col>
               );
             })}

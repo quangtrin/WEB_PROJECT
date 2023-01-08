@@ -23,9 +23,11 @@ const ListEpisode = ({ user, setIsSignUp }) => {
   }
 
   const getDataEpisodeFilm = async () => {
-    const res2 = await axios.get("/api/user/getEpisodeFilm/" + film?.filmID);
-    setEpisodeFilm(res2.data);
-    setIsHasData(true);
+    if (film) {
+      const res2 = await axios.get("/api/user/getEpisodeFilm/" + film?.filmID);
+      setEpisodeFilm(res2.data);
+      setIsHasData(true);
+    }
   }
 
   useEffect(() => {

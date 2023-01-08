@@ -31,7 +31,6 @@ const Home = ({ user, setIsSignUp }) => {
     setIsHasData(false);
     const res = await axios.get("/api/user/getFilm");
     setFilms(res.data);
-    console.log(films);
     setIsHasData(true);
   }
   const slideEffect = () => {
