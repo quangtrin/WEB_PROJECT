@@ -115,7 +115,7 @@ const userModel = {
     });
   },
   getEpisodeFilmById: async (connection, filmID, callback) => {
-    var sql = "SELECT * FROM episode_film WHERE filmID = " + filmID;
+    var sql = "SELECT * FROM episode_film WHERE filmID = " + filmID ;
     await connection.query(sql, (err, result, fields) => {
       if (err) callback(err, null);
       else callback(null, result);

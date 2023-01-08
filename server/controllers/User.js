@@ -95,7 +95,7 @@ const userController = {
       if (err) {
         console.log(err);
         return;
-      } else res.json(data);
+      } else res.json(data[0]);
     })
   },
   getEpisodeFilm: async (req, res) => {

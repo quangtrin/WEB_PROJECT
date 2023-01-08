@@ -31,7 +31,6 @@ const Home = ({ user, setIsSignUp }) => {
     setIsHasData(false);
     const res = await axios.get("/api/user/getFilm");
     setFilms(res.data);
-    console.log(films);
     setIsHasData(true);
   }
   const slideEffect = () => {
@@ -179,7 +178,7 @@ const Home = ({ user, setIsSignUp }) => {
               {
                 isHasData ? films.map((film, index) => {
                   if (index >= (page * 30 - 30) && index <= (30 * page - 1))
-                    return <Col><CardFilm imgUrl={film.url} name={film.filmName} episode={1} duration={film.duration}></CardFilm></Col>
+                    return <Col><CardFilm href={"/ListEpisode/" + film.filmName} imgUrl={film.url} name={film.filmName} episode={1} duration={film.duration}></CardFilm></Col>
                 }) : <></>
               }
             </Row>
