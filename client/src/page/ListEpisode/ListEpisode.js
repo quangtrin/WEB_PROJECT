@@ -113,7 +113,7 @@ const ListEpisode = ({ user, setIsSignUp }) => {
                 </div>
               </Container>
             </div>
-            <Navbar className={cx("navbar")} user={user} episodeFilm={episodeFilm}></Navbar>
+            <Navbar className={cx("navbar")} user={user} episodeFilm={episodeFilm} film={film}></Navbar>
           </div>
         </> : <></>
       }
