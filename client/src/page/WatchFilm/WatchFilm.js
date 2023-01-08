@@ -17,6 +17,7 @@ const WatchFilm = ({ user, setIsSignUp }) => {
   const [film, setFilm] = useState();
   const [isHasData, setIsHasData] = useState(false);
   const [episodeFilm, setEpisodeFilm] = useState();
+  const [urlEpisodeFilm, setUrlEpisodeFilm] = useState("");
   const getDataFilm = async () => {
     setIsHasData(false);
     const res = await axios.get("/api/user/getFilm/" + filmName);
@@ -27,10 +28,16 @@ const WatchFilm = ({ user, setIsSignUp }) => {
     if (film) {
       const res2 = await axios.get("/api/user/getEpisodeFilm/" + film?.filmID);
       setEpisodeFilm(res2.data);
-      setIsHasData(true);
     }
   }
 
+  const getUrlEpisodeFilm = async () => {
+    if (episodeFilm) {
+      const res = await axios.get("/api/user/getUrlEpisodeFilm/" + film.filmID + "?episodeID=" + episodeID);
+      setUrlEpisodeFilm(res.data[0].url);
+      setIsHasData(true);
+    }
+  }
   useEffect(
     () => {
       getDataFilm();
@@ -39,13 +46,17 @@ const WatchFilm = ({ user, setIsSignUp }) => {
   useEffect(() => {
     getDataEpisodeFilm();
   }, [film]);
+
+  useEffect(() => {
+    getUrlEpisodeFilm();
+  }, [episodeFilm]);
   return (
     <div>
       <Header user={user} setIsSignUp={setIsSignUp} ></Header>
       {isHasData ? <>
         <div className={cx("layout")}>
           <div className={cx("layout_video", "container")}>
-            <iframe className={cx("video")} src="https://suckplayer.xyz/video/08913a2e8cbcc8bf302a8554782add46"></iframe>
+            <iframe className={cx("video")} src={urlEpisodeFilm}></iframe>
           </div>
           <div className={cx("layout_up")}>
             <Container style={{ paddingLeft: "10%" }}>
