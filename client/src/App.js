@@ -26,7 +26,7 @@ function App() {
       <Route path="/:page" element={<Home user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/ListEpisode" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/ListEpisode/:filmName" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
-      <Route path="/WatchFilm" element={<WatchFilm user={user} setIsSignUp={setIsSignUp} />} />
+      <Route path="/WatchFilm/:filmName" element={<WatchFilm user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/Register" element={<Register />} />
       <Route path="/Login" element={<Login setIsSignUp={setIsSignUp} />} />
     </Routes>
