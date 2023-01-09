@@ -23,12 +23,26 @@
 .title_films {
   font-weight: 700;
   color: white;
-  font-size: 40px;
+  font-size: 3rem;
   text-transform: uppercase;
 }
 
 .describe {
-  font-size: 20px;
+  font-size: 2rem;
+}
+
+.fillm_des.hide {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hide_option {
+  text-decoration: underline;
+  color: var(--text-title-describe);
+  cursor: pointer;
 }
 
 .layout_back {
@@ -73,8 +87,4 @@
   font-weight: 800;
   color: white;
   margin: 5px;
-}
-
-// Navbar
-.navbar {
 }
