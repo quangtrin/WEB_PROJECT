@@ -16,7 +16,7 @@ import { Col, Row } from "antd";
 const cx = classNames.bind(styles);
 
 function Navbar({ user, episodeFilm, film }) {
-  const [key, setKey] = useState("comment");
+  const [key, setKey] = useState("episode");
   const [comments, setComments] = useState([]);
   const [userComment, setUserComment] = useState("");
   const [commentParentID, setCommentParentID] = useState();
@@ -199,7 +199,15 @@ function Navbar({ user, episodeFilm, film }) {
             {episodeFilm.map((episode) => {
               return (
                 <Col span={4}>
-                  <Episode href={"/WatchFilm/"+film.filmName+"?episode="+episode.episodeID} episode={episode?.episodeID}></Episode>
+                  <Episode
+                    href={
+                      "/WatchFilm/" +
+                      film.filmName +
+                      "?episode=" +
+                      episode.episodeID
+                    }
+                    episode={episode?.episodeID}
+                  ></Episode>
                 </Col>
               );
             })}
