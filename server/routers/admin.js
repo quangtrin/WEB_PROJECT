@@ -1,5 +1,5 @@
-const express = require("express");
-const adminController = require("../controllers/admin");
+import express from "express";
+import adminController from "../controllers/admin.js";
 
 const admin = (app) => {
   const router = express.Router();
@@ -8,4 +8,4 @@ const admin = (app) => {
   router.post("/addFilm", adminController.addFilm);
 };
 
-module.exports = admin;
+export default admin;

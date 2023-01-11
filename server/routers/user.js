@@ -1,5 +1,5 @@
-const express = require("express");
-const userController = require("../controllers/user");
+import express from "express";
+import userController from "../controllers/user.js";
 
 const user = (app) => {
   const router = express.Router();
@@ -15,4 +15,4 @@ const user = (app) => {
   router.get("/getUrlEpisodeFilm/:filmID", userController.getEpisodeFilmByEpisodeId);
 };
 
-module.exports = user;
+export default user;

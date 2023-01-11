@@ -55,12 +55,6 @@ const ListEpisode = ({ user, setIsSignUp }) => {
               <Container>
                 <div className={cx("title_films")}>{film.filmName}</div>
                 <div className={cx("describe")}>
-                  {/* <span className={cx("text-title-describe")}>Tập mới nhất:</span>
-              <span className={cx("primary")}> S20 - Tập 921 </span>
-              <span className={cx("dot")}>.</span>
-              <span className={cx("primary")}> S20 - Tập 920 </span>
-              <span className={cx("dot")}>.</span>
-              <span className={cx("primary")}> S20 - Tập 919 </span> */}
                   <Row>
                     <Col
                       xs={9}
@@ -141,7 +135,9 @@ const ListEpisode = ({ user, setIsSignUp }) => {
           </div>
         </>
       ) : (
-        <></>
+        <div className={cx("loading-wrapper")}>
+          <LoadingOutlined className={cx("loading-icon")} />
+        </div>
       )}
 
       <Footer></Footer>
