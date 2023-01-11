@@ -7,6 +7,7 @@ import styles from "./ListEpisode.module.scss";
 import Footer from "../../components/Footer/Footer";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { LoadingOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const cx = classNames.bind(styles);
