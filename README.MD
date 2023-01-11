@@ -1,24 +1,29 @@
-# thêm thư viện
+```
+# Add library
 
 npm i
 
-# import data mySQL
+# Import data mySQL
 
 DATABASE.sql
 
-# cài đặt auth mysql
+# Setting auth mysql
 
 cd server
 
-tạo file .env trong thư mục server tạo các biến global với tên (DATABASTE_HOST, DATABASE_USER, DATABASE_PORT, DATABASE_NAME, DATABASE_PASSWORD)
-=> có thể copy từ file .env.examp và thay đổi giá trị biến
+Create file .env in folder server, create các global variables with name (DATABASTE_HOST, DATABASE_USER, DATABASE_PORT, DATABASE_NAME, DATABASE_PASSWORD)
 
-# chạy client
+=> can copy from .env.examp file and change variable value
+
+# run client
 
 cd client
+
 npm run watch-client
 
-# chạy server
+# run server
 
 cd server
+
 npm run watch-server
+```
