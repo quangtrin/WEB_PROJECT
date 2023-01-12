@@ -64,7 +64,7 @@ const Register = () => {
     navigate("/login", { state: { isHistoryUrlRegister: true } });
   }
   useEffect(() => {
-    success ? navigate("/login") : <></>;
+    success ? handleClickLogin() : <></>;
   }, [success]);
   return (
     <div className={cx("background-register")}>
