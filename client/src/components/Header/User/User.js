@@ -46,6 +46,7 @@ const MENU_ITEM = [
 ];
 
 const User = ({ user, setIsSignUp }) => {
+  const navigate = useNavigate();
   const handleMenuChange = (menuItem) => {
     switch (menuItem.type) {
       case "language":
@@ -72,12 +73,11 @@ const User = ({ user, setIsSignUp }) => {
       separate: true,
     },
   ];
-  const navigate = useNavigate();
   const handleClickLogout = () => {
     localStorage.clear();
     setIsSignUp(false);
-    navigate("/login");
-  };
+    navigate(0);
+  }
   return (
     <Menu
       items={userMenu}
