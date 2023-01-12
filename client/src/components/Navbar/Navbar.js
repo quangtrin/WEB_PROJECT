@@ -5,6 +5,7 @@ import {
   CloseOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
+import Swal from "sweetalert2";
 
 import styles from "./Navbar.module.scss";
 import CardFilm from "./cardFilm";
@@ -72,12 +73,12 @@ function Navbar({ user, episodeFilm, film }) {
   };
 
   const handleSendComment = async (comment) => {
-    if (user) {
+    if (user.userId) {
       const req = await axios.post("/api/user/comment", {
         userID: user.userId,
         commentParentID: commentParentID,
         comment: comment,
-        filmID: 1,
+        filmID: film.filmID,
         likeCount: 0,
       });
       setCheckForComment(!checkForComment);
@@ -85,6 +86,12 @@ function Navbar({ user, episodeFilm, film }) {
       setCommentParentID();
       setUserComment("");
       setIsRepping("");
+    } else {
+      Swal.fire({
+        title: "Bạn Cần Đăng Nhập Để Comment!",
+        icon: "warning",
+        showCloseButton: true,
+      });
     }
   };
 
