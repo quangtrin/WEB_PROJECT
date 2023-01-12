@@ -63,6 +63,11 @@ const Register = () => {
   useEffect(() => {
     success ? navigate("/login") : <></>;
   }, [success]);
+
+  useEffect(() => {
+    document.title = "Register";
+  }, []);
+
   return (
     <div className={cx("background-register")}>
       <a className={cx("logo_link")} href="/">
