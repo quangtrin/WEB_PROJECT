@@ -79,7 +79,7 @@ const userController = {
   },
 
   getFilm: async (req, res) => {
-    var sql = "SELECT * FROM film ";
+    var sql = "SELECT film.*, COUNT(episode_film.filmID) as episodeCount FROM film, episode_film WHERE film.filmID = episode_film.filmID GROUP BY episode_film.filmID order by COUNT(episode_film.filmID) DESC";
     try {
       const [result] = await connect.query(sql);
       res.json(result)
