@@ -211,7 +211,7 @@ const Home = ({ user, setIsSignUp }) => {
                           href={"/ListEpisode/" + film.filmName}
                           imgUrl={film.url}
                           name={film.filmName}
-                          episode={1}
+                          episode={film.episodeCount}
                           duration={film.duration}
                         ></CardFilm>
                       </Col>
