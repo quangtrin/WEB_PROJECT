@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "antd";
 import Swal from "sweetalert2";
 import React from "react";
@@ -48,9 +48,13 @@ const Login = ({ setIsSignUp }) => {
     }
   };
 
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
+
   return (
     <div className={cx("background-login")}>
-      <a className={cx('logo_link')} href="/">
+      <a className={cx("logo_link")} href="/">
         <img src={imgLogo} alt="logo" />
       </a>
       <form id="form" className={cx("login")} onSubmit={handleClickSubmit}>

@@ -43,6 +43,7 @@ const WatchFilm = ({ user, setIsSignUp }) => {
   };
   useEffect(() => {
     getDataFilm();
+    document.title = filmName + " tập " + episodeID;
   }, []);
 
   useEffect(() => {

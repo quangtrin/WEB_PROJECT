@@ -44,12 +44,19 @@ const Home = ({ user, setIsSignUp }) => {
       }
     }, 5000);
   };
+
   useEffect(() => {
     slideEffect();
   }, [countSlide]);
+
   useEffect(() => {
     getDataFilms();
   }, []);
+
+  useEffect(() => {
+    document.title = "Home";
+  }, []);
+
   return (
     <div>
       <Header user={user} setIsSignUp={setIsSignUp}></Header>
