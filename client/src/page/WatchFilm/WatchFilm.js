@@ -130,6 +130,7 @@ const WatchFilm = ({ user, setIsSignUp }) => {
             user={user}
             episodeFilm={episodeFilm}
             film={film}
+            episodeID = {episodeID}
           ></Navbar>
         </div>
       ) : (

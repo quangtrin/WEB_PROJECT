@@ -16,7 +16,7 @@ import { Col, Row } from "antd";
 
 const cx = classNames.bind(styles);
 
-function Navbar({ user, episodeFilm, film }) {
+function Navbar({ user, episodeFilm, film, episodeID }) {
   const [key, setKey] = useState("episode");
   const [comments, setComments] = useState([]);
   const [userComment, setUserComment] = useState("");
@@ -64,7 +64,7 @@ function Navbar({ user, episodeFilm, film }) {
     setIsLoading(false);
 
     try {
-      const res = await (await axios.get("/api/user/comment")).data;
+      const res = await (await axios.get("/api/user/comment?filmID=" + film.filmID + "&episodeID=" + episodeID)).data;
       setComments(res);
       setIsLoading(true);
     } catch (error) {
@@ -80,6 +80,7 @@ function Navbar({ user, episodeFilm, film }) {
         comment: comment,
         filmID: film.filmID,
         likeCount: 0,
+        episodeID: episodeID,
       });
       setCheckForComment(!checkForComment);
 
