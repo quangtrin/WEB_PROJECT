@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
-import Header from "../../components/Header/Header";
+// import Header from "../../components/Header/Header";
+import HeaderEffect from "../../components/Header/HeaderEffect";
 import styles from "./Home.module.scss";
 import Footer from "../../components/Footer/Footer";
 import { useState, useEffect } from "react";
@@ -59,7 +60,8 @@ const Home = ({ user, setIsSignUp }) => {
 
   return (
     <div>
-      <Header user={user} setIsSignUp={setIsSignUp}></Header>
+      {/* <Header user={user} setIsSignUp={setIsSignUp}></Header> */}
+      <HeaderEffect user={user} setIsSignUp={setIsSignUp}></HeaderEffect> 
       <div className={cx("home")}>
         <div className={cx("slider")}>
           <div className={cx("slides-drop")}>
