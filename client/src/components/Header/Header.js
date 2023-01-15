@@ -1,12 +1,29 @@
 import imgLogo from "../../imgs/logo_hqbh.png";
-import imgIconSearch from "../../imgs/search.png";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import User from "./User/User";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
+import Search from "./Search";
 
 const cx = classNames.bind(styles);
 
 const Header = ({ user, setIsSignUp }) => {
+  const [films, setFilms] = useState();
+  const [isHasData, setIsHasData] = useState(false);
+
+  const getDataFilms = async () => {
+    setIsHasData(false);
+    const res = await axios.get("/api/user/getFilm");
+    setFilms(res.data);
+    setIsHasData(true);
+  };
+
+  useEffect(() => {
+    getDataFilms();
+  }, []);
+
   return (
     // html
     <>
@@ -36,16 +53,9 @@ const Header = ({ user, setIsSignUp }) => {
             </li>
           </ul>
         </nav>
-        <form className={cx("header_form")} action="#">
-          <input
-            className={cx("header_search")}
-            type="text"
-            placeholder="Search..."
-          />
-          <button type="submit">
-            <img src={imgIconSearch} alt="" />
-          </button>
-        </form>
+        {isHasData ? (
+          <Search films={films}></Search>
+        ) : <></>}
         {user?.userId ? (
           <User user={user} setIsSignUp={setIsSignUp}></User>
         ) : (

@@ -1,14 +1,16 @@
 import { Container, Row, Col } from "react-bootstrap";
 import classNames from "classnames/bind";
-import Header from "../../components/Header/Header";
-import styles from "./Home.module.scss";
-import Footer from "../../components/Footer/Footer";
 import { useState, useEffect } from "react";
+import { LoadingOutlined } from "@ant-design/icons";
+import axios from "axios";
+import { useParams, useSearchParams } from "react-router-dom";
+
+import styles from "./Home.module.scss";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import HotSlide from "./HotSlide/HotSlide";
 import CardFilm from "../Home/CardFilm/CardFilm";
 import SlideHome from "../Home/SlideHome/SlideHome";
-import HotSlide from "./HotSlide/HotSlide";
-import { LoadingOutlined } from "@ant-design/icons";
-
 import imgBanner1 from "../../imgs/conan.jpg";
 import imgBanner2 from "../../imgs/doraemonbanner.jpg";
 import imgBanner3 from "../../imgs/conan.jpg";
@@ -17,13 +19,13 @@ import imgBanner4 from "../../imgs/doraemonbanner.jpg";
 import imgAdds from "../../imgs/adds.jpg";
 
 import imgSlideUp1 from "../../imgs/down.png";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 const Home = ({ user, setIsSignUp }) => {
   let { page } = useParams();
+  const [searchParams] = useSearchParams();
+  const searchFilm = searchParams.get("Search");
   if (page === undefined) page = "1";
   const [checkedRadio, setCheckedRadio] = useState("");
   const [countSlide, setCountSlide] = useState(1);
@@ -32,7 +34,14 @@ const Home = ({ user, setIsSignUp }) => {
   const getDataFilms = async () => {
     setIsHasData(false);
     const res = await axios.get("/api/user/getFilm");
-    setFilms(res.data);
+    if (searchFilm) {
+      const searchResult = res.data.filter((film) => {
+        return film.filmName
+          .toUpperCase()
+          .includes(searchFilm.trim().toUpperCase());
+      });
+      setFilms(searchResult);
+    } else setFilms(res.data);
     setIsHasData(true);
   };
   const slideEffect = () => {
@@ -217,6 +226,7 @@ const Home = ({ user, setIsSignUp }) => {
               )}
             </Row>
           </Container>
+          {/* Param Search */}
           {isHasData ? (
             <div className={cx("pagination")}>
               <a href={"/" + (Number(page) - 1)}>&lt;&lt;</a>
