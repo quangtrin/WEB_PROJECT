@@ -43,6 +43,7 @@ const WatchFilm = ({ user, setIsSignUp }) => {
   };
   useEffect(() => {
     getDataFilm();
+    document.title = filmName + " tập " + episodeID;
   }, []);
 
   useEffect(() => {
@@ -60,75 +61,13 @@ const WatchFilm = ({ user, setIsSignUp }) => {
           <div className={cx("layout_video", "container")}>
             <iframe className={cx("video")} src={urlEpisodeFilm}></iframe>
           </div>
-          <div className={cx("layout_up")}>
-            <Container style={{ paddingLeft: "10%" }}>
-              <div className={cx("title_films")}>
-                {film.filmName} - <span>Tập {episodeID}</span>
-              </div>
-              <div className={cx("under_line")}></div>
-              <div className={cx("describe")}>
-                <Row>
-                  <Col xs={9} style={{ paddingRight: "100px" }}>
-                    <TextInformation
-                      title="Mô tả: "
-                      text={film.description}
-                      color="white"
-                    />
-                  </Col>
 
-                  <Col xs={3}>
-                    <div>
-                      <TextInformation
-                        title="Tên khác: "
-                        text={film.filmName}
-                        color="white"
-                      />
-                      <TextInformation
-                        title="Thể Loại: "
-                        text={film.category}
-                        color="#ea6016"
-                      />
-                      <TextInformation
-                        title="Năm Phát Hành: "
-                        text={film.year}
-                        color="white"
-                      />
-                      <TextInformation
-                        title="Chuyển Ngữ: "
-                        text="Lồng tiếng"
-                        color="white"
-                      />
-                      <TextInformation
-                        title="Xếp Hạng: "
-                        text="13+"
-                        color="white"
-                      />
-                      <TextInformation
-                        title="Phát Sóng: "
-                        text="Tập mới mỗi Thứ 3, Thứ 5, Thứ 7 và Chủ nhật"
-                        color="white"
-                      />
-                      <TextInformation
-                        title="Danh Mục: "
-                        text="Anime"
-                        color="#ea6016"
-                      />
-                      <TextInformation
-                        title="Nội Dung Bởi: "
-                        text="TOEI Animation"
-                        color="white"
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Container>
-          </div>
           <Navbar
             className={cx("navbar")}
             user={user}
             episodeFilm={episodeFilm}
             film={film}
+            episodeID={episodeID}
           ></Navbar>
         </div>
       ) : (
