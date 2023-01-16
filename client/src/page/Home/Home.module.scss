@@ -280,3 +280,16 @@
     color: var(--white);
   }
 }
+
+@media only screen and (max-width: 505px) {
+  .col1 {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .slider {
+    display: none;
+  }
+}

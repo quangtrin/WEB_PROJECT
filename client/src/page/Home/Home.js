@@ -206,7 +206,7 @@ const Home = ({ user, setIsSignUp }) => {
                 films.map((film, index) => {
                   if (index >= page * 30 - 30 && index <= 30 * page - 1)
                     return (
-                      <Col key={index}>
+                      <Col className={cx("col1")} key={index}>
                         <CardFilm
                           href={"/ListEpisode/" + film.filmName}
                           imgUrl={film.url}
