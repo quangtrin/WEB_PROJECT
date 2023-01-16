@@ -155,3 +155,10 @@ header {
 }
 
 //navbar
+
+// Responsive
+@media only screen and (max-width: 1350px) {
+  .container {
+    display: none;
+  }
+}
