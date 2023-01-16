@@ -10,9 +10,7 @@ import HotSlide from "./HotSlide/HotSlide";
 import { LoadingOutlined } from "@ant-design/icons";
 
 import imgBanner1 from "../../imgs/conan.jpg";
-import imgBanner2 from "../../imgs/doraemonbanner.jpg";
 import imgBanner3 from "../../imgs/conan.jpg";
-import imgBanner4 from "../../imgs/doraemonbanner.jpg";
 
 import imgAdds from "../../imgs/adds.jpg";
 
