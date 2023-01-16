@@ -16,9 +16,14 @@ import imgBanner4 from "../../imgs/doraemonbanner.jpg";
 
 import imgAdds from "../../imgs/adds.jpg";
 
-import imgSlideUp1 from "../../imgs/down.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import imgSlideUp1 from "../../imgs/HotSlide/one_piece.png";
+import imgSlideUp2 from "../../imgs/HotSlide/doraemon.png";
+import imgSlideUp3 from "../../imgs/HotSlide/naruto.png";
+import imgSlideUp4 from "../../imgs/HotSlide/demon_slayder.png";
+import imgSlideUp5 from "../../imgs/HotSlide/conan.png";
+import imgSlideUp6 from "../../imgs/HotSlide/pokemon.png";
 
 const cx = classNames.bind(styles);
 
@@ -178,12 +183,27 @@ const Home = ({ user, setIsSignUp }) => {
             </div>
             <div className={cx("img-hot-series")}>
               <div className={cx("mySlides")}>
-                <HotSlide href="#" img={imgSlideUp1} />
-                <HotSlide href="#" img={imgSlideUp1} />
-                <HotSlide href="#" img={imgSlideUp1} />
-                <HotSlide href="#" img={imgSlideUp1} />
-                <HotSlide href="#" img={imgSlideUp1} />
-                <HotSlide href="#" img={imgSlideUp1} />
+                <HotSlide
+                  href="http://localhost:3000/ListEpisode/One%20Piece"
+                  img={imgSlideUp1}
+                />
+                <HotSlide
+                  href="http://localhost:3000/ListEpisode/Doraemon%20New%20TV%20Series"
+                  img={imgSlideUp2}
+                />
+                <HotSlide
+                  href="http://localhost:3000/ListEpisode/Naruto%20Shippuuden"
+                  img={imgSlideUp3}
+                />
+                <HotSlide
+                  href="http://localhost:3000/ListEpisode/Kimetsu%20no%20Yaiba"
+                  img={imgSlideUp4}
+                />
+                <HotSlide href="#" img={imgSlideUp5} />
+                <HotSlide
+                  href="http://localhost:3000/ListEpisode/Pocket%20Monsters%202019"
+                  img={imgSlideUp6}
+                />
               </div>
             </div>
           </div>
