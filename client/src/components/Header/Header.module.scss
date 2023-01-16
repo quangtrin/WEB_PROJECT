@@ -79,41 +79,7 @@ header {
   width: 100%;
 }
 
-.header_form {
-  position: relative;
-}
 
-.header_search {
-  font-family: "Roboto", sans-serif;
-  width: 130px;
-  font-size: 16px;
-  padding: 7px 10px;
-  color: var(--black);
-  border: 2px solid;
-  border-radius: 50px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-
-  &:hover {
-    box-shadow: 0 5px 10px 0 var(--header-box-shadow-button-hover);
-  }
-
-  &:focus {
-    outline: none !important;
-    border-color: rgb(234 96 22);
-    color: rgb(234 96 22);
-  }
-}
-
-.header_form img {
-  width: 20px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 30px;
-  cursor: pointer;
-}
 
 .header_register {
   font-family: "Roboto", sans-serif;
