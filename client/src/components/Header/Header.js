@@ -53,21 +53,21 @@ const Header = ({ user, setIsSignUp }) => {
             </li>
           </ul>
         </nav>
-        {isHasData ? (
-          <Search films={films}></Search>
-        ) : <></>}
-        {user?.userId ? (
-          <User user={user} setIsSignUp={setIsSignUp}></User>
-        ) : (
-          <>
-            <a className={cx("cta")} href="/Register">
-              <button className={cx("header_register")}>ĐĂNG KÝ</button>
-            </a>
-            <a className={cx("cta")} href="/Login">
-              <button className={cx("header_login")}>ĐĂNG NHẬP</button>
-            </a>
-          </>
-        )}
+        <div className={cx("right-content")}>
+          {isHasData ? <Search films={films}></Search> : <></>}
+          {user?.userId ? (
+            <User user={user} setIsSignUp={setIsSignUp}></User>
+          ) : (
+            <>
+              <a className={cx("cta")} href="/Register">
+                <button className={cx("header_register")}>ĐĂNG KÝ</button>
+              </a>
+              <a className={cx("cta")} href="/Login">
+                <button className={cx("header_login")}>ĐĂNG NHẬP</button>
+              </a>
+            </>
+          )}
+        </div>
       </header>
     </>
   );

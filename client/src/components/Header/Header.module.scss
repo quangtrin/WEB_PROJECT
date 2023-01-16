@@ -79,8 +79,6 @@ header {
   width: 100%;
 }
 
-
-
 .header_register {
   font-family: "Roboto", sans-serif;
   width: 130px;
@@ -120,11 +118,29 @@ header {
   }
 }
 
+.right-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+  justify-content: flex-end;
+}
+
 //navbar
 
 // Responsive
-@media only screen and (max-width: 1350px) {
+@media only screen and (max-width: 1210px) {
+  header {
+    justify-content: space-between;
+  }
+
   .container {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  header {
+    justify-content: flex-start;
   }
 }
