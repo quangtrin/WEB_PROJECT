@@ -64,7 +64,7 @@ const User = ({ user, setIsSignUp }) => {
     },
     {
       icon: <SettingOutlined />,
-      title: "Settings",
+      title: "Change Password",
     },
     ...MENU_ITEM,
     {
