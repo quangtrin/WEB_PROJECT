@@ -114,7 +114,7 @@ const userController = {
 
   getEpisodeFilmById: async (req, res) => {
     const filmID = req.params.filmID;
-    var sql = "SELECT * FROM episode_film WHERE filmID = " + filmID;
+    var sql = "SELECT * FROM episode_film WHERE filmID = " + filmID +" ORDER BY episodeID DESC";
     try {
       const [result] = await connect.query(sql);
       res.json(result);
