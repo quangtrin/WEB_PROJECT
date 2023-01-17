@@ -11,10 +11,6 @@ import Footer from "../../components/Footer/Footer";
 import HotSlide from "./HotSlide/HotSlide";
 import CardFilm from "../Home/CardFilm/CardFilm";
 import SlideHome from "../Home/SlideHome/SlideHome";
-import imgBanner1 from "../../imgs/conan.jpg";
-import imgBanner3 from "../../imgs/conan.jpg";
-
-import imgAdds from "../../imgs/adds.jpg";
 
 import imgSlideUp1 from "../../imgs/HotSlide/one_piece.png";
 import imgSlideUp2 from "../../imgs/HotSlide/doraemon.png";
@@ -30,8 +26,6 @@ const Home = ({ user, setIsSignUp }) => {
   const [searchParams] = useSearchParams();
   const searchFilm = searchParams.get("Search");
   if (page === undefined) page = "1";
-  const [checkedRadio, setCheckedRadio] = useState("");
-  const [countSlide, setCountSlide] = useState(1);
   const [isHasData, setIsHasData] = useState(false);
   const [films, setFilms] = useState();
   const getDataFilms = async () => {
@@ -47,19 +41,6 @@ const Home = ({ user, setIsSignUp }) => {
     } else setFilms(res.data);
     setIsHasData(true);
   };
-  const slideEffect = () => {
-    setTimeout(function () {
-      setCountSlide(countSlide + 1);
-      setCheckedRadio("radio" + countSlide);
-      if (countSlide > 4) {
-        setCountSlide(1);
-      }
-    }, 5000);
-  };
-
-  useEffect(() => {
-    slideEffect();
-  }, [countSlide]);
 
   useEffect(() => {
     getDataFilms();
@@ -74,113 +55,7 @@ const Home = ({ user, setIsSignUp }) => {
       <Header user={user} setIsSignUp={setIsSignUp}></Header>
       <div className={cx("home")}>
         <div className={cx("slider")}>
-          <div className={cx("slides-drop")}>
-            <input
-              type="radio"
-              name="radio-btn"
-              id={cx("radio1")}
-              checked={checkedRadio === "radio1"}
-            />
-            <input
-              type="radio"
-              name="radio-btn"
-              id={cx("radio2")}
-              checked={checkedRadio === "radio2"}
-            />
-            <input
-              type="radio"
-              name="radio-btn"
-              id={cx("radio3")}
-              checked={checkedRadio === "radio3"}
-            />
-            <input
-              type="radio"
-              name="radio-btn"
-              id={cx("radio4")}
-              checked={checkedRadio === "radio4"}
-            />
-
-            <div className={cx("slide", "first")}>
-              <img src={imgBanner1} alt="" />
-              <div className={cx("slider-text")}>
-                <div className={cx("container")}>
-                  <div className={cx("text-heading")}>
-                    <h3>Doraemon: Cuộc phiêu lưu của Yasuo và Yone!</h3>
-                  </div>
-                  <div className={cx("text-description")}>
-                    <p>
-                      Năm phát hành: <span>1998</span>
-                    </p>
-                  </div>
-                  <button className={cx("button-slider")}>CHI TIẾT</button>
-                </div>
-              </div>
-            </div>
-            <SlideHome
-              imgSlide={imgBanner3}
-              nameTitle={"Doraemon: Cuộc phiêu lưu của Yasuo và Yone!"}
-              releaseYear={"Năm phát hành:"}
-              year={1998}
-              detail={"Chi tiết"}
-            />
-            <SlideHome
-              imgSlide={imgBanner3}
-              nameTitle={"Doraemon: Cuộc phiêu lưu của Yasuo và Yone!"}
-              releaseYear={"Năm phát hành:"}
-              year={1998}
-              detail={"Chi tiết"}
-            />
-            <SlideHome
-              imgSlide={imgBanner3}
-              nameTitle={"Doraemon: Cuộc phiêu lưu của Yasuo và Yone!"}
-              releaseYear={"Năm phát hành:"}
-              year={1998}
-              detail={"Chi tiết"}
-            />
-
-            <div className={cx("navigation-manual", "container")}>
-              <ul>
-                <li>
-                  <label htmlFor="radio1" className={cx("manual-btn")}>
-                    {" "}
-                  </label>
-                </li>
-                <li>
-                  <label htmlFor="radio2" className={cx("manual-btn")}>
-                    {" "}
-                  </label>
-                </li>
-                <li>
-                  <label htmlFor="radio3" className={cx("manual-btn")}>
-                    {" "}
-                  </label>
-                </li>
-                <li>
-                  <label htmlFor="radio4" className={cx("manual-btn")}>
-                    {" "}
-                  </label>
-                </li>
-              </ul>
-            </div>
-
-            <div className={cx("navigation-auto", "container")}>
-              <ul>
-                <li>
-                  <div className={cx("auto-btn1")} />
-                </li>
-                <li>
-                  <div className={cx("auto-btn2")} />
-                </li>
-                <li>
-                  <div className={cx("auto-btn3")} />
-                </li>
-                <li>
-                  <div className={cx("auto-btn4")} />
-                </li>
-              </ul>
-            </div>
-          </div>
-
+          <SlideHome></SlideHome>
           <div className={cx("slider-up", "container")}>
             <div className={cx("text-hot-series")}>
               <h3>
@@ -214,10 +89,6 @@ const Home = ({ user, setIsSignUp }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className={cx("adds", "container")}>
-          <img src={imgAdds} />
         </div>
 
         <div className={cx("content", "container")}>
