@@ -53,8 +53,9 @@ const Register = () => {
     if (account && userName && password && dateOfBirth) {
       if (!checkDate(dateOfBirth)) {
         setIsRightDate(false);
+        setAccountExist(false);
         return;
-      }
+      } else setIsRightDate(true);
       setIsRegistering(true);
       const res = await axios.post("/api/user/register", {
         account: account,
