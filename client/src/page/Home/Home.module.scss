@@ -78,6 +78,7 @@
 .navigation-auto div:not(:last-child) {
   margin-right: 40px;
 }
+
 .img-hot-series {
   width: 100%;
   overflow: hidden;
@@ -87,6 +88,7 @@
     margin: 4rem 0px;
   }
 }
+
 .text-hot-series h3 {
   font-family: "Roboto", sans-serif;
   font-size: 36px;
@@ -143,22 +145,20 @@
   background-color: #151515;
 }
 
-.pagination a {
+.pagination .page {
   display: inline-block;
   font-size: 16px;
   font-weight: 700;
   color: #fff;
-  height: 30px;
-  width: 30px;
-  border: 1px solid transparent;
-  border-radius: 50%;
-  line-height: 30px;
   text-align: center;
+  margin: 2px;
+  padding: 5px 1rem;
+  background-color: #666666;
 }
 
 .pagination a.active {
-  color: rgb(234 96 22);
-  border-color: rgb(234 96 22);
+  color: #151515;
+  background-color: white;
 }
 
 .pagination a:hover {
@@ -180,6 +180,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
+
   .loading-icon {
     font-size: 120px;
     color: var(--white);
