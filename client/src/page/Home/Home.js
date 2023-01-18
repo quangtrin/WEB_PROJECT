@@ -44,7 +44,7 @@ const Home = ({ user, setIsSignUp }) => {
 
   useEffect(() => {
     getDataFilms();
-  }, []);
+  }, [searchFilm]);
 
   useEffect(() => {
     document.title = "Home";
