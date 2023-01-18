@@ -21,6 +21,8 @@ const Register = () => {
   const [isHidePass, setIsHidePass] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [isRightDate, setIsRightDate] = useState(true);
+
   const handleChangeAccount = (e) => {
     setAccount(e.target.value);
   };
@@ -33,9 +35,27 @@ const Register = () => {
   const handleChangeDateOfBirth = (e) => {
     setDateOfBirth(e.target.value);
   };
+
+  const checkDate = (date) => {
+    const inputDate = date.split("-");
+    const curDate = new Date();
+    if (parseInt(inputDate[0]) > curDate.getFullYear()) return false;
+    if (parseInt(inputDate[0]) === curDate.getFullYear()) {
+      if (parseInt(inputDate[1]) > curDate.getMonth() + 1) return false;
+      if (parseInt(inputDate[1]) === curDate.getMonth() + 1) {
+        if (parseInt(inputDate[2]) >= curDate.getDate()) return false;
+      }
+    }
+    return true;
+  };
   const handleClickSubmit = async (e) => {
     e.preventDefault();
-    if (account && userName && password) {
+    if (account && userName && password && dateOfBirth) {
+      if (!checkDate(dateOfBirth)) {
+        setIsRightDate(false);
+        setAccountExist(false);
+        return;
+      } else setIsRightDate(true);
       setIsRegistering(true);
       const res = await axios.post("/api/user/register", {
         account: account,
@@ -62,7 +82,7 @@ const Register = () => {
   };
   const handleClickLogin = () => {
     navigate("/login", { state: { isHistoryUrlRegister: true } });
-  }
+  };
   useEffect(() => {
     success ? handleClickLogin() : <></>;
   }, [success]);
@@ -79,7 +99,12 @@ const Register = () => {
       <div className={cx("register")}>
         <h1 className={cx("register_heading")}>Đăng ký</h1>
         {accountExist ? (
-          <p className={cx("notify")}>Tài khoản đã tồn tại</p>
+          <p className={cx("notify")}>Tài khoản đã tồn tại!</p>
+        ) : (
+          <></>
+        )}
+        {!isRightDate ? (
+          <p className={cx("notify")}>Vui lòng nhập lại ngày sinh!</p>
         ) : (
           <></>
         )}
@@ -172,7 +197,7 @@ const Register = () => {
         </form>
         <p className={cx("register_already")}>
           <span>Bạn đã có tài khoản?</span>
-          <a onClick={handleClickLogin} className={cx("login_link")} >
+          <a onClick={handleClickLogin} className={cx("login_link")}>
             Đăng nhập
           </a>
         </p>
