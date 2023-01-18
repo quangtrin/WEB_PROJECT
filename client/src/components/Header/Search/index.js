@@ -40,7 +40,6 @@ function Search({ films }) {
       
     }
   };
-  console.log(searchResult);
   return (
     <HeadlessTippy
       interactive
