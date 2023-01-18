@@ -59,7 +59,7 @@ const Home = ({ user, setIsSignUp }) => {
           <div className={cx("slider-up", "container")}>
             <div className={cx("text-hot-series")}>
               <h3>
-                <button />
+                <button disabled />
                 <span>Hot Series</span>
               </h3>
             </div>
@@ -68,23 +68,28 @@ const Home = ({ user, setIsSignUp }) => {
                 <HotSlide
                   href="http://localhost:3000/ListEpisode/One%20Piece"
                   img={imgSlideUp1}
+                  classname="first"
                 />
                 <HotSlide
                   href="http://localhost:3000/ListEpisode/Doraemon%20New%20TV%20Series"
                   img={imgSlideUp2}
+                  classname="first"
                 />
                 <HotSlide
                   href="http://localhost:3000/ListEpisode/Naruto%20Shippuuden"
                   img={imgSlideUp3}
+                  classname="first"
                 />
                 <HotSlide
                   href="http://localhost:3000/ListEpisode/Kimetsu%20no%20Yaiba"
                   img={imgSlideUp4}
+                  classname="last"
                 />
-                <HotSlide href="#" img={imgSlideUp5} />
+                <HotSlide href="#" img={imgSlideUp5} classname="last" />
                 <HotSlide
                   href="http://localhost:3000/ListEpisode/Pocket%20Monsters%202019"
                   img={imgSlideUp6}
+                  classname="last"
                 />
               </div>
             </div>
@@ -94,7 +99,7 @@ const Home = ({ user, setIsSignUp }) => {
         <div className={cx("content", "container")}>
           <div className={cx("text-content")}>
             <h3>
-              <button />
+              <button disabled />
               <span>Phim Mới</span>
             </h3>
           </div>
