@@ -197,7 +197,7 @@ const Register = () => {
         </form>
         <p className={cx("register_already")}>
           <span>Bạn đã có tài khoản?</span>
-          <a onClick={handleClickLogin} className={cx("login_link")}>
+          <a href="#" onClick={handleClickLogin} className={cx("login_link")}>
             Đăng nhập
           </a>
         </p>
