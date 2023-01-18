@@ -1,5 +1,5 @@
 header {
-  background-color: #111111;
+  background-color: rgba($color: #151515, $alpha: 0.5);
   height: 76px;
   display: flex;
   justify-content: space-between;
@@ -7,9 +7,16 @@ header {
   padding: 16px 5%;
   position: fixed;
   width: 100%;
-  border-bottom: 1px solid #272727;
   transition: all 0.5s ease-in-out;
   z-index: 10;
+
+  &:hover {
+    background-color: #151515;
+  }
+}
+
+.background-header-scroll {
+  background-color: #000000;
 }
 
 .header img {
@@ -61,11 +68,11 @@ header {
   color: var(--primary);
 }
 
-.header_nav_links > li > a {
+.header_nav_links>li>a {
   position: relative;
 }
 
-.header_nav_links > li > a::before {
+.header_nav_links>li>a::before {
   content: "";
   height: 2px;
   width: 0;
@@ -75,7 +82,7 @@ header {
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.header_nav_links > li:hover > a::before {
+.header_nav_links>li:hover>a::before {
   width: 100%;
 }
 
