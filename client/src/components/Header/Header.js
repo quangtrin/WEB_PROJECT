@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 const Header = ({ user, setIsSignUp }) => {
   const [films, setFilms] = useState();
   const [isHasData, setIsHasData] = useState(false);
-
+  const [scroll, setScroll] = useState(false);
   const getDataFilms = async () => {
     setIsHasData(false);
     const res = await axios.get("/api/user/getFilm");
@@ -23,12 +23,18 @@ const Header = ({ user, setIsSignUp }) => {
 
   useEffect(() => {
     getDataFilms();
+    window.addEventListener("scroll", (e) => {
+      if (e.path[1].pageYOffset > 0) {
+        setScroll(true);
+      }
+      else setScroll(false);
+    })
   }, []);
 
   return (
     // html
     <>
-      <header className={cx("header")}>
+      <header className={scroll ? cx("header", "background-header-scroll") : cx("header")}>
         <a href="/">
           <img src={imgLogo} alt="logo" />
         </a>
