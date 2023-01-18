@@ -29,9 +29,9 @@ const Header = ({ user, setIsSignUp }) => {
     // html
     <>
       <header className={cx("header")}>
-        <Link to="/">
+        <a href="/">
           <img src={imgLogo} alt="logo" />
-        </Link>
+        </a>
         <nav className={cx("container")}>
           <ul className={cx("header_nav_links")}>
             <li>
