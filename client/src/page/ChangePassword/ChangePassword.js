@@ -5,6 +5,7 @@ import classNames from "classnames/bind";
 
 import styles from "./ChangePassword.module.scss";
 import imgLogo from "../../imgs/logo_hqbh.png";
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -28,9 +29,9 @@ const ChangePassword = () => {
   };
   return (
     <div className={cx("background-form")}>
-      <a className={cx("logo_link")} href="/">
+      <Link className={cx("logo_link")} to="/">
         <img src={imgLogo} alt="logo" />
-      </a>
+      </Link>
       <div className={cx("form")}>
         <h1 className={cx("form_heading")}>Đổi mật khẩu</h1>
 

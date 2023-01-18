@@ -6,7 +6,7 @@ import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import imgLogo from "../../imgs/logo_hqbh.png";
 
 const cx = classNames.bind(styles);
@@ -93,9 +93,9 @@ const Register = () => {
 
   return (
     <div className={cx("background-register")}>
-      <a className={cx("logo_link")} href="/">
+      <Link className={cx("logo_link")} to="/">
         <img src={imgLogo} alt="logo" />
-      </a>
+      </Link>
       <div className={cx("register")}>
         <h1 className={cx("register_heading")}>Đăng ký</h1>
         {accountExist ? (

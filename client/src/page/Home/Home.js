@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
 import styles from "./Home.module.scss";
 import Header from "../../components/Header/Header";
@@ -66,28 +66,28 @@ const Home = ({ user, setIsSignUp }) => {
             <div className={cx("img-hot-series")}>
               <div className={cx("mySlides")}>
                 <HotSlide
-                  href="http://localhost:3000/ListEpisode/One%20Piece"
+                  href="/ListEpisode/One%20Piece"
                   img={imgSlideUp1}
                   classname="first"
                 />
                 <HotSlide
-                  href="http://localhost:3000/ListEpisode/Doraemon%20New%20TV%20Series"
+                  href="/ListEpisode/Doraemon%20New%20TV%20Series"
                   img={imgSlideUp2}
                   classname="first"
                 />
                 <HotSlide
-                  href="http://localhost:3000/ListEpisode/Naruto%20Shippuuden"
+                  href="/ListEpisode/Naruto%20Shippuuden"
                   img={imgSlideUp3}
                   classname="first"
                 />
                 <HotSlide
-                  href="http://localhost:3000/ListEpisode/Kimetsu%20no%20Yaiba"
+                  href="/ListEpisode/Kimetsu%20no%20Yaiba"
                   img={imgSlideUp4}
                   classname="last"
                 />
-                <HotSlide href="#" img={imgSlideUp5} classname="last" />
+                <HotSlide to="#" img={imgSlideUp5} classname="last" />
                 <HotSlide
-                  href="http://localhost:3000/ListEpisode/Pocket%20Monsters%202019"
+                  href="/ListEpisode/Pocket%20Monsters%202019"
                   img={imgSlideUp6}
                   classname="last"
                 />
@@ -130,26 +130,26 @@ const Home = ({ user, setIsSignUp }) => {
           {/* Param Search */}
           {isHasData ? (
             <div className={cx("pagination")}>
-              <a href={"/" + (Number(page) - 1)}>&lt;&lt;</a>
-              <a className={page === "1" ? cx("active") : <></>} href="/1">
+              <Link to={"/" + (Number(page) - 1)}>&lt;&lt;</Link>
+              <Link className={page === "1" ? cx("active") : <></>} to="/1">
                 1
-              </a>
-              <a href="/2" className={page === "2" ? cx("active") : <></>}>
+              </Link>
+              <Link to="/2" className={page === "2" ? cx("active") : <></>}>
                 2
-              </a>
-              <a href="/3" className={page === "3" ? cx("active") : <></>}>
+              </Link>
+              <Link to="/3" className={page === "3" ? cx("active") : <></>}>
                 3
-              </a>
+              </Link>
               <span>...</span>
               {page !== "1" && page !== "2" && page !== "3" ? (
                 <>
-                  <a href={"/" + page}>{page}</a>
+                  <Link to={"/" + page}>{page}</Link>
                   <span>...</span>
                 </>
               ) : (
                 <></>
               )}
-              <a href={"/" + (Number(page) + 1)}>&gt;&gt;</a>
+              <Link to={"/" + (Number(page) + 1)}>&gt;&gt;</Link>
             </div>
           ) : (
             <></>
