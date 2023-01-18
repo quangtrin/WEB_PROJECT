@@ -6,6 +6,7 @@ import User from "./User/User";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import Search from "./Search";
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -34,9 +35,9 @@ const Header = ({ user, setIsSignUp }) => {
     // html
     <>
       <header className={scroll ? cx("header", "background-header-scroll") : cx("header")}>
-        <a href="/">
+        <Link to="/">
           <img src={imgLogo} alt="logo" />
-        </a>
+        </Link>
         <nav className={cx("container")}>
           <ul className={cx("header_nav_links")}>
             <li>
@@ -65,12 +66,12 @@ const Header = ({ user, setIsSignUp }) => {
             <User user={user} setIsSignUp={setIsSignUp}></User>
           ) : (
             <>
-              <a className={cx("cta")} href="/Register">
+              <Link className={cx("cta")} to="/Register">
                 <button className={cx("header_register")}>ĐĂNG KÝ</button>
-              </a>
-              <a className={cx("cta")} href="/Login">
+              </Link>
+              <Link className={cx("cta")} to="/Login">
                 <button className={cx("header_login")}>ĐĂNG NHẬP</button>
-              </a>
+              </Link>
             </>
           )}
         </div>

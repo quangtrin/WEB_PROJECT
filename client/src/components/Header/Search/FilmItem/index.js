@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import { Link } from "react-router-dom";
 
 import styles from "./FilmItem.module.scss";
 
@@ -6,7 +7,7 @@ const cx = classNames.bind(styles);
 
 function FilmItem({ film }) {
   return (
-    <a href={"/ListEpisode/" + film.filmName} className={cx("wrapper")}>
+    <Link to={"/ListEpisode/" + film.filmName} className={cx("wrapper")}>
       <div className={cx("film-item")}>
         <div className={cx("film-img")}>
           <img src={film.url} alt={film.filmName} />
@@ -21,7 +22,7 @@ function FilmItem({ film }) {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
 
