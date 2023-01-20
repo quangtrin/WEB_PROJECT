@@ -48,7 +48,6 @@ const Home = ({ user, setIsSignUp }) => {
             .toUpperCase()
             .includes(searchFilm.trim().toUpperCase());
         });
-        console.log(searchResult);
         setFilterFilms(searchResult);
         setFilterPage("?Search=" + searchFilm);
       }
