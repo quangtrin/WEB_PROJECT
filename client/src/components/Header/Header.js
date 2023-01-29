@@ -7,7 +7,7 @@ import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import Search from "./Search";
 import { Link } from "react-router-dom";
-import Category from "./Category/Category"
+import Category from "./Category/Category";
 
 const cx = classNames.bind(styles);
 
@@ -25,51 +25,67 @@ const Header = ({ user, setIsSignUp, category }) => {
 
   useEffect(() => {
     setCategoryState(category);
-  }, [category])
+  }, [category]);
 
   useEffect(() => {
     getDataFilms();
     window.addEventListener("scroll", (e) => {
       if (window.pageYOffset > 0) {
         setScroll(true);
-      }
-      else setScroll(false);
-    })
+      } else setScroll(false);
+    });
   }, []);
-
   return (
     // html
-    <>
-      <header className={scroll ? cx("header", "background-header-scroll") : cx("header")}>
-        <a href="/">
-          <img src={imgLogo} alt="logo" />
-        </a>
-        <nav className={cx("container")}>
-          <ul className={cx("header_nav_links")}>
-            <Category categoryHome={categoryState} categoryName={"Hành động"}></Category>
-            <Category categoryHome={categoryState} categoryName={"Hài hước"}></Category>
-            <Category categoryHome={categoryState} categoryName={"Phiêu lưu"}></Category>
-            <Category categoryHome={categoryState} categoryName={"Tiên hiệp"}></Category>
-            <Category categoryHome={categoryState} categoryName={"Học đường"}></Category>
-          </ul>
-        </nav>
-        <div className={cx("right-content")}>
-          {isHasData ? <Search films={films}></Search> : <></>}
-          {user?.userId ? (
-            <User user={user} setIsSignUp={setIsSignUp}></User>
-          ) : (
-            <>
-              <Link className={cx("cta")} to="/Register">
-                <button className={cx("header_register")}>ĐĂNG KÝ</button>
-              </Link>
-              <Link className={cx("cta")} to="/Login">
-                <button className={cx("header_login")}>ĐĂNG NHẬP</button>
-              </Link>
-            </>
-          )}
-        </div>
-      </header>
-    </>
+    <header
+      className={
+        scroll ? cx("header", "background-header-scroll") : cx("header")
+      }
+    >
+      <a href="/">
+        <img src={imgLogo} alt="logo" />
+      </a>
+      <nav className={cx("container")}>
+        <ul className={cx("header_nav_links")}>
+          <Category
+            categoryHome={categoryState}
+            categoryName={"Hành động"}
+          ></Category>
+          <Category
+            categoryHome={categoryState}
+            categoryName={"Hài hước"}
+          ></Category>
+          <Category
+            categoryHome={categoryState}
+            categoryName={"Phiêu lưu"}
+          ></Category>
+          <Category
+            categoryHome={categoryState}
+            categoryName={"Tiên hiệp"}
+          ></Category>
+          <Category
+            categoryHome={categoryState}
+            categoryName={"Học đường"}
+          ></Category>
+        </ul>
+      </nav>
+      <div className={cx("right-content")}>
+        {isHasData ? <Search films={films}></Search> : <></>}
+        {!user?.userId ? (
+          <>
+            <Link className={cx("cta")} to="/Register">
+              <button className={cx("header_register")}>ĐĂNG KÝ</button>
+            </Link>
+            <Link className={cx("cta")} to="/Login">
+              <button className={cx("header_login")}>ĐĂNG NHẬP</button>
+            </Link>
+            <User setIsSignUp={setIsSignUp}></User>
+          </>
+        ) : (
+          <User user={user} setIsSignUp={setIsSignUp}></User>
+        )}
+      </div>
+    </header>
   );
 };
 
