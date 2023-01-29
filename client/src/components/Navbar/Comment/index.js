@@ -31,7 +31,7 @@ function Comment({ data, commentChilds, callBack, inputElement }) {
           <span className={cx("message-main")}>{data.comment}</span>
         </div>
         <div className={cx("comment-body_options")}>
-          <div>
+          <div className={cx("comment-body_options-left")}>
             <span className={cx("option", "disable")}>{data.time}</span>
             <span className={cx("option")}>Thích</span>
             <span className={cx("option")} onClick={handleRep}>
