@@ -1,29 +1,17 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import { connect } from "./db.js";
+import user from "./routers/user.js";
+import admin from "./routers/admin.js";
+import * as dotenv from "dotenv";
+dotenv.config();
+const port = process.env.PORT || 4000;
 const app = express();
-const user = require("./routers/user");
-const admin = require("./routers/admin")
-const mysql = require("mysql");
-require('dotenv').config({ path: '.env' })
-var connect = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASS,
-  database: process.env.DATABASE_NAME,
-  port: process.env.DATABASE_PORT,
-});
-
-connect.connect((err) => {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
-// app.get("/", (req, res) => {
-//   res.json({ users: ["userOne", "userTwo", "userThress"] });
-// });
 app.use(express.urlencoded());
 app.use(express.json());
+app.use(cors());
 user(app);
 admin(app);
-app.listen(4000, () => {
+app.listen(port, () => {
   console.log("Server started on port 4000");
 });

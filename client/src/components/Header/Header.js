@@ -1,63 +1,73 @@
-import imgLogo from "../../imgs/logo-pops.png";
-import imgIconSearch from "../../imgs/search.png";
+import imgLogo from "../../imgs/logo_hqbh.png";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import User from "./User/User";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
+import Search from "./Search";
+import { Link } from "react-router-dom";
+import Category from "./Category/Category"
 
 const cx = classNames.bind(styles);
 
-const Header = ({ user, setIsSignUp }) => {
+const Header = ({ user, setIsSignUp, category }) => {
+  const [films, setFilms] = useState();
+  const [isHasData, setIsHasData] = useState(false);
+  const [scroll, setScroll] = useState(false);
+  const [categoryState, setCategoryState] = useState("");
+  const getDataFilms = async () => {
+    setIsHasData(false);
+    const res = await axios.get("/api/user/getFilm");
+    setFilms(res.data);
+    setIsHasData(true);
+  };
+
+  useEffect(() => {
+    setCategoryState(category);
+  }, [category])
+
+  useEffect(() => {
+    getDataFilms();
+    window.addEventListener("scroll", (e) => {
+      if (window.pageYOffset > 0) {
+        setScroll(true);
+      }
+      else setScroll(false);
+    })
+  }, []);
+
   return (
     // html
     <>
-      <header className={cx("header")}>
+      <header className={scroll ? cx("header", "background-header-scroll") : cx("header")}>
         <a href="/">
           <img src={imgLogo} alt="logo" />
         </a>
         <nav className={cx("container")}>
           <ul className={cx("header_nav_links")}>
-            <li>
-              <a href="#">Thiếu nhi</a>
-            </li>
-            <li>
-              <a href="#">Comics</a>
-            </li>
-            <li>
-              <a href="#">Anime</a>
-            </li>
-            <li>
-              <a href="#">Phim</a>
-            </li>
-            <li>
-              <a href="#">Âm nhạc</a>
-            </li>
-            <li>
-              <a href="#">Thêm</a>
-            </li>
+            <Category categoryHome={categoryState} categoryName={"Hành động"}></Category>
+            <Category categoryHome={categoryState} categoryName={"Hài hước"}></Category>
+            <Category categoryHome={categoryState} categoryName={"Phiêu lưu"}></Category>
+            <Category categoryHome={categoryState} categoryName={"Tiên hiệp"}></Category>
+            <Category categoryHome={categoryState} categoryName={"Học đường"}></Category>
           </ul>
         </nav>
-        <form className={cx("header_form")} action="#">
-          <input
-            className={cx("header_search")}
-            type="text"
-            placeholder="Search..."
-          />
-          <button type="submit">
-            <img src={imgIconSearch} alt="" />
-          </button>
-        </form>
-        {user?.userId ? (
-          <User user={user} setIsSignUp={setIsSignUp}></User>
-        ) : (
-          <>
-            <a className={cx("cta")} href="/Register">
-              <button className={cx("header_register")}>ĐĂNG KÝ</button>
-            </a>
-            <a className={cx("cta")} href="/Login">
-              <button className={cx("header_login")}>ĐĂNG NHẬP</button>
-            </a>
-          </>
-        )}
+        <div className={cx("right-content")}>
+          {isHasData ? <Search films={films}></Search> : <></>}
+          {user?.userId ? (
+            <User user={user} setIsSignUp={setIsSignUp}></User>
+          ) : (
+            <>
+              <Link className={cx("cta")} to="/Register">
+                <button className={cx("header_register")}>ĐĂNG KÝ</button>
+              </Link>
+              <Link className={cx("cta")} to="/Login">
+                <button className={cx("header_login")}>ĐĂNG NHẬP</button>
+              </Link>
+            </>
+          )}
+        </div>
       </header>
     </>
   );
