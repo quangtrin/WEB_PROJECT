@@ -8,22 +8,17 @@ import ListAccountAdmin from "./Account/ListAccountAdmin";
 import ListAccountUser from "./Account/ListAccountUser";
 import AddAccountAdmin from "./Account/AddAccountAdmin";
 import AddEpisodeFilm from "./FilmAdmin/AddEpisodeFilm";
-
+import { Outlet } from "react-router-dom";
 
 const cx = classNames.bind();
 const Admin = () => {
-
-    return (
-        <div>
-            <AddFilmAdmin></AddFilmAdmin>
-            <AddEpisodeFilm></AddEpisodeFilm>
-            <ListFilmAdmin></ListFilmAdmin>
-            <ListAccountAdmin></ListAccountAdmin>
-            <ListAccountUser></ListAccountUser>
-            <AddAccountAdmin></AddAccountAdmin>
-            <HeaderAdmin></HeaderAdmin>
-            <NavAdmin></NavAdmin>
-        </div>
-    );
+  return (
+    <div>
+      
+      <Outlet />
+      <HeaderAdmin></HeaderAdmin>
+      <NavAdmin></NavAdmin>
+    </div>
+  );
 };
 export default Admin;

@@ -1,143 +1,102 @@
 .sidebar {
-    z-index: 1;
-    background: #2F323A;
-    position: fixed;
-    top: 70px;
-    width: 250px;
-    height: calc(100% - 9%);
-    transition: 0.3s;
-    transition-property: width;
-    overflow-y: auto;
+  z-index: 1;
+  background: #2f323a;
+  position: fixed;
+  top: 70px;
+  width: 250px;
+  height: calc(100% - 9%);
+  transition: 0.3s;
+  transition-property: width;
+  overflow-y: auto;
 }
 
 .sidebar .sidebar-menu {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .sidebar .sidebar-menu .profile img {
-    margin: 20px 0;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  margin: 20px 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 
 .sidebar .sidebar-menu .profile p {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    color: #bbb;
-    font-weight: 700;
-    margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: #bbb;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .sidebar .sidebar-menu .item {
-    width: 250px;
-    overflow: hidden;
+  width: 250px;
+  overflow: hidden;
 }
 
-.sidebar .sidebar-menu .item span{
-    padding-left: 10px;
+.sidebar .sidebar-menu .item span {
+  padding-left: 10px;
 }
-
-
 
 .sidebar .sidebar-menu .item .menu-btn {
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    display: block;
-    color: #fff;
-    position: relative;
-    padding: 25px 20px;
-    transition: 0.3s;
-    transition-property: color;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  display: block;
+  color: #fff;
+  position: relative;
+  padding: 25px 20px;
+  transition: 0.3s;
+  transition-property: color;
 }
 
 .sidebar .sidebar-menu .item .menu-btn:hover {
-    color: #4CCEE8;
+  color: #4ccee8;
 }
 
 .sidebar .sidebar-menu .item .menu-btn i {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .sidebar .sidebar-menu .item .menu-btn .drop-down {
-    float: right;
-    font-size: 12px;
-    margin-top: 3px;
+  float: right;
+  font-size: 12px;
+  margin-top: 3px;
 }
 
 .sidebar .sidebar-menu .item .sub-menu {
-    background: #3498DB;
-    overflow: hidden;
-    max-height: 0;
-    transition: 0.3s;
-    transition-property: background, max-height;
+  background: #3498db;
+  overflow: hidden;
+  max-height: 0;
+  transition: 0.3s;
+  transition-property: background, max-height;
 }
 
-.sidebar .sidebar-menu .item .sub-menu a {
-    display: block;
-    position: relative;
-    color: #fff;
-    white-space: nowrap;
-    font-size: 15px;
-    padding: 20px;
-    transition: 0.3s;
-    transition-property: background;
+.sidebar .sidebar-menu .item .sub-menu .sub-menu-btn {
+  display: block;
+  position: relative;
+  color: #fff;
+  white-space: nowrap;
+  font-size: 15px;
+  padding: 20px;
+  transition: 0.3s;
+  transition-property: background;
 }
 
-.sidebar .sidebar-menu .item .sub-menu a:hover {
-    background: #55B1F0;
+.sidebar .sidebar-menu .item .sub-menu .sub-menu-btn:hover {
+  background: #55b1f0;
 }
 
-.sidebar .sidebar-menu .item .sub-menu a:not(last-child) {
-    border-bottom: 1px solid #8FC5E9;
+.sidebar .sidebar-menu .item .sub-menu .sub-menu-btn:not(last-child) {
+  border-bottom: 1px solid #8fc5e9;
 }
 
 .sidebar .sidebar-menu .item .sub-menu i {
-    padding-right: 20px;
-    font-size: 10px;
+  padding-right: 20px;
+  font-size: 10px;
 }
 
-.sidebar .sidebar-menu .item:target .sub-menu {
-    max-height: 500px;
+.sidebar .sidebar-menu .item:hover .sub-menu {
+  max-height: 500px;
 }
 
-.main-container {
-    width: 100%;
-    margin-top: 70px;
-    margin-left: 250px;
-    padding: 15px;
-    background-size: cover;
-    height: 100vh;
-    transition: 0.3s;
-}
 
-.collapse .sidebar {
-    width: 70px;
-}
-
-.collapse .sidebar .profile img,
-.collapse .sidebar .profile p,
-.collapse .sidebar a span {
-    display: none;
-}
-
-.collapse .sidebar .sidebar-menu .item .menu-btn {
-    font-size: 23px;
-}
-
-.collapse .sidebar .sidebar-menu .item .sub-menu i {
-    font-size: 18px;
-    padding-left: 3px;
-}
-
-.collapse .main-container {
-    width: calc(100% - 70px);
-    margin-left: 70px;
-}
-
-.main-container .card {
-    background: #fff;
-    padding: 15px;
-    margin-bottom: 10px;
-    font-size: 14px;
-}
