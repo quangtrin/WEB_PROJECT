@@ -9,7 +9,6 @@ const HomeAdmin = () => {
   return (
     <div>
       <HeaderAdmin></HeaderAdmin>
-
     </div>
   );
 };
