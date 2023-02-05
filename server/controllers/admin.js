@@ -37,63 +37,58 @@ const adminController = {
       res.json(false);
     }
   },
-  insertData: async (req, res) => {
-    if (req.params.passwordInsert === process.env.PASSWORD_INSERT) {
-      var sql = "INSERT INTO film( filmName, status, point, year, duration, description, category, url ) VALUES ?";
-      try {
-        let values = [];
-        let valuesEpisode = [];
-        for (let i = 0; i < filmData.length; i++) {
-          values.push([filmData[i].filmName, filmData[i].status, filmData[i].point, filmData[i].year, filmData[i].duration, filmData[i].description, filmData[i].category, filmData[i].url]);
-        }
-        const [statusInsertFilm] = await connect.query(sql, [values]);
-        try {
-          Promise.all(
-            episodeData.map(async (episode) => {
-              sql = "SELECT filmID FROM film WHERE filmName = ?";
-              const [result] = await connect.query(sql, [episode.filmName]);
-              if (result[0] != null && valuesEpisode.find((episodeCheck) => { return episodeCheck[0] === result[0].filmID && episodeCheck[1] === episode.episodeID }) === undefined)
-                valuesEpisode.push([result[0].filmID, episode.episodeID, episode.url]);
-            })
-          );
-          sql = "INSERT INTO episode_film(filmID, episodeID, url) VALUES ?"
-          try {
-            const [statusInsertEpisode] = await connect.query(sql, [valuesEpisode]);
-          } catch (error) {
-            console.log(error);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-        res.json(true);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      res.json("Bạn không có quyền truy cập vào web này");
-    }
-  },
-  deleteFilm: async (req, res) => {
-    if (req.params.passwordDelete === process.env.PASSWORD_INSERT) {
+  autoUpdateFilm: async (req, res) => {
+    if (req.params.passwordUpdate === process.env.PASSWORD_INSERT) {
       var valuesEpisodeNull = [];
-      var sql = "SELECT film.filmID, episode_film.episodeID FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
+      var valuesFilmNull = [];
+      var sql = "SELECT film.filmID, episode_film.episodeID, film.filmName FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
       try {
         const [film] = await connect.query(sql);
-        film.map(async (film) => {
-          if (film.episodeID === null) {
-            const url = "https://suckplayer.xyz/video/a1a15170543564de6ec386358b88d6d3";
-            const episodeID = 1;
-            valuesEpisodeNull.push([film.filmID, episodeID, url]);
+        filmData.map((newFilm) => {
+          const findFilm = film.find((oldFilm) => {
+            return oldFilm.filmName === newFilm.filmName;
+          })
+          if (!findFilm) {
+            const checkExist = valuesFilmNull.find((fi) => {
+              return fi[0] === newFilm.filmName;
+            })
+            if (!checkExist)
+              valuesFilmNull.push([newFilm.filmName, newFilm.status, newFilm.point, newFilm.year, newFilm.duration, newFilm.description, newFilm.category, newFilm.url]);
+          }
+        })
+        if (valuesFilmNull[0] != null) {
+          try {
+            sql = "INSERT INTO film( filmName, status, point, year, duration, description, category, url ) VALUES ?";
+            const [statusInsertFilm] = await connect.query(sql, [valuesFilmNull]);
+          } catch (error) {
+            console.log(error)
           }
         }
-        )
+        episodeData.map((episode) => {
+          const check = film.find((fi) => {
+            return fi.filmName === episode.filmName && Number(fi.episodeID) === Number(episode.episodeID);
+          })
+          if (!check) {
+            const findFilm = film.find((fi) => {
+              return fi.filmName === episode.filmName;
+            })
+            if (findFilm) {
+              const checkExist = valuesEpisodeNull.find((newEpisode) => {
+                return Number(newEpisode[1]) === Number(episode.episodeID) && Number(newEpisode[0]) === Number(findFilm.filmID);
+              })
+              if (!checkExist) valuesEpisodeNull.push([findFilm.filmID, episode.episodeID, episode.url]);
+            }
+          }
+        })
         sql = "INSERT INTO episode_film(filmID, episodeID, url) VALUES ?"
         try {
-          const [statusInsertEpisode] = await connect.query(sql, [valuesEpisodeNull]);
+          if (valuesEpisodeNull[0] != null) {
+            const [statusInsertEpisode] = await connect.query(sql, [valuesEpisodeNull]);
+          }
         } catch (error) {
           console.log(error);
         }
-        res.json(true);
+        res.json("Update thành công");
       } catch (error) { console.log(error) };
     } else res.json("Bạn không có quyền truy cập trang web này");
   },
