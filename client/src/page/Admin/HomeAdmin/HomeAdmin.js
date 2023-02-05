@@ -6,8 +6,12 @@ import styles from "./HomeAdmin.module.scss";
 const HomeAdmin = () => {
   return (
     <div>
+<<<<<<< HEAD
+      <HeaderAdmin></HeaderAdmin>
+=======
       {/* <HeaderAdmin></HeaderAdmin>
       <NavAdmin></NavAdmin> */}
+>>>>>>> master
     </div>
   );
 };

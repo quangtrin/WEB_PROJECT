@@ -5,6 +5,7 @@ import Home from "./page/Home/Home";
 import ListEpisode from "./page/ListEpisode/ListEpisode";
 import { useEffect, useState } from "react";
 import WatchFilm from "./page/WatchFilm/WatchFilm";
+import AdminLogin from "./page/AdminLogin/AdminLogin";
 import ChangePassword from "./page/ChangePassword/ChangePassword";
 import Admin from "./page/Admin/index";
 import HomeAdmin from "./page/Admin/HomeAdmin/HomeAdmin";
@@ -37,14 +38,15 @@ function App() {
       <Route path="/ListEpisode/:filmName" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/WatchFilm/:filmName" element={<WatchFilm user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/Register" element={<Register />} />
+      <Route path="/AdminLogin" element={<AdminLogin />} />
       <Route path="/Admin" element={<Admin />} >
-          <Route path="Home" element={<HomeAdmin />}></Route>
-          <Route path="AddFilm" element={<AddFilmAdmin />}></Route>
-          <Route path="AddEpisodeFilm" element={<AddEpisodeAdmin />}></Route>
-          <Route path="ListFilm" element={<ListFilmAdmin />}></Route>
-          <Route path="ListAccountAdmin" element={<ListAccountAdmin />}></Route>
-          <Route path="ListAccountUser" element={<ListAccountUser />}></Route>
-          <Route path="AddAccountAdmin" element={<AddAccountAdmin />}></Route>
+        <Route path="Home" element={<HomeAdmin />}></Route>
+        <Route path="AddFilm" element={<AddFilmAdmin />}></Route>
+        <Route path="AddEpisodeFilm" element={<AddEpisodeAdmin />}></Route>
+        <Route path="ListFilm" element={<ListFilmAdmin />}></Route>
+        <Route path="ListAccountAdmin" element={<ListAccountAdmin />}></Route>
+        <Route path="ListAccountUser" element={<ListAccountUser />}></Route>
+        <Route path="AddAccountAdmin" element={<AddAccountAdmin />}></Route>
       </Route>
       <Route path="/ChangePassword" element={<ChangePassword />} />
       <Route path="/Login" element={<Login setIsSignUp={setIsSignUp} />} />
