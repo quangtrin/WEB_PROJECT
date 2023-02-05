@@ -1,19 +1,17 @@
 import classNames from "classnames/bind";
+import { Link } from "react-router-dom";
+import {
+  FaDesktop,
+  FaFilm,
+  FaPlus,
+  FaEye,
+  FaUser,
+  FaUsers,
+  FaUserTie,
+  FaImage,
+} from "react-icons/fa";
+
 import styles from "./NavAdmin.module.scss";
-
-import {FaDesktop} from "react-icons/fa";
-import {FaFilm} from "react-icons/fa";
-import {FaPlus} from "react-icons/fa";
-import {FaEye} from "react-icons/fa";
-
-import {FaUser} from "react-icons/fa";
-import {FaUsers} from "react-icons/fa";
-import {FaUserTie} from "react-icons/fa";
-
-import {FaImage} from "react-icons/fa";
-
-
-
 import imgUser from "../../../../imgs/user_default.png";
 
 const cx = classNames.bind(styles);
@@ -28,33 +26,56 @@ const NavAdmin = () => {
             <p>Cục Đá</p>
           </center>
           <li className={cx("item")}>
-            <a href="#" className={cx("menu-btn")}>
-              <FaDesktop/><span>Trang chủ</span>
-            </a>
+            <Link to="/Admin/Home" className={cx("menu-btn")}>
+              <FaDesktop />
+              <span>Trang chủ</span>
+            </Link>
           </li>
           <li className={cx("item")} id="film">
-            <a href="#film" className={cx("menu-btn")}>
-              <FaFilm/><span>Phim <i className="fas fa-chevron-down drop-down" /></span>
-            </a>
+            <Link to="/Admin/ListFilm" className={cx("menu-btn")}>
+              <FaFilm />
+              <span>
+                Phim <i className="fas fa-chevron-down drop-down" />
+              </span>
+            </Link>
             <div className={cx("sub-menu")}>
-              <a href="#"><FaPlus/><span>Thêm mới phim</span></a>
-              <a href="#"><FaPlus/><span>Thêm mới tập phim</span></a>
-              <a href="#"><FaEye/><span>Tổng quan</span></a>
+              <Link to="/Admin/AddFilm" className={cx("sub-menu-btn")}>
+                <FaPlus />
+                <span>Thêm mới phim</span>
+              </Link>
+              <Link to="/Admin/AddEpisodeFilm" className={cx("sub-menu-btn")}>
+                <FaPlus />
+                <span>Thêm mới tập phim</span>
+              </Link>
+              <Link to="/Admin/ListFilm" className={cx("sub-menu-btn")}>
+                <FaEye />
+                <span>Tổng quan</span>
+              </Link>
             </div>
           </li>
           <li className={cx("item")} id="account">
-            <a href="#account" className={cx("menu-btn")}>
-              <FaUser/><span>Tài khoản <i className="fas fa-chevron-down drop-down" /></span>
-            </a>
+            <Link to="/Admin/AddAccountAdmin" className={cx("menu-btn")}>
+              <FaUser />
+              <span>
+                Tài khoản <i className="fas fa-chevron-down drop-down" />
+              </span>
+            </Link>
             <div className={cx("sub-menu")}>
-              <a href="#"><FaUsers/><span>Người dùng</span></a>
-              <a href="#"><FaUserTie/><span>Quản trị viên</span></a>
+              <Link to="/Admin/ListAccountUser" className={cx("sub-menu-btn")}>
+                <FaUsers />
+                <span>Người dùng</span>
+              </Link>
+              <Link to="/Admin/ListAccountAdmin" className={cx("sub-menu-btn")}>
+                <FaUserTie />
+                <span>Quản trị viên</span>
+              </Link>
             </div>
           </li>
           <li className={cx("item")}>
-            <a href="#" className={cx("menu-btn")}>
-              <FaImage/><span>Banner</span>
-            </a>
+            <Link to="#" className={cx("menu-btn")}>
+              <FaImage />
+              <span>Banner</span>
+            </Link>
           </li>
         </div>
       </div>
