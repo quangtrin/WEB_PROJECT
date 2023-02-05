@@ -53,14 +53,14 @@
     margin-top: -1%;
 }
 
-.wrapper form {
+.wrapper .form-admin {
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin-top: 40px;
 }
 
-form input {
+.form-admin input {
     height: 60px;
     outline: none;
     border: none;
@@ -72,11 +72,11 @@ form input {
     background: #fff;
 }
 
-form input:focus {
+.form-admin input:focus {
     box-shadow: 5px 5px 4px #0042f9;
 }
 
-form button {
+.form-admin button {
     height: 60px;
     outline: none;
     border: none;
@@ -92,7 +92,7 @@ form button {
     border: 1px solid #aaa;
 }
 
-form .checkbox {
+.form-admin .checkbox {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -105,7 +105,7 @@ form .checkbox {
     cursor: pointer;
 }
 
-form .checkbox label {
+.form-admin .checkbox label {
     cursor: pointer;
     color: #fff;
     font-size: 16px;

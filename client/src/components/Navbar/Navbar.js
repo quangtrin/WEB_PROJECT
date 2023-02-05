@@ -13,6 +13,7 @@ import Comment from "./Comment";
 import axios from "axios";
 import Episode from "./episode/Episode";
 import { Col, Row } from "antd";
+import defaultUser from "../../imgs/user_default.png"
 
 const cx = classNames.bind(styles);
 
@@ -130,7 +131,7 @@ function Navbar({ user, episodeFilm, film, episodeID }) {
                 <div className={cx("user-comment")}>
                   <div className={cx("user-comment-avatar")}>
                     <img
-                      src="https://products.popsww.com/api/v2/containers/file2/profiles/Adult-01.png"
+                      src={user.avatar || defaultUser}
                       alt="Avatar"
                     />
                   </div>

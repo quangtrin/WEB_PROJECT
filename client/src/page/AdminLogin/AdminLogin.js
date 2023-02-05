@@ -12,7 +12,7 @@ const AdminLogin = () => {
       <section className={cx("wrapper")}>
         <div className={cx("form_header", "login")}>
           <p>Đăng Nhập Admin</p>
-          <form action="#">
+          <form className={cx("form-admin")} action="#">
             <input type="text" placeholder="Tài khoản" required />
             <input type="password" placeholder="Mật khẩu" required />
             <div className={cx("checkbox")}>
