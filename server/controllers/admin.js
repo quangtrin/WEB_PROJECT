@@ -4,39 +4,6 @@ import episodeData from "../FILE_URL/episodeFilm.json"  assert { type: "json" };
 import * as dotenv from 'dotenv';
 dotenv.config();
 const adminController = {
-  addEpisode: async (req, res) => {
-    const { filmID, episodeID, url } = req.body;
-    var sql = "INSERT INTO episode_film( filmID, episodeID, url ) VALUES (?,?,?)";
-    try {
-      const [result] = await connect.query(sql, [filmID, episodeID, url]);
-      res.json(true);
-    } catch (error) {
-      console.log(error);
-      res.json(false);
-    }
-  },
-
-  addFilm: async (req, res) => {
-    const {
-      filmName,
-      status,
-      point,
-      year,
-      duration,
-      description,
-      category,
-      url,
-    } = req.body;
-
-    var sql = "INSERT INTO film( filmName, status, point, year, duration, description, category, url ) VALUES (?,?,?,?,?,?,?,?)";
-    try {
-      const [result] = await connect.query(sql, [filmName, status, point, year, duration, description, category, url]);
-      res.json(true);
-    } catch (error) {
-      console.log(error);
-      res.json(false);
-    }
-  },
   autoUpdateFilm: async (req, res) => {
     if (req.params.passwordUpdate === process.env.PASSWORD_INSERT) {
       var valuesEpisodeNull = [];
@@ -53,23 +20,25 @@ const adminController = {
               return fi[0] === newFilm.filmName;
             })
             if (!checkExist)
-              valuesFilmNull.push([newFilm.filmName, newFilm.status, newFilm.point, newFilm.year, newFilm.duration, newFilm.description, newFilm.category, newFilm.url]);
+              valuesFilmNull.push([newFilm.filmName, newFilm.status, newFilm.year, newFilm.duration, newFilm.description, newFilm.category, newFilm.url]);
           }
         })
         if (valuesFilmNull[0] != null) {
           try {
-            sql = "INSERT INTO film( filmName, status, point, year, duration, description, category, url ) VALUES ?";
+            sql = "INSERT INTO film( filmName, status, year, duration, description, category, url ) VALUES ?";
             const [statusInsertFilm] = await connect.query(sql, [valuesFilmNull]);
           } catch (error) {
             console.log(error)
           }
         }
+        sql = "SELECT film.filmID, episode_film.episodeID, film.filmName FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
+        const [newFilm] = await connect.query(sql);
         episodeData.map((episode) => {
-          const check = film.find((fi) => {
+          const check = newFilm.find((fi) => {
             return fi.filmName === episode.filmName && Number(fi.episodeID) === Number(episode.episodeID);
           })
           if (!check) {
-            const findFilm = film.find((fi) => {
+            const findFilm = newFilm.find((fi) => {
               return fi.filmName === episode.filmName;
             })
             if (findFilm) {

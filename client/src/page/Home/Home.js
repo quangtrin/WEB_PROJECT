@@ -34,7 +34,7 @@ const Home = ({ user, setIsSignUp }) => {
   const getDataFilms = async () => {
     setIsHasData(false);
     if (films === undefined) {
-      const res = await axios.get("/api/user/getFilm");
+      const res = await axios.get("/api/film/getFilm");
       setFilms(res.data);
     }
 

@@ -18,7 +18,7 @@ const Header = ({ user, setIsSignUp, category }) => {
   const [categoryState, setCategoryState] = useState("");
   const getDataFilms = async () => {
     setIsHasData(false);
-    const res = await axios.get("/api/user/getFilm");
+    const res = await axios.get("/api/film/getFilm");
     setFilms(res.data);
     setIsHasData(true);
   };

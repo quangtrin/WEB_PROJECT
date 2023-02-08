@@ -33,7 +33,7 @@ function Navbar({ user, episodeFilm, film, episodeID }) {
     try {
       const res = await (
         await axios.get(
-          "/api/user/comment?filmID=" + film.filmID + "&episodeID=" + episodeID
+          "/api/comment?filmID=" + film.filmID + "&episodeID=" + episodeID
         )
       ).data;
       setComments(res);
@@ -45,13 +45,12 @@ function Navbar({ user, episodeFilm, film, episodeID }) {
   const getDataFilms = async () => {
     try {
       setIsLoading(false);
-      const res = await axios.get("/api/user/getFilm");
+      const res = await axios.get("/api/film/getFilm");
       let top10Film = [];
       for (let i = 0; i < 10; i++) {
         top10Film.push(res.data[i]);
       }
       setTop10Films(top10Film);
-      console.log(top10Film);
       setIsLoading(true);
     } catch (error) {
       console.log(error);
@@ -59,7 +58,7 @@ function Navbar({ user, episodeFilm, film, episodeID }) {
   };
   const handleSendComment = async (comment) => {
     if (user.userId) {
-      const req = await axios.post("/api/user/comment", {
+      const req = await axios.post("/api/comment", {
         userID: user.userId,
         commentParentID: commentParentID,
         comment: comment,
