@@ -45,7 +45,16 @@ const Rate = ({ user, film }) => {
         setIsRateDialogOpen(false)
     }
     const handleButtonOnclick = () => {
-        setIsRateDialogOpen(true);
+        if (user?.userId) {
+            setIsRateDialogOpen(true);
+        }
+        else {
+            Swal.fire({
+                title: "Bạn Cần Đăng Nhập Để đánh giá!",
+                icon: "warning",
+                showCloseButton: true,
+            });
+        }
     }
     const closeDialog = () => {
         setCurrentRate(0);
