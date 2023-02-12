@@ -41,5 +41,25 @@ const userController = {
     }
   },
 
+  changePassword: async (req, res) => {
+    const { account, oldPassword, newPassword } = req.body;
+    var sql =
+      "SELECT userID FROM login_user WHERE account = ? AND password = ?";
+    try {
+      const [result] = await connect.query(sql, [account, oldPassword]);
+      if (result[0] != null) {
+        var sql2 = "UPDATE login_user SET password = ? WHERE userID = ?";
+        const [result2] = await connect.query(sql2, [newPassword, result[0].userID]);
+        res.json({
+          change: true,
+          id: result[0].userID,
+        })
+      } else res.json({ change: false })
+    }
+    catch (error) {
+      console.log(error);
+    }
+  },
+
 };
 export default userController;
