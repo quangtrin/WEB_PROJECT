@@ -24,6 +24,10 @@ const ListAdmin = () => {
     setIsHasData(true);
   };
 
+  const handleChangePage = () => {
+    window.scroll(0, 0);
+  };
+
   useEffect(() => {
     getDataFilms();
   }, []);
@@ -84,8 +88,9 @@ const ListAdmin = () => {
                 <div className={cx("pagination")}>
                   {Number(page) > 1 ? (
                     <Link
-                      class={cx("prev")}
+                      className={cx("prev")}
                       to={"/Admin/ListFilm/" + (Number(page) - 1)}
+                      onClick={handleChangePage}
                     >
                       &lt;&lt;
                     </Link>
@@ -93,7 +98,7 @@ const ListAdmin = () => {
                     <></>
                   )}
                   <Link
-                    class={cx(
+                    className={cx(
                       "page",
                       Number(page) <= Number.parseInt(films.length / 30) + 1 - 3
                         ? "active"
@@ -105,13 +110,14 @@ const ListAdmin = () => {
                         ? Number.parseInt(films.length / 30) + 1 - 3
                         : Number(page))
                     }
+                    onClick={handleChangePage}
                   >
                     {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
                       ? Number.parseInt(films.length / 30) + 1 - 3
                       : Number(page)}
                   </Link>
                   <Link
-                    class={cx(
+                    className={cx(
                       "page",
                       Number(page) ===
                         Number.parseInt(films.length / 30) + 1 - 2
@@ -124,13 +130,14 @@ const ListAdmin = () => {
                         ? Number.parseInt(films.length / 30) + 1 - 2
                         : Number(page) + 1)
                     }
+                    onClick={handleChangePage}
                   >
                     {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
                       ? Number.parseInt(films.length / 30) + 1 - 2
                       : Number(page) + 1}
                   </Link>
                   <Link
-                    class={cx(
+                    className={cx(
                       "page",
                       Number(page) ===
                         Number.parseInt(films.length / 30) + 1 - 1
@@ -143,13 +150,14 @@ const ListAdmin = () => {
                         ? Number.parseInt(films.length / 30) + 1 - 1
                         : Number(page) + 2)
                     }
+                    onClick={handleChangePage}
                   >
                     {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
                       ? Number.parseInt(films.length / 30) + 1 - 1
                       : Number(page) + 2}
                   </Link>
                   <Link
-                    class={cx(
+                    className={cx(
                       "page",
                       Number(page) === Number.parseInt(films.length / 30) + 1
                         ? "active"
@@ -161,6 +169,7 @@ const ListAdmin = () => {
                         ? Number.parseInt(films.length / 30) + 1
                         : Number(page) + 3)
                     }
+                    onClick={handleChangePage}
                   >
                     {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
                       ? Number.parseInt(films.length / 30) + 1
@@ -168,8 +177,9 @@ const ListAdmin = () => {
                   </Link>
                   {Number(page) + 3 < Number.parseInt(films.length / 30) + 1 ? (
                     <Link
-                      class={cx("next")}
+                      className={cx("next")}
                       to={"/Admin/ListFilm/" + (Number(page) + 1)}
+                      onClick={handleChangePage}
                     >
                       &gt;&gt;
                     </Link>

@@ -120,29 +120,22 @@
     &:nth-last-child(2) {
       margin-right: 16px;
     }
-  }
 
-  .page:hover {
-    color: var(--primary);
+    &:hover {
+      color: var(--primary);
+      cursor: pointer;
+    }
   }
 
   .page.active {
     color: var(--primary);
+    cursor: default;
   }
-
   .next:hover,
   .prev:hover {
     color: var(--primary);
+    cursor: pointer;
   }
-}
-
-.pagination span {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 700;
-  color: #3498db;
-  padding-left: 10px;
-  padding-right: 15px;
 }
 
 .container {
