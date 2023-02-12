@@ -4,6 +4,16 @@ import episodeData from "../FILE_URL/episodeFilm.json"  assert { type: "json" };
 import * as dotenv from 'dotenv';
 dotenv.config();
 const adminController = {
+  login: async (req, res) => {
+    const { account, password } = req.body;
+    var sql = "SELECT adminName, adminID, avatar FROM login_admin WHERE account = ? AND password = ?";
+    try {
+      const [admin] = await connect.query(sql, [account, password]);
+      res.json(admin[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  },
   autoUpdateFilm: async (req, res) => {
     if (req.params.passwordUpdate === process.env.PASSWORD_INSERT) {
       var valuesEpisodeNull = [];
