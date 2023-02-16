@@ -136,20 +136,26 @@ const Home = ({ user, setIsSignUp }) => {
             <Row>
               {isHasData ? (
                 filterFilms ? (
-                  filterFilms.map((film, index) => {
-                    if (index >= page * 30 - 30 && index <= 30 * page - 1)
-                      return (
-                        <Col className={cx("col1")} key={index}>
-                          <CardFilm
-                            href={"/ListEpisode/" + film.filmName}
-                            imgUrl={film.url}
-                            name={film.filmName}
-                            episode={film.episodeCount}
-                            duration={film.duration}
-                          ></CardFilm>
-                        </Col>
-                      );
-                  })
+                  filterFilms.length > 0 ? (
+                    filterFilms.map((film, index) => {
+                      if (index >= page * 30 - 30 && index <= 30 * page - 1)
+                        return (
+                          <Col className={cx("col1")} key={index}>
+                            <CardFilm
+                              href={"/ListEpisode/" + film.filmName}
+                              imgUrl={film.url}
+                              name={film.filmName}
+                              episode={film.episodeCount}
+                              duration={film.duration}
+                            ></CardFilm>
+                          </Col>
+                        );
+                    })
+                  ) : (
+                    <span className={cx("Not-found")}>
+                      Không tìm thấy kết quả
+                    </span>
+                  )
                 ) : (
                   films.map((film, index) => {
                     if (index >= page * 30 - 30 && index <= 30 * page - 1)
@@ -175,54 +181,252 @@ const Home = ({ user, setIsSignUp }) => {
           </Container>
           {/* Param Search */}
           {isHasData ? (
-            <div className={cx("pagination")}>
-              {page !== "1" ? (
+            filterFilms && filterFilms.length > 0 ? (
+              <div className={cx("pagination")}>
                 <Link
                   to={"/" + (Number(page) - 1) + filterPage}
-                  className={cx("page")}
+                  className={cx(
+                    "page",
+                    Number(page) > 1 &&
+                      Number.parseInt(filterFilms.length / 30) + 1 > 4
+                      ? ""
+                      : "hide"
+                  )}
                   onClick={handleChangePage}
                 >
                   &lt;&lt;
                 </Link>
-              ) : (
-                <></>
-              )}
-              <Link
-                className={cx("active", "page")}
-                to={"/" + page + filterPage}
-                onClick={handleChangePage}
-              >
-                {page}
-              </Link>
-              {Number(page) + 2 <= 123 ? (
-                <>
-                  <Link
-                    to={"/" + (Number(page) + 1) + filterPage}
-                    className={cx("page")}
-                    onClick={handleChangePage}
-                  >
-                    {Number(page) + 1}
-                  </Link>
-                  <Link
-                    to={"/" + (Number(page) + 2) + filterPage}
-                    className={cx("page")}
-                    onClick={handleChangePage}
-                  >
-                    {Number(page) + 2}
-                  </Link>
-                  <span>...</span>
-                  <Link
-                    to={"/" + (Number(page) + 1) + filterPage}
-                    className={cx("page")}
-                    onClick={handleChangePage}
-                  >
-                    &gt;&gt;
-                  </Link>{" "}
-                </>
-              ) : (
-                <></>
-              )}
-            </div>
+                <Link
+                  className={cx(
+                    "page",
+                    Number(page) <=
+                      Number.parseInt(filterFilms.length / 30) + 1 - 3
+                      ? "active"
+                      : "",
+                    Number.parseInt(filterFilms.length / 30) + 1 < 4
+                      ? "hide"
+                      : ""
+                  )}
+                  to={
+                    "/" +
+                    (Number(page) + 3 >
+                    Number.parseInt(filterFilms.length / 30) + 1
+                      ? Number.parseInt(filterFilms.length / 30) + 1 - 3
+                      : Number(page)) +
+                    filterPage
+                  }
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 >
+                  Number.parseInt(filterFilms.length / 30) + 1
+                    ? Number.parseInt(filterFilms.length / 30) + 1 - 3
+                    : Number(page)}
+                </Link>
+                <Link
+                  to={
+                    "/" +
+                    (Number(page) + 3 >
+                    Number.parseInt(filterFilms.length / 30) + 1
+                      ? Number.parseInt(filterFilms.length / 30) + 1 - 2
+                      : Number(page) + 1) +
+                    filterPage
+                  }
+                  className={cx(
+                    "page",
+                    Number(page) ===
+                      Number.parseInt(filterFilms.length / 30) + 1 - 2
+                      ? "active"
+                      : "",
+                    Number.parseInt(filterFilms.length / 30) + 1 < 3
+                      ? "hide"
+                      : ""
+                  )}
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 >
+                  Number.parseInt(filterFilms.length / 30) + 1
+                    ? Number.parseInt(filterFilms.length / 30) + 1 - 2
+                    : Number(page) + 1}
+                </Link>
+                <Link
+                  to={
+                    "/" +
+                    (Number(page) + 3 >
+                    Number.parseInt(filterFilms.length / 30) + 1
+                      ? Number.parseInt(filterFilms.length / 30) + 1 - 1
+                      : Number(page) + 2) +
+                    filterPage
+                  }
+                  className={cx(
+                    "page",
+                    Number(page) ===
+                      Number.parseInt(filterFilms.length / 30) + 1 - 1
+                      ? "active"
+                      : "",
+                    Number.parseInt(filterFilms.length / 30) + 1 < 2
+                      ? "hide"
+                      : ""
+                  )}
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 >
+                  Number.parseInt(filterFilms.length / 30) + 1
+                    ? Number.parseInt(filterFilms.length / 30) + 1 - 1
+                    : Number(page) + 2}
+                </Link>
+                <Link
+                  to={
+                    "/" +
+                    (Number(page) + 3 >
+                    Number.parseInt(filterFilms.length / 30) + 1
+                      ? Number.parseInt(filterFilms.length / 30) + 1
+                      : Number(page) + 3) +
+                    filterPage
+                  }
+                  className={cx(
+                    "page",
+                    Number(page) ===
+                      Number.parseInt(filterFilms.length / 30) + 1
+                      ? "active"
+                      : "",
+                    Number.parseInt(filterFilms.length / 30) + 1 < 1
+                      ? "hide"
+                      : ""
+                  )}
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 >
+                  Number.parseInt(filterFilms.length / 30) + 1
+                    ? Number.parseInt(filterFilms.length / 30) + 1
+                    : Number(page) + 3}
+                </Link>
+                <Link
+                  to={"/" + (Number(page) + 1) + filterPage}
+                  className={cx(
+                    "page",
+                    Number(page) + 3 <
+                      Number.parseInt(filterFilms.length / 30) + 1
+                      ? ""
+                      : "hide"
+                  )}
+                  onClick={handleChangePage}
+                >
+                  &gt;&gt;
+                </Link>
+              </div>
+            ) : (
+              <div className={cx("pagination")}>
+                <Link
+                  to={"/" + (Number(page) - 1) + filterPage}
+                  className={cx(
+                    "page",
+                    Number(page) > 1 &&
+                      Number.parseInt(films.length / 30) + 1 > 4
+                      ? ""
+                      : "hide"
+                  )}
+                  onClick={handleChangePage}
+                >
+                  &lt;&lt;
+                </Link>
+                <Link
+                  className={cx(
+                    "page",
+                    Number(page) <= Number.parseInt(films.length / 30) + 1 - 3
+                      ? "active"
+                      : "",
+                    Number.parseInt(films.length / 30) + 1 < 4 ? "hide" : ""
+                  )}
+                  to={
+                    "/" +
+                    (Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                      ? Number.parseInt(films.length / 30) + 1 - 3
+                      : Number(page)) +
+                    filterPage
+                  }
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                    ? Number.parseInt(films.length / 30) + 1 - 3
+                    : Number(page)}
+                </Link>
+                <Link
+                  to={
+                    "/" +
+                    (Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                      ? Number.parseInt(films.length / 30) + 1 - 2
+                      : Number(page) + 1) +
+                    filterPage
+                  }
+                  className={cx(
+                    "page",
+                    Number(page) === Number.parseInt(films.length / 30) + 1 - 2
+                      ? "active"
+                      : "",
+                    Number.parseInt(films.length / 30) + 1 < 3 ? "hide" : ""
+                  )}
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                    ? Number.parseInt(films.length / 30) + 1 - 2
+                    : Number(page) + 1}
+                </Link>
+                <Link
+                  to={
+                    "/" +
+                    (Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                      ? Number.parseInt(films.length / 30) + 1 - 1
+                      : Number(page) + 2) +
+                    filterPage
+                  }
+                  className={cx(
+                    "page",
+                    Number(page) === Number.parseInt(films.length / 30) + 1 - 1
+                      ? "active"
+                      : "",
+                    Number.parseInt(films.length / 30) + 1 < 2 ? "hide" : ""
+                  )}
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                    ? Number.parseInt(films.length / 30) + 1 - 1
+                    : Number(page) + 2}
+                </Link>
+                <Link
+                  to={
+                    "/" +
+                    (Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                      ? Number.parseInt(films.length / 30) + 1
+                      : Number(page) + 3) +
+                    filterPage
+                  }
+                  className={cx(
+                    "page",
+                    Number(page) === Number.parseInt(films.length / 30) + 1
+                      ? "active"
+                      : "",
+                    Number.parseInt(films.length / 30) + 1 < 1 ? "hide" : ""
+                  )}
+                  onClick={handleChangePage}
+                >
+                  {Number(page) + 3 > Number.parseInt(films.length / 30) + 1
+                    ? Number.parseInt(films.length / 30) + 1
+                    : Number(page) + 3}
+                </Link>
+                <Link
+                  to={"/" + (Number(page) + 1) + filterPage}
+                  className={cx(
+                    "page",
+                    Number(page) + 3 < Number.parseInt(films.length / 30) + 1
+                      ? ""
+                      : "hide"
+                  )}
+                  onClick={handleChangePage}
+                >
+                  &gt;&gt;
+                </Link>
+              </div>
+            )
           ) : (
             <></>
           )}
