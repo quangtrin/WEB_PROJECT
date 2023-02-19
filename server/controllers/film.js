@@ -5,7 +5,6 @@ const filmController = {
         const {
             filmName,
             status,
-            point,
             year,
             duration,
             description,
@@ -13,7 +12,7 @@ const filmController = {
             url,
         } = req.body;
 
-        var sql = "INSERT INTO film( filmName, status, year, duration, description, category, url ) VALUES (?,?,?,?,?,?,?,?)";
+        var sql = "INSERT INTO film( filmName, status, year, duration, description, category, url ) VALUES (?,?,?,?,?,?,?)";
         try {
             const [result] = await connect.query(sql, [filmName, status, year, duration, description, category, url]);
             res.json(true);
