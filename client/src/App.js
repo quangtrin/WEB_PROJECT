@@ -12,6 +12,7 @@ import HomeAdmin from "./page/Admin/HomeAdmin/HomeAdmin";
 import AddFilmAdmin from "./page/Admin/FilmAdmin/AddFilmAdmin";
 import AddEpisodeAdmin from "./page/Admin/FilmAdmin/AddEpisodeFilm"
 import ListFilmAdmin from "./page/Admin/FilmAdmin/ListFilmAdmin";
+import ListEpisodeAdmin from "./page/Admin/FilmAdmin/ListEpisodeAdmin";
 import ListAccountAdmin from "./page/Admin/Account/ListAccountAdmin";
 import ListAccountUser from "./page/Admin/Account/ListAccountUser";
 import AddAccountAdmin from "./page/Admin/Account/AddAccountAdmin"
@@ -44,6 +45,7 @@ function App() {
         <Route path="AddFilm" element={<AddFilmAdmin />}></Route>
         <Route path="AddEpisodeFilm" element={<AddEpisodeAdmin />}></Route>
         <Route path="ListFilm" element={<ListFilmAdmin />}></Route>
+        <Route path="ListEpisode" element={<ListEpisodeAdmin />}></Route>
         <Route path="ListAccountAdmin" element={<ListAccountAdmin />}></Route>
         <Route path="ListAccountUser" element={<ListAccountUser />}></Route>
         <Route path="AddAccountAdmin" element={<AddAccountAdmin />}></Route>
