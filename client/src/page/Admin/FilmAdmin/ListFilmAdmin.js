@@ -71,9 +71,11 @@ const ListAdmin = () => {
                             name={film.filmName}
                             category={film.category}
                             countEpisode={
-                              film.episodeCount +
-                              "/" +
-                              film.duration.split(" ")[0]
+                              film.duration.split(" ")[1] === "phút"
+                                ? "1/1"
+                                : film.episodeCount +
+                                  "/" +
+                                  film.duration.split(" ")[0]
                             }
                             time={film.year}
                           ></TableFilm>
