@@ -2,31 +2,42 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import classNames from "classnames/bind";
 import HeadlessTippy from "@tippyjs/react/headless";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FilmAdmin.module.scss";
 import FilmItem from "../../../components/Header/Search/FilmItem";
 
 const cx = classNames.bind(styles);
 const AddEpisodeFilm = () => {
   const [filmName, setFilmName] = useState("");
-  const [filmId, setFilmId] = useState(0);
   const [episodeID, setEpisodeID] = useState(0);
   const [episodeUrl, setEpisodeUrl] = useState("");
   const [films, setFilms] = useState();
   const [searchResult, setSearchResult] = useState([]);
   const [isHasData, setIsHasData] = useState(false);
-  const inputRef = useRef();
 
   const handleChangeFilmName = (e) => {
     const value = e.target.value;
-    const res = films.filter((film) => {
-      return (
-        film.filmName.toUpperCase().includes(value.trim().toUpperCase()) &&
-        value.trim() !== ""
-      );
-    });
-    setSearchResult(res);
-    setFilmName(value);
+    if (value[0] !== " ") {
+      const res = films.filter((film) => {
+        let check = true;
+        const cmp = film.filmName.toUpperCase();
+        for (let i = 0; i < value.length; i++) {
+          if (value.toUpperCase()[i] !== cmp[i]) {
+            check = false;
+            break;
+          }
+        }
+        if (check === true) return film;
+      });
+      setSearchResult(res);
+      setFilmName(value);
+    }
+  };
+
+  const handleFocusFilmName = () => {
+    if (!filmName) {
+      setSearchResult(films);
+    }
   };
 
   const handleChangeEpisode = (e) => {
@@ -48,39 +59,62 @@ const AddEpisodeFilm = () => {
 
   const handleClickSubmit = async (e) => {
     e.preventDefault();
+    setSearchResult([]);
     let isSuccess = true;
-    if (filmId && episodeID && episodeUrl) {
-      const list = await (
-        await axios.get("/api/episodeFilm//getEpisodeFilm/" + filmId)
-      ).data;
-      console.log(list);
-      for (let index = 0; index < list.length; index++) {
-        console.log(list[index].episodeID == episodeID);
-        if (list[index].episodeID == episodeID) {
-          isSuccess = false;
-          break;
+    let id;
+    if (filmName && episodeID && episodeUrl) {
+      for (let i = 0; i < films.length; i++) {
+        if (filmName === films[i].filmName) {
+          id = films[i].filmID;
         }
       }
-      if (isSuccess) {
-        const res = await axios.post("/api/episodeFilm//addEpisode", {
-          filmID: filmId,
-          episodeID: episodeID,
-          url: episodeUrl,
-        });
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Thêm thành công",
-          confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
-        });
+
+      if (id) {
+        const list = await (
+          await axios.get("/api/episodeFilm/getEpisodeFilm/" + id)
+        ).data;
+        for (let index = 0; index < list.length; index++) {
+          if (list[index].episodeID == episodeID) {
+            isSuccess = false;
+            break;
+          }
+        }
+
+        if (isSuccess) {
+          const res = await axios.post("/api/episodeFilm/addEpisode", {
+            filmID: id,
+            episodeID: episodeID,
+            url: episodeUrl,
+          });
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Thêm thành công",
+            confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "ERROR",
+            text: "Tập phim đã tồn tại",
+            confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
+          });
+        }
       } else {
         Swal.fire({
           icon: "error",
           title: "ERROR",
-          text: "Tập phim đã tồn tại",
+          text: "Tên phim không chính xác",
           confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
         });
       }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "ERROR",
+        text: "Yêu cầu nhập đủ thông tin",
+        confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
+      });
     }
   };
 
@@ -98,10 +132,7 @@ const AddEpisodeFilm = () => {
                 <h1>Thêm tập</h1>
                 <HeadlessTippy
                   interactive
-                  visible={
-                    searchResult.length > 0 &&
-                    inputRef.current.value.trim().length > 0
-                  }
+                  visible={searchResult.length > 0}
                   delay={[0, 700]}
                   appendTo={document.body}
                   placement="bottom-start"
@@ -117,11 +148,7 @@ const AddEpisodeFilm = () => {
                             <FilmItem
                               key={index}
                               film={film}
-                              callBack={[
-                                setFilmName,
-                                setSearchResult,
-                                setFilmId,
-                              ]}
+                              callBack={[setFilmName, setSearchResult]}
                             ></FilmItem>
                           );
                         })}
@@ -136,10 +163,10 @@ const AddEpisodeFilm = () => {
                       name="filmName"
                       id="filmName"
                       placeholder="Tên phim"
-                      ref={inputRef}
                       value={filmName}
                       required
                       onChange={handleChangeFilmName}
+                      onFocus={handleFocusFilmName}
                     />
                   </div>
                 </HeadlessTippy>

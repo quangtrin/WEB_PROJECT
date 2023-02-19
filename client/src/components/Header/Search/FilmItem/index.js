@@ -7,7 +7,6 @@ function FilmItem({ film, callBack = null }) {
   const handleClick = () => {
     callBack[0](film.filmName);
     callBack[1]([]);
-    callBack[2](film.filmID);
   };
   return (
     <div>
