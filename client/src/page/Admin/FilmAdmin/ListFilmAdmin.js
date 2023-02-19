@@ -2,6 +2,8 @@ import { FaSearch } from "react-icons/fa";
 import classNames from "classnames/bind";
 import styles from "./FilmAdmin.module.scss";
 import TableFilm from './TableFilm/TableFilm';
+import PaginationAdmin from '../componentsAdmin/PaginationAdmin/PaginationAdmin';
+
 
 const cx = classNames.bind(styles);
 const ListAdmin = () => {
@@ -57,13 +59,7 @@ const ListAdmin = () => {
                   </TableFilm>
                 </tbody>
               </table>
-              <div className={cx("pagination")}>
-                <a class="active" href="#">1</a>
-                <a href="#">2</a>
-                <span>...</span>
-                <a href="#">3</a>
-                <a href="#">4</a>
-              </div>
+              <PaginationAdmin/>
             </div>
           </section>
         </div>

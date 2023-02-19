@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./AccountAdmin.module.scss";
 import { FaSearch } from "react-icons/fa";
 import TableAccountAdmin from './TableAccount/TableAccountAdmin';
+import PaginationAdmin from '../componentsAdmin/PaginationAdmin/PaginationAdmin';
 
 const cx = classNames.bind(styles);
 const ListAccountAdmin = () => {
@@ -55,13 +56,7 @@ const ListAccountAdmin = () => {
                   </TableAccountAdmin>
                 </tbody>
               </table>
-              <div className={cx("pagination")}>
-                  <a class="active" href="#">1</a>
-                  <a href="#">2</a>
-                  <span>...</span>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                </div>
+              <PaginationAdmin />
             </div>
           </section>
         </div>
