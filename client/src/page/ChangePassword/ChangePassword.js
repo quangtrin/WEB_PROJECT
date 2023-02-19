@@ -52,12 +52,11 @@ const ChangePassword = () => {
         oldPassword: oldPassword,
         newPassword: newPassword
       });
-      console.log('passsss2');
       if (req.data.change) {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Đăng ký thành công",
+          text: "Đổi mật khẩu thành công",
           confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
         })
       }
