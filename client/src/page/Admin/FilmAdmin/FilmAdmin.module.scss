@@ -75,10 +75,14 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   width: 250px;
   margin-left: 80%;
-}
 
-.search:hover input {
-  width: 250px;
+  &:hover input {
+    width: 100%;
+  }
+
+  &:focus-within input {
+    width: 100%;
+  }
 }
 
 .search input {
