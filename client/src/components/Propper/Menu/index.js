@@ -33,6 +33,8 @@ function Menu({
           data={item}
           onClick={() => {
             if (item.title === "Log out") callBack();
+            else if (item.title === "View profile")
+            navigate("/Infomation");
             else if (item.title === "Change Password")
               navigate("/ChangePassword");
             else if (item.title === "Login") navigate("/Login");

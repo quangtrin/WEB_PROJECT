@@ -1,5 +1,7 @@
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
+import Information from "../../../page/Information/Information";
+
 import {
   GlobalOutlined,
   QuestionCircleOutlined,
