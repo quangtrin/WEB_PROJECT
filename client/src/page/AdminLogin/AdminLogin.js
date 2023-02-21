@@ -26,8 +26,9 @@ const AdminLogin = () => {
         password: password,
       })
       const admin = res.data;
+      console.log(admin);
       if (admin) {
-        navigate("/Admin", { state: { admin } });
+        // navigate("/Admin", { state: { admin } });
       }
       else {
         setIsLoginSucces(false);
