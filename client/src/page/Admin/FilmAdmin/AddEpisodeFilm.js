@@ -144,6 +144,7 @@ const AddEpisodeFilm = () => {
                         {...attrs}
                       >
                         {searchResult.map((film, index) => {
+                          if (index < 20)
                           return (
                             <FilmItem
                               key={index}
