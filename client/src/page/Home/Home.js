@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "antd";
 import classNames from "classnames/bind";
 import { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -132,15 +132,15 @@ const Home = ({ user, setIsSignUp }) => {
               <span>Phim Mới</span>
             </h3>
           </div>
-          <Container fluid="md">
-            <Row>
+          {/* <Container fluid="md"> */}
+            <Row gutter={[16, 6]}>
               {isHasData ? (
                 filterFilms ? (
                   filterFilms.length > 0 ? (
                     filterFilms.map((film, index) => {
                       if (index >= page * 30 - 30 && index <= 30 * page - 1)
                         return (
-                          <Col className={cx("col1")} key={index}>
+                          <Col className={cx("col1")} key={index} span={4}>
                             <CardFilm
                               href={"/ListEpisode/" + film.filmName}
                               imgUrl={film.url}
@@ -178,7 +178,7 @@ const Home = ({ user, setIsSignUp }) => {
                 </div>
               )}
             </Row>
-          </Container>
+          {/* </Container> */}
           {/* Param Search */}
           {isHasData ? (
             filterFilms && filterFilms.length > 0 ? (

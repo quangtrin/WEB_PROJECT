@@ -14,7 +14,7 @@ const CardFilm = (props) => {
 
       </div>
       <div className={cx("image-card")}>
-        <img src={props.imgUrl} alt="" className={cx("film-img")} />
+        <img src={props.imgUrl} alt="" className={cx("film-img")} loading="lazy"/>
       </div>
       <div className={cx("text-card")}>
         <span className={cx("name")}>{props.name}</span>
