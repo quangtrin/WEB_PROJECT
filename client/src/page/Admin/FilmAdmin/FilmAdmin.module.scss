@@ -107,63 +107,32 @@
 }
 
 .pagination {
-  padding: 5px 0;
-  text-align: center;
+	padding: 5px 0;
+	text-align: center;
 }
 
 .pagination a {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 700;
-  color: #3498db;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-  text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+	color: #3498DB;
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	text-align: center;
 }
 
 .pagination a:hover {
-  border-color: #69a8d1;
+	border-color: #69a8d1;
 }
 
 .pagination span {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 700;
-  color: #3498db;
-  padding-left: 10px;
-  padding-right: 15px;
-
-  .page {
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 16px;
-    font-weight: 700;
-    color: #3498db;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
-    text-align: center;
-
-    &:nth-last-child(2) {
-      margin-right: 16px;
-    }
-
-    &:hover {
-      color: var(--primary);
-      cursor: pointer;
-    }
-  }
-
-  .page.active {
-    color: var(--primary);
-    cursor: default;
-  }
-  .next:hover,
-  .prev:hover {
-    color: var(--primary);
-    cursor: pointer;
-  }
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+	color: #3498DB;
+	padding-left: 10px;
+	padding-right: 15px;
 }
 
 .container {
@@ -277,17 +246,5 @@
 }
 
 .form button:hover {
-  background: #8fc5e9;
-}
-
-.wrapper {
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4);
-  background-color: #242424;
-  width: 650px;
-  margin-top: 8px;
-  font-size: 1.6rem;
-  cursor: default;
-  border-radius: 8px;
-  overflow-y: auto;
-  overflow-x: hidden;
+    background: #8FC5E9;
 }
