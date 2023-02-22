@@ -7,41 +7,9 @@ import styles from "./Information.module.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
 const cx = classNames.bind(styles);
 
 const Information = ({ user, setIsSignUp }) => {
-    const { filmName } = useParams();
-    const [isHasData, setIsHasData] = useState(false);
-    const [film, setFilm] = useState();
-    const [episodeFilm, setEpisodeFilm] = useState();
-    const [hide, setHide] = useState(true);
-
-    const getDataUser = async () => {
-        setIsHasData(false);
-        const res = await axios.get("/api/film/getFilm/" + filmName);
-        setFilm(res.data);
-    };
-
-    const getDataEpisodeFilm = async () => {
-        if (film) {
-            const res2 = await axios.get("/api/episodeFilm/getEpisodeFilm/" + film?.filmID);
-            setEpisodeFilm(res2.data);
-            setIsHasData(true);
-        }
-    };
-
-    useEffect(() => {
-        getDataFilms();
-        document.title = filmName;
-    }, []);
-
-    useEffect(() => {
-        getDataEpisodeFilm();
-    }, [film]);
     return (
         <div>
             <Header user={user} setIsSignUp={setIsSignUp}></Header>
