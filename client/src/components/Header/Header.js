@@ -36,7 +36,6 @@ const Header = ({ user, setIsSignUp, category }) => {
     });
   }, []);
   return (
-    // html
     <header
       className={
         scroll ? cx("header", "background-header-scroll") : cx("header")

@@ -27,7 +27,9 @@ const WatchFilm = ({ user, setIsSignUp }) => {
 
   const getDataEpisodeFilm = async () => {
     if (film) {
-      const res2 = await axios.get("/api/episodeFilm/getEpisodeFilm/" + film?.filmID);
+      const res2 = await axios.get(
+        "/api/episodeFilm/getEpisodeFilm/" + film?.filmID
+      );
       setEpisodeFilm(res2.data);
     }
   };
@@ -35,7 +37,10 @@ const WatchFilm = ({ user, setIsSignUp }) => {
   const getUrlEpisodeFilm = async () => {
     if (episodeFilm) {
       const res = await axios.get(
-        "/api/episodeFilm/getUrlEpisodeFilm/" + film.filmID + "?episodeID=" + episodeID
+        "/api/episodeFilm/getUrlEpisodeFilm/" +
+          film.filmID +
+          "?episodeID=" +
+          episodeID
       );
       setUrlEpisodeFilm(res.data[0].url);
       setIsHasData(true);
@@ -59,7 +64,11 @@ const WatchFilm = ({ user, setIsSignUp }) => {
       {isHasData ? (
         <div className={cx("layout")}>
           <div className={cx("layout_video", "container")}>
-            <iframe className={cx("video")} src={urlEpisodeFilm}></iframe>
+            <iframe
+              className={cx("video")}
+              src={urlEpisodeFilm}
+              allowFullScreen
+            ></iframe>
           </div>
 
           <Navbar
