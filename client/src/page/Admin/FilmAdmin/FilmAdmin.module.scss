@@ -107,39 +107,32 @@
 }
 
 .pagination {
-  padding: 5px 0;
-  text-align: center;
+	padding: 5px 0;
+	text-align: center;
+}
 
-  .page {
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 16px;
-    font-weight: 700;
-    color: #3498db;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
-    text-align: center;
+.pagination a {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+	color: #3498DB;
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	text-align: center;
+}
 
-    &:nth-last-child(2) {
-      margin-right: 16px;
-    }
+.pagination a:hover {
+	border-color: #69a8d1;
+}
 
-    &:hover {
-      color: var(--primary);
-      cursor: pointer;
-    }
-  }
-
-  .page.active {
-    color: var(--primary);
-    cursor: default;
-  }
-  .next:hover,
-  .prev:hover {
-    color: var(--primary);
-    cursor: pointer;
-  }
+.pagination span {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 700;
+	color: #3498DB;
+	padding-left: 10px;
+	padding-right: 15px;
 }
 
 .container {
@@ -253,5 +246,5 @@
 }
 
 .form button:hover {
-  background: #8fc5e9;
+    background: #8FC5E9;
 }
