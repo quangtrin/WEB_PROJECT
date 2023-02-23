@@ -6,64 +6,113 @@ import axios from "axios";
 import styles from "./FilmAdmin.module.scss";
 import TableFilm from "./TableFilm/TableFilm";
 import { Link, useParams } from "react-router-dom";
+import HeadlessTippy from "@tippyjs/react/headless";
+import FilmItem from "../../../components/Header/Search/FilmItem";
 
 const cx = classNames.bind(styles);
 const ListEpisodeFilm = () => {
   let { page } = useParams();
+
+  const [filmName, setFilmName] = useState("");
+  const [episodeID, setEpisodeID] = useState(0);
+  const [episodeUrl, setEpisodeUrl] = useState("");
+  // const [films, setFilms] = useState();
+  // const [searchResult, setSearchResult] = useState([]);
+  // const [isHasData, setIsHasData] = useState(false);
+
   if (page === undefined || Number(page) <= 0) page = "1";
   const [isHasData, setIsHasData] = useState(false);
   const [films, setFilms] = useState();
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
+  const handleChangeFilmName = (e) => {
+    const value = e.target.value;
+    if (value[0] !== " ") {
+      const res = films.filter((film) => {
+        let check = true;
+        const cmp = film.filmName.toUpperCase();
+        for (let i = 0; i < value.length; i++) {
+          if (value.toUpperCase()[i] !== cmp[i]) {
+            check = false;
+            break;
+          }
+        }
+        if (check === true) return film;
+      });
+      setSearchResult(res);
+      setFilmName(value);
+    }
+  };
+
+  const handleFocusFilmName = () => {
+    if (!filmName) {
+      setSearchResult(films);
+    }
+  };
+
   const getDataFilms = async () => {
     setIsHasData(false);
     if (films === undefined) {
-      const res = await axios.get("/api/episodeFilm/getEpisodeFilm/")
+      const res = await axios.get("/api/film/getFilm");
       setFilms(res.data);
-      setSearchResult(res.data);
     }
-
     setIsHasData(true);
-  };
-
-  const handleSearch = (e) => {
-    if (e.target.value[0] !== " ") setSearchValue(e.target.value);
-  };
-
-  const handleChangePage = () => {
-    window.scroll(0, 0);
   };
 
   useEffect(() => {
     getDataFilms();
   }, []);
 
-  useEffect(() => {
-    if (films) {
-      if (searchValue !== "") {
-        const result = films.filter((film) => {
-          let checked = true;
-          for (let i = 0; i < searchValue.length; i++) {
-            if (
-              searchValue.toUpperCase()[i] !== film.filmName.toUpperCase()[i]
-            ) {
-              checked = false;
-            }
-          }
-          if (checked) return film;
-        });
-        setSearchResult(result);
-      } else setSearchResult(films);
-    }
-  }, [searchValue]);
 
   return (
     <div>
+
       <div className={cx("main-container")}>
         <div className={cx("card")}>
           <section className={cx("attendance")}>
-            <div className={cx("attendance-list")}>
+            <HeadlessTippy
+              interactive
+              visible={searchResult.length > 0}
+              delay={[0, 700]}
+              appendTo={document.body}
+              placement="bottom-start"
+              render={(attrs) => (
+                <div className={cx("wrapper")}>
+                  <div
+                    className={cx("search-list")}
+                    tapindex="-1"
+                    {...attrs}
+                  >
+                    {searchResult.map((film, index) => {
+                      if (index < 20)
+                        return (
+                          <FilmItem
+                            key={index}
+                            film={film}
+                            callBack={[setFilmName, setSearchResult]}
+                          ></FilmItem>
+                        );
+                    })}
+                  </div>
+                </div>
+              )}
+            >
+              <div className={cx("input-box")}>
+                <label htmlFor="filmName">Tên phim</label>
+                <input
+                  type="text"
+                  name="filmName"
+                  id="filmName"
+                  placeholder="Tên phim"
+                  value={filmName}
+                  required
+                  onChange={handleChangeFilmName}
+                  onFocus={handleFocusFilmName}
+                />
+              </div>
+            </HeadlessTippy>
+            {/* <div className={cx("attendance-list")}>
               <h1>Danh sách tập phim</h1>
               <div className={cx("header-table")}>
                 <div className={cx("search")}>
@@ -221,7 +270,7 @@ const ListEpisodeFilm = () => {
               ) : (
                 <></>
               )}
-            </div>
+            </div> */}
           </section>
         </div>
       </div>
