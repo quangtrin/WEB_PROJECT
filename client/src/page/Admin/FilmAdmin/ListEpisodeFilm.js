@@ -82,8 +82,8 @@ const ListEpisodeFilm = () => {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Avatar Tập</th>
                     <th>Tập</th>
+                    <th>Url</th>
                     <th>Thao tác</th>
                   </tr>
                 </thead>
@@ -95,7 +95,7 @@ const ListEpisodeFilm = () => {
                           <TableFilm
                             key={episode.filmID}
                             id={episode.episodeID}
-                            avatar={episode.url}
+                            url={episode.url}
                           ></TableFilm>
                         );
                     })}
