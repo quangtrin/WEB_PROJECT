@@ -19,7 +19,7 @@ const ListEpisodeFilm = () => {
   const getDataFilms = async () => {
     setIsHasData(false);
     if (films === undefined) {
-      const res = await axios.get("/api/film/getFilm");
+      const res = await axios.get("/api/episodeFilm/getEpisodeFilm/")
       setFilms(res.data);
       setSearchResult(res.data);
     }
@@ -89,23 +89,13 @@ const ListEpisodeFilm = () => {
                 </thead>
                 {isHasData ? (
                   <tbody>
-                    {searchResult.map((film, index) => {
+                    {searchResult.map((episode, index) => {
                       if (index >= page * 30 - 30 && index <= 30 * page - 1)
                         return (
                           <TableFilm
-                            key={film.filmID}
-                            id={film.filmID}
-                            avatar={film.url}
-                            name={film.filmName}
-                            category={film.category}
-                            countEpisode={
-                              film.duration.split(" ")[1] === "phút"
-                                ? "1/1"
-                                : film.episodeCount +
-                                  "/" +
-                                  film.duration.split(" ")[0]
-                            }
-                            time={film.year}
+                            key={episode.filmID}
+                            id={episode.episodeID}
+                            avatar={episode.url}
                           ></TableFilm>
                         );
                     })}
