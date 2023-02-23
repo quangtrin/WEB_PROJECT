@@ -49,7 +49,11 @@ const NavAdmin = () => {
               </Link>
               <Link to="/Admin/ListFilm" className={cx("sub-menu-btn")}>
                 <FaEye />
-                <span>Tổng quan</span>
+                <span>Tổng quan phim</span>
+              </Link>
+              <Link to="/Admin/ListEpisodeFilm" className={cx("sub-menu-btn")}>
+                <FaEye />
+                <span>Tổng quan tập phim</span>
               </Link>
             </div>
           </li>
