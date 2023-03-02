@@ -61,5 +61,25 @@ const adminController = {
       } catch (error) { console.log(error) };
     } else res.json("Bạn không có quyền truy cập trang web này");
   },
+
+  deleteFilmByFilmID: async (req, res) => {
+    const { filmID } = req.body;
+    var sql =
+      "SELECT * FROM film WHERE filmID = ?";
+    try {
+      const [result] = await connect.query(sql, [filmID]);
+      if (result[0] != null) {
+        var sql2 = "DELETE FROM film WHERE filmID = ?";
+        const [result2] = await connect.query(sql2, [result[0].filmID]);
+        res.json({
+          delete: true,
+          id: result[0].filmID,
+        })
+      } else res.json({ delete: false })
+    }
+    catch (error) {
+      console.log(error);
+    }
+  },
 };
 export default adminController;
