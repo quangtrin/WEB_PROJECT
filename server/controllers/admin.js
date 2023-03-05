@@ -2,8 +2,25 @@ import { connect } from "../db.js";
 import filmData from "../FILE_URL/film.json"  assert { type: "json" };
 import episodeData from "../FILE_URL/episodeFilm.json"  assert { type: "json" };
 import * as dotenv from 'dotenv';
+import jsonwebtoken from "jsonwebtoken";
 dotenv.config();
 const adminController = {
+  login: async (req, res) => {
+    const { account, password } = req.body;
+    var sql = "SELECT adminName, adminID, avatar FROM login_admin WHERE account = ? AND password = ?";
+    try {
+      const [admin] = await connect.query(sql, [account, password]);
+      if (admin[0]) {
+        const adminToken = "Bearer " + jsonwebtoken.sign(admin[0], process.env.PASSWORD_TOKEN, {
+          expiresIn: "1800s"
+        });
+        res.json(adminToken);
+      }
+      else res.sendStatus(401);
+    } catch (error) {
+      console.log(error);
+    }
+  },
   autoUpdateFilm: async (req, res) => {
     if (req.params.passwordUpdate === process.env.PASSWORD_INSERT) {
       var valuesEpisodeNull = [];
