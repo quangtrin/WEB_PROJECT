@@ -7,7 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const cx = classNames.bind(styles);
-const AdminLogin = () => {
+const AdminLogin = ({ setIsAdminLogin }) => {
   const navigate = useNavigate();
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
@@ -21,17 +21,26 @@ const AdminLogin = () => {
   const handleSubmmit = async (e) => {
     e.preventDefault();
     if (account && password) {
-      const res = await axios.post("/api/admin/login", {
-        account: account,
-        password: password,
-      })
-      const token = res.data;
-      if (token) {
-        localStorage.setItem("adminToken", token);
-        navigate("/Admin");
+      try {
+        const res = await axios.post("/api/admin/login", {
+          account: account,
+          password: password,
+        })
+        const token = res.data;
+        console.log(token);
+        if (token) {
+          localStorage.setItem("adminToken", token);
+          setIsAdminLogin(true);
+          navigate("/Admin");
+        }
+        else {
+          setIsLoginSucces(false);
+        }
       }
-      else {
-        setIsLoginSucces(false);
+      catch (error) {
+        if (error.response.status === 401)
+          setIsLoginSucces(false);
+        else console.log(error);
       }
     }
   }
