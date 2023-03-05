@@ -9,9 +9,11 @@ const verifyToken = (req, res, next) => {
     try {
         const decoded = jsonwebtoken.verify(token, process.env.PASSWORD_TOKEN);
         next();
-    } catch (error) {
-        console.log(error);
-        return res.sendStatus(403);
+    } catch (e) {
+        if(e instanceof jsonwebtoken.JsonWebTokenError){
+            res.json({error: "Token time out"});
+        }
+        else return res.sendStatus(403);
     }
 }
 export default verifyToken;

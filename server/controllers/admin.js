@@ -11,7 +11,9 @@ const adminController = {
     try {
       const [admin] = await connect.query(sql, [account, password]);
       if (admin[0]) {
-        const adminToken = "Bearer " + jsonwebtoken.sign(admin[0], process.env.PASSWORD_TOKEN);
+        const adminToken = "Bearer " + jsonwebtoken.sign(admin[0], process.env.PASSWORD_TOKEN, {
+          expiresIn: "1800s"
+        });
         res.json(adminToken);
       }
       else res.sendStatus(401);

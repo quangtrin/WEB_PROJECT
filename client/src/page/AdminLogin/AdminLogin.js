@@ -25,10 +25,10 @@ const AdminLogin = () => {
         account: account,
         password: password,
       })
-      const admin = res.data;
-      console.log(admin);
-      if (admin) {
-        // navigate("/Admin", { state: { admin } });
+      const token = res.data;
+      if (token) {
+        localStorage.setItem("adminToken", token);
+        navigate("/Admin");
       }
       else {
         setIsLoginSucces(false);

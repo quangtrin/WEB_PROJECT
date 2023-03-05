@@ -1,23 +1,21 @@
 import classNames from "classnames/bind";
 import { useLocation, useNavigate } from "react-router-dom";
-import HeaderAdmin from "../../page/Admin/componentsAdmin/HeaderAdmin/HeaderAdmin";
-import NavAdmin from "../../page/Admin/componentsAdmin/NavAdmin/NavAdmin";
+import HeaderAdmin from "./componentsAdmin/HeaderAdmin/HeaderAdmin";
+import NavAdmin from "./componentsAdmin/NavAdmin/NavAdmin";
 
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+
 
 const cx = classNames.bind();
-const Admin = () => {
-  const location = useLocation();
+const Admin = ({adminToken}) => {
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState();
-  if (!location.state) {
+  if (!adminToken) {
     navigate("/AdminLogin");
   }
   return (
     <div>
 
-      <Outlet />
+      <Outlet context={adminToken}/>
       <HeaderAdmin></HeaderAdmin>
       <NavAdmin></NavAdmin>
     </div>
