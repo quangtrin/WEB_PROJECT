@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button } from "antd";
-import Swal from "sweetalert2";
 import React from "react";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import styles from "./Login.module.scss";

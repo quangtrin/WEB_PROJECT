@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./FilmAdmin.module.scss";
+import Swal from "sweetalert2";
 import TableFilm from "./TableFilm/TableFilm";
 import { Link, useParams, useOutletContext } from "react-router-dom";
 
@@ -14,6 +15,7 @@ const ListAdmin = () => {
   const [isHasData, setIsHasData] = useState(false);
   const [films, setFilms] = useState();
   const [searchValue, setSearchValue] = useState("");
+
   const [searchResult, setSearchResult] = useState([]);
 
   const getDataFilms = async () => {
@@ -33,6 +35,29 @@ const ListAdmin = () => {
 
   const handleChangePage = () => {
     window.scroll(0, 0);
+  };
+
+  const deleteFilm = async (id) => {
+    if (id) {
+      const req = await axios.post("/api/admin/deleteFilmByFilmID", {
+        filmID: id,
+      });
+      window.location.reload();
+    }
+  };
+
+  const showWarning = (id = 0, index) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Bấm OK để xóa!",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteFilm(id);
+      }
+    });
   };
 
   useEffect(() => {
@@ -109,6 +134,7 @@ const ListAdmin = () => {
                                   film.duration.split(" ")[0]
                             }
                             time={film.year}
+                            callBack={showWarning}
                           ></TableFilm>
                         );
                     })}
