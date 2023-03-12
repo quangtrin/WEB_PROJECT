@@ -14,7 +14,8 @@ const TableFilm = (props) => {
       <td>{props.countEpisode}</td>
       <td>{props.time}</td>
       <td className={cx("interactive")}>
-        <button>Sửa</button> <button>Xóa</button>
+        <button>Sửa</button>
+        <button onClick={() => props.callBack(props.id)}>Xóa</button>
       </td>
     </tr>
   );
