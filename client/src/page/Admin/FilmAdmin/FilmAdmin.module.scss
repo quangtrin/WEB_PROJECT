@@ -107,32 +107,32 @@
 }
 
 .pagination {
-	padding: 5px 0;
-	text-align: center;
+  padding: 5px 0;
+  text-align: center;
 }
 
 .pagination a {
-	display: inline-block;
-	font-size: 16px;
-	font-weight: 700;
-	color: #3498DB;
-	height: 30px;
-	width: 30px;
-	line-height: 30px;
-	text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3498db;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
 }
 
 .pagination a:hover {
-	border-color: #69a8d1;
+  border-color: #69a8d1;
 }
 
 .pagination span {
-	display: inline-block;
-	font-size: 16px;
-	font-weight: 700;
-	color: #3498DB;
-	padding-left: 10px;
-	padding-right: 15px;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3498db;
+  padding-left: 10px;
+  padding-right: 15px;
 }
 
 .container {
@@ -246,5 +246,20 @@
 }
 
 .form button:hover {
-    background: #8FC5E9;
+  background: #8fc5e9;
+}
+
+.wrapper {
+  width: 650px;
+  background-color: #242424;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 40%);
+  cursor: default;
+  font-size: 1.6rem;
+  height: 500px;
+  overflow-y: auto;
+  .search-list {
+    width: 100%;
+    margin-top: 8px;
+  }
 }
