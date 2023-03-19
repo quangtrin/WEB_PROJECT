@@ -8,9 +8,9 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import styles from "./Home.module.scss";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import HotSlide from "./HotSlide/HotSlide";
-import CardFilm from "../Home/CardFilm/CardFilm";
-import SlideHome from "../Home/SlideHome/SlideHome";
+import HotSlide from "../../components/Home/HotSlide/HotSlide";
+import CardFilm from "../../components/Home/CardFilm/CardFilm";
+import SlideHome from "../../components/Home/SlideHome/SlideHome";
 
 import imgSlideUp1 from "../../imgs/HotSlide/one_piece.png";
 import imgSlideUp2 from "../../imgs/HotSlide/doraemon.png";

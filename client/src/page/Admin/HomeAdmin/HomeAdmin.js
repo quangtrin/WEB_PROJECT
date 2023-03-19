@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
-import NavAdmin from "../componentsAdmin/NavAdmin/NavAdmin";
-import HeaderAdmin from "../componentsAdmin/HeaderAdmin/HeaderAdmin";
+import NavAdmin from "../../../components/Admin//NavAdmin/NavAdmin";
+import HeaderAdmin from "../../../components/Admin//HeaderAdmin/HeaderAdmin";
 import styles from "./HomeAdmin.module.scss";
 
 const HomeAdmin = () => {

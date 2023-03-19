@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 import styles from "./NavAdmin.module.scss";
-import imgUser from "../../../../imgs/user_default.png";
+import imgUser from "../../../imgs/user_default.png";
 
 const cx = classNames.bind(styles);
 
