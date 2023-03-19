@@ -8,6 +8,7 @@ const admin = (app) => {
   router.post("/login", adminController.login);
   router.get("/autoUpdateFilm/:passwordUpdate", verifyToken, adminController.autoUpdateFilm);
   router.get("/listAdminAccount", verifyToken, adminController.listAdminAccount);
+  router.get("/listUserAccount", verifyToken, adminController.listUserAccount);
 };
 
 export default admin;
