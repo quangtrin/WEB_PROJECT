@@ -98,5 +98,14 @@ const adminController = {
       console.log(error);
     }
   },
+  listAdminAccount: async (req, res) => {
+    var sql = "SELECT * FROM login_admin";
+    try {
+      const [result] = await connect.query(sql);
+      res.json(result)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 export default adminController;
