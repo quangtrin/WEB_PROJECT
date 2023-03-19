@@ -1,4 +1,4 @@
-import imgLogo from "../../../../imgs/logo_hqbh.png";
+import imgLogo from "../../../imgs/logo_hqbh.png";
 
 import classNames from "classnames/bind";
 import styles from "./HeaderAdmin.module.scss";
