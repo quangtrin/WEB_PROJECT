@@ -1,19 +1,71 @@
 import { UpOutlined, DownOutlined } from "@ant-design/icons";
+import Swal from "sweetalert2";
+import axios from "axios";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommentChild from "../CommentChild";
 import styles from "./Comment.module.scss";
 
 const cx = classNames.bind(styles);
 
-function Comment({ data, commentChilds, callBack, inputElement }) {
+function Comment({ data, commentChilds, callBack, inputElement, userID }) {
   const [isShowCommentChild, setIsShowCommentChild] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [userLiked, setUserLiked] = useState(false);
+
+  const getLike = async () => {
+    if (!commentChilds) return;
+    if (userID) {
+      try {
+        const res = await (
+          await axios.get("/api/like/" + data.commentID + "/" + userID)
+        ).data;
+        setLikeCount(res[0].likeCount);
+        setUserLiked(res[0].userLiked);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const res = await (await axios.get("/api/like/" + data.commentID)).data;
+        setLikeCount(res[0].likeCount);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   const handleRep = () => {
     inputElement.current.focus();
     callBack[0](data.commentID);
     callBack[1](data.comment);
   };
+
+  const handleLike = async () => {
+    if (userID) {
+      setUserLiked(!userLiked);
+      if (!userLiked) {
+        setLikeCount((prev) => prev + 1);
+      } else {
+        setLikeCount((prev) => prev - 1);
+      }
+      const req = await axios.post("/api/like", {
+        liked: !userLiked,
+        commentID: data.commentID,
+        userID: userID,
+      });
+    } else {
+      Swal.fire({
+        title: "Bạn Cần Đăng Nhập Để Like!",
+        icon: "warning",
+        showCloseButton: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    getLike();
+  }, []);
   return (
     <div key={data.commentID} className={cx("comment")}>
       <div className={cx("comment-avatar")}>
@@ -33,16 +85,21 @@ function Comment({ data, commentChilds, callBack, inputElement }) {
         <div className={cx("comment-body_options")}>
           <div className={cx("comment-body_options-left")}>
             <span className={cx("option", "disable")}>{data.time}</span>
-            <span className={cx("option")}>Thích</span>
+            <span
+              className={cx("option", userLiked ? "active" : "")}
+              onClick={handleLike}
+            >
+              {userLiked ? "Bỏ thích" : "Thích"}
+            </span>
             <span className={cx("option")} onClick={handleRep}>
               Trả lời
             </span>
           </div>
-          {data.likeCount <= 0 ? (
+          {likeCount <= 0 ? (
             <></>
           ) : (
             <span className={cx("option", "icon")}>
-              {data.likeCount}
+              {likeCount}
               <svg
                 viewBox="0 0 16 16"
                 fill="none"
@@ -77,7 +134,6 @@ function Comment({ data, commentChilds, callBack, inputElement }) {
                 >
                   Ẩn câu trả lời
                   <UpOutlined className={cx("show-icon")} />
-                  {/* <DownOutlined className={cx("show-icon")} /> */}
                 </span>
               ) : (
                 <span

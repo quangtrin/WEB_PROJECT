@@ -8,6 +8,7 @@ import film from "./routers/film.js";
 import episodeFilm from "./routers/episodeFilm.js";
 import comment from "./routers/comment.js";
 import rate from "./routers/rate.js";
+import like from "./routers/like.js";
 import session from "express-session";
 
 dotenv.config();
@@ -17,9 +18,12 @@ const app = express();
 
 app.use(express.urlencoded());
 app.use(express.json());
-app.use(session({secret:"04112002", resave: false, saveUninitialized: true}))
+app.use(
+  session({ secret: "04112002", resave: false, saveUninitialized: true })
+);
 app.use(cors());
 
+like(app);
 user(app);
 admin(app);
 film(app);
