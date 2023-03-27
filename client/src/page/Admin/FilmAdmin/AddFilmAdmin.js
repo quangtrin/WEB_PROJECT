@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import { useState } from "react";
 import styles from "./FilmAdmin.module.scss";
 import { useOutletContext } from "react-router-dom";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 const cx = classNames.bind(styles);
@@ -64,7 +65,21 @@ const AddFilm = () => {
       formData.append("category", categorys?.join(" "));
       formData.append("image", avatar);
       const res = await axios.post("/api/film/addFilm", formData);
-      console.log(res);
+      if (res.data) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Thêm thành công",
+          confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
+        });
+      }
+      else{
+        Swal.fire({
+          title: "Thêm phim thất bại, xin hãy thử lại",
+          icon: "warning",
+          showCloseButton: true,
+        });
+      }
     }
 
   }

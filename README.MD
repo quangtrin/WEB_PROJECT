@@ -15,6 +15,8 @@ Create file .env in folder server, create các global variables with name (DATAB
 
 => can copy from .env.examp file and change variable value
 
+Create folder uploads in folder server
+
 # run client
 
 cd client
