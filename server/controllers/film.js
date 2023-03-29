@@ -11,13 +11,13 @@ const filmController = {
             description,
             category,
         } = req.body;
-        const fileName = Date.now() + req.files.image.name;
+        const fileName = Date.now() + "_" + req.files.image.name;
         const files = req.files.image;
         const __dirname = path.resolve();
         const uploadPath = __dirname + "\\uploads\\" + fileName;
         const url = fileName + " uploads";
         files.mv(uploadPath, (err) => {
-            if(err) {
+            if (err) {
                 return res.send(err);
             }
         });
