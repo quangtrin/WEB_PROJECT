@@ -1,4 +1,5 @@
 import { connect } from "../db.js";
+import path from "path";
 
 const filmController = {
     addFilm: async (req, res) => {
@@ -9,9 +10,17 @@ const filmController = {
             duration,
             description,
             category,
-            url,
         } = req.body;
-
+        const fileName = Date.now() + "_" + req.files.image.name;
+        const files = req.files.image;
+        const __dirname = path.resolve();
+        const uploadPath = __dirname + "\\uploads\\" + fileName;
+        const url = fileName + " uploads";
+        files.mv(uploadPath, (err) => {
+            if (err) {
+                return res.send(err);
+            }
+        });
         var sql = "INSERT INTO film( filmName, status, year, duration, description, category, url ) VALUES (?,?,?,?,?,?,?)";
         try {
             const [result] = await connect.query(sql, [filmName, status, year, duration, description, category, url]);
