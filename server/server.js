@@ -9,6 +9,7 @@ import film from "./routers/film.js";
 import episodeFilm from "./routers/episodeFilm.js";
 import comment from "./routers/comment.js";
 import rate from "./routers/rate.js";
+import like from "./routers/like.js";
 import session from "express-session";
 import path from "path";
 
@@ -25,6 +26,7 @@ app.use(cors());
 app.use(fileUpload());
 app.use("/uploads",express.static(path.join(__dirname, 'uploads')))
 
+like(app);
 user(app);
 admin(app);
 film(app);

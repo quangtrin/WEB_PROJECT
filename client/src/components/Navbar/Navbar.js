@@ -181,6 +181,7 @@ function Navbar({ user, episodeFilm, film, episodeID }) {
                         commentChilds={comment.commentChild}
                         callBack={[setCommentParentID, setIsRepping]}
                         inputElement={inputElement}
+                        userID={user.userId}
                       ></Comment>
                     );
                   })}
