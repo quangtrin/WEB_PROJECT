@@ -16,14 +16,15 @@ import imgUser from "../../../imgs/user_default.png";
 
 const cx = classNames.bind(styles);
 
-const NavAdmin = () => {
+const NavAdmin = ({admin}) => {
   return (
+    admin ?
     <>
       <div className={cx("sidebar")}>
         <div className={cx("sidebar-menu")}>
           <center className={cx("profile")}>
-            <img src={imgUser} alt="" />
-            <p>Cục Đá</p>
+            <img src={admin.avatar} alt="" />
+            <p>{admin.name}</p>
           </center>
           <li className={cx("item")}>
             <Link to="/Admin/Home" className={cx("menu-btn")}>
@@ -79,7 +80,7 @@ const NavAdmin = () => {
           </li>
         </div>
       </div>
-    </>
+    </> : null
   );
 };
 

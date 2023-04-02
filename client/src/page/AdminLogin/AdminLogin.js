@@ -26,10 +26,11 @@ const AdminLogin = ({ setIsAdminLogin }) => {
           account: account,
           password: password,
         })
-        const token = res.data;
-        console.log(token);
-        if (token) {
-          localStorage.setItem("adminToken", token);
+        const admin = res.data;
+        if (admin) {
+          localStorage.setItem("adminToken", admin.adminToken);
+          localStorage.setItem("adminName", admin.name);
+          localStorage.setItem("adminAvatar", admin.avatar);
           setIsAdminLogin(true);
           navigate("/Admin");
         }

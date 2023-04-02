@@ -5,17 +5,17 @@ import NavAdmin from "../../components/Admin//NavAdmin/NavAdmin";
 import { Outlet } from "react-router-dom";
 
 
-const Admin = ({adminToken}) => {
+const Admin = ({admin}) => {
   const navigate = useNavigate();
-  if (!adminToken) {
+  if (!admin) {
     navigate("/AdminLogin");
   }
   return (
     <div>
 
-      <Outlet context={adminToken}/>
+      <Outlet context={admin}/>
       <HeaderAdmin></HeaderAdmin>
-      <NavAdmin></NavAdmin>
+      <NavAdmin admin={admin}></NavAdmin>
     </div>
   );
 };
