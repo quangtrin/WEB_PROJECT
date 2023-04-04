@@ -73,7 +73,7 @@ const AddFilm = () => {
           confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
         });
       }
-      else{
+      else {
         Swal.fire({
           title: "Thêm phim thất bại, xin hãy thử lại",
           icon: "warning",
@@ -116,6 +116,7 @@ const AddFilm = () => {
                   />
                 </div>
                 <div className={cx("select-box")}>
+
                   <input
                     type="checkbox"
                     id="category1"

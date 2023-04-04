@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./TableFilm.module.scss";
+import styles from "./InputBox.module.scss";
 import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);

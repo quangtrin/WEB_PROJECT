@@ -12,7 +12,6 @@ const Admin = ({adminToken}) => {
   }
   return (
     <div>
-
       <Outlet context={adminToken}/>
       <HeaderAdmin></HeaderAdmin>
       <NavAdmin></NavAdmin>
