@@ -1,6 +1,5 @@
 import classNames from "classnames/bind";
 import styles from "./TableFilm.module.scss";
-import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const TableFilm = (props) => {
@@ -15,9 +14,7 @@ const TableFilm = (props) => {
       <td>{props.countEpisode}</td>
       <td>{props.time}</td>
       <td className={cx("interactive")}>
-        <button ><Link to="/Admin/UpdateFilm">
-            Sửa
-          </Link></button>
+        <button>Sửa</button>
         <button onClick={() => props.callBack(props.id)}>Xóa</button>
       </td>
     </tr>

@@ -1,0 +1,206 @@
+.body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 220px;
+    padding-top: 70px;
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(234, 96, 22, 0.35);
+}
+
+.container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 80px;
+    border-radius: 5px;
+    background: rgb(234, 96, 22);
+}
+
+.content form .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 0px 0;
+}
+
+form .user-details .input-box {
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+}
+
+form .input-box span.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.user-details .input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.user-details .input-box input:focus,
+.user-details .input-box input:valid {
+    border-color: #ea6016;
+}
+
+form .gender-details .gender-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.radio-box {
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    padding-top: 10px;
+}
+
+.radio-label {
+    padding-left: 10px;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.form :where(.input-box input, .select-box) {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+.input-box input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input {
+    margin: 0 80px;
+}
+
+.select-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    input:not(:first-child) {
+        margin-left: 16px;
+    }
+
+    label {
+        margin-left: 4px;
+        font-size: 14px;
+    }
+}
+
+form .category {
+    display: flex;
+    width: 80%;
+    margin: 14px 0;
+    justify-content: space-between;
+}
+
+form .category label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+form .button {
+    height: 45px;
+    margin: 35px 0
+}
+
+form .button input {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #ea6016;
+}
+
+form .button input:hover {
+    /* transform: scale(0.99); */
+    background: #d44e06;
+}
+
+@media(max-width: 584px) {
+    .container {
+        max-width: 100%;
+    }
+
+    form .user-details .input-box {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    form .category {
+        width: 100%;
+    }
+
+    .content form .user-details {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+
+    .user-details::-webkit-scrollbar {
+        width: 5px;
+    }
+}
+
+@media(max-width: 459px) {
+    .container .content .category {
+        flex-direction: column;
+    }
+}
