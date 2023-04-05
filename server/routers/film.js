@@ -7,6 +7,7 @@ const film = (app) => {
     router.get("/getFilm", filmController.getFilm);
     router.get("/getFilm/:name", filmController.getFilmByName);
     router.post("/addFilm", filmController.addFilm);
+    router.put("/updateFilm/:id", filmController.updateFilm);
 }
 
 export default film;
