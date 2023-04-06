@@ -18,7 +18,7 @@ import AdminRegister from "./page/Admin/Account/AdminRegister"
 
 function App() {
   const [user, setUser] = useState();
-  const [adminToken, setAdminToken] = useState();
+  const [admin, setAdmin] = useState();
   const [isSignUp, setIsSignUp] = useState(false);
   const [isAdminLogin, setIsAdminLogin] = useState(false);
   const signUp = () => {
@@ -30,14 +30,18 @@ function App() {
     setUser(user);
   }
   const adminLogin = () => {
-    setAdminToken(localStorage.getItem("adminToken"));
+    setAdmin({
+      token: localStorage.getItem("adminToken"),
+      name: localStorage.getItem("adminName"),
+      avatar: localStorage.getItem("adminAvatar")
+    });
   }
   useEffect(() => {
     signUp();
   }, [isSignUp]);
   useEffect(() => {
     adminLogin();
-  },[isAdminLogin]);
+  }, [isAdminLogin]);
   return (
     <Routes>
       <Route path="/" element={<Home user={user} setIsSignUp={setIsSignUp} />} />
@@ -46,8 +50,8 @@ function App() {
       <Route path="/ListEpisode/:filmName" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/WatchFilm/:filmName" element={<WatchFilm user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/Register" element={<Register />} />
-      <Route path="/AdminLogin" element={<AdminLogin setIsAdminLogin={setIsAdminLogin}/>} />
-      <Route path="/Admin" element={<Admin adminToken = {adminToken}/>} >
+      <Route path="/AdminLogin" element={<AdminLogin setIsAdminLogin={setIsAdminLogin} />} />
+      <Route path="/Admin" element={<Admin admin={admin} />} >
         <Route path="Home" element={<HomeAdmin />}></Route>
         <Route path="AddFilm" element={<AddFilmAdmin />}></Route>
         <Route path="AddEpisodeFilm" element={<AddEpisodeAdmin />}></Route>

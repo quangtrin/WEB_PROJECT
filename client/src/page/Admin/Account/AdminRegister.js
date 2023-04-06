@@ -13,7 +13,7 @@ import FormData from 'form-data';
 
 const cx = classNames.bind(styles);
 const AddAccountAdmin = () => {
-  const adminToken = useOutletContext();
+  const admin = useOutletContext();
   const [adminName, setAdminName] = useState();
   const [account, setAccount] = useState();
   const [password, setPassword] = useState("");
@@ -57,9 +57,11 @@ const AddAccountAdmin = () => {
       formData.append("account", account);
       formData.append("password", password);
       try {
-        const res = await axios.post("/api/admin/uploadAvatarAdmin",
-          formData
-        );
+        const res = await axios.post("/api/admin/uploadAvatarAdmin", formData, {
+          headers: {
+            Authorization: admin.token
+          }
+        });
         if (res.data.change) { 
           Swal.fire({
             icon: "success",

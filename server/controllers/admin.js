@@ -16,7 +16,11 @@ const adminController = {
         const adminToken = "Bearer " + jsonwebtoken.sign(admin[0], process.env.PASSWORD_TOKEN, {
           expiresIn: "1800s"
         });
-        res.json(adminToken);
+        res.json({
+          adminToken,
+          name: admin[0].adminName,
+          avatar: admin[0].avatar
+        });
       }
       else res.sendStatus(401);
     } catch (error) {
