@@ -23,7 +23,7 @@ const NavAdmin = () => {
         <div className={cx("sidebar-menu")}>
           <center className={cx("profile")}>
             <img src={imgUser} alt="" />
-            <p>Cục Đá</p>
+            <p>Cục đá</p>
           </center>
           <li className={cx("item")}>
             <Link to="/Admin/Home" className={cx("menu-btn")}>
@@ -54,7 +54,7 @@ const NavAdmin = () => {
             </div>
           </li>
           <li className={cx("item")} id="account">
-            <Link to="/Admin/AddAccountAdmin" className={cx("menu-btn")}>
+            <Link className={cx("menu-btn")}>
               <FaUser />
               <span>
                 Tài khoản <i className="fas fa-chevron-down drop-down" />
@@ -67,7 +67,11 @@ const NavAdmin = () => {
               </Link>
               <Link to="/Admin/ListAccountAdmin" className={cx("sub-menu-btn")}>
                 <FaUserTie />
-                <span>Quản trị viên</span>
+                <span>Admin</span>
+              </Link>
+              <Link to="/Admin/AdminRegister" className={cx("sub-menu-btn")}>
+                <FaUserTie />
+                <span>Thêm tài khoản Admin</span>
               </Link>
             </div>
           </li>

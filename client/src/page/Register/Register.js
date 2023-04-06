@@ -15,10 +15,13 @@ const Register = () => {
   const navigate = useNavigate();
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
   const [userName, setUserName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [accountExist, setAccountExist] = useState(false);
   const [isHidePass, setIsHidePass] = useState(true);
+  const [isHideRePass, setIsHideRePass] = useState(true);
+  const [isEqualPassword, setIsEqualPassword] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isRightDate, setIsRightDate] = useState(true);
@@ -28,6 +31,9 @@ const Register = () => {
   };
   const handleChangePassword = (e) => {
     setPassword(e.target.value);
+  };
+  const handleChangeRePassword = (e) => {
+    setRePassword(e.target.value);
   };
   const handleChangeUserName = (e) => {
     setUserName(e.target.value);
@@ -51,6 +57,10 @@ const Register = () => {
   const handleClickSubmit = async (e) => {
     e.preventDefault();
     if (account && userName && password && dateOfBirth) {
+      if (password !== rePassword) {
+        setIsEqualPassword(false);
+        return;
+      }
       if (!checkDate(dateOfBirth)) {
         setIsRightDate(false);
         setAccountExist(false);
@@ -77,7 +87,7 @@ const Register = () => {
         }).then((result) => {
           if (result.isConfirmed) setSuccess(true);
         });
-      } 
+      }
     }
   };
   const handleClickLogin = () => {
@@ -160,6 +170,36 @@ const Register = () => {
               )}
             </div>
           </div>
+
+          {!isEqualPassword ? (
+            <p className={cx("notify")}>Mật khẩu phải giống nhau!</p>
+          ) : (
+            <></>
+          )}
+          <label htmlFor="rePassword" className={cx("register_label")}>
+            Nhập lại mật khẩu
+          </label>
+          <div className={cx("password_input")}>
+            <input
+              type={isHideRePass ? "rePassword" : "text"}
+              id="rePassword"
+              required
+              name="rePassword"
+              className={cx("register_input")}
+              minLength={6}
+              maxLength={30}
+              placeholder="*********"
+              onChange={handleChangeRePassword}
+            />
+            <div className={cx("hide_icon")}>
+              {isHideRePass ? (
+                <EyeFilled onClick={() => setIsHideRePass(false)} />
+              ) : (
+                <EyeInvisibleFilled onClick={() => setIsHideRePass(true)} />
+              )}
+            </div>
+          </div>
+
           <label htmlFor="dateOfBirth" className={cx("register_label")}>
             Ngày sinh
           </label>

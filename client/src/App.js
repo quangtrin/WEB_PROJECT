@@ -14,7 +14,7 @@ import AddEpisodeAdmin from "./page/Admin/FilmAdmin/AddEpisodeFilm"
 import ListFilmAdmin from "./page/Admin/FilmAdmin/ListFilmAdmin";
 import ListAccountAdmin from "./page/Admin/Account/ListAccountAdmin";
 import ListAccountUser from "./page/Admin/Account/ListAccountUser";
-import AddAccountAdmin from "./page/Admin/Account/AddAccountAdmin"
+import AdminRegister from "./page/Admin/Account/AdminRegister"
 
 function App() {
   const [user, setUser] = useState();
@@ -55,7 +55,7 @@ function App() {
         <Route path="ListFilm" element={<ListFilmAdmin />}></Route>
         <Route path="ListAccountAdmin" element={<ListAccountAdmin />}></Route>
         <Route path="ListAccountUser" element={<ListAccountUser />}></Route>
-        <Route path="AddAccountAdmin" element={<AddAccountAdmin />}></Route>
+        <Route path="AdminRegister" element={<AdminRegister />}></Route>
       </Route>
       <Route path="/ChangePassword" element={<ChangePassword />} />
       <Route path="/Login" element={<Login setIsSignUp={setIsSignUp} />} />

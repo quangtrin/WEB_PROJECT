@@ -11,7 +11,7 @@ import comment from "./routers/comment.js";
 import rate from "./routers/rate.js";
 import like from "./routers/like.js";
 import session from "express-session";
-import path from "path";
+import path from 'path';
 
 dotenv.config();
 
