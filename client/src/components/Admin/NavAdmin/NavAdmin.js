@@ -18,8 +18,8 @@ import axios from "axios";
 
 const cx = classNames.bind(styles);
 
-const NavAdmin = () => {
-  const admin = useOutletContext();
+const NavAdmin = ({admin}) => {
+  // const admin = useOutletContext();
   const handleAutoUpdate = async () => {
     const res = await axios.get("/api/admin/autoUpdateFilm", {
       headers: {
@@ -30,12 +30,13 @@ const NavAdmin = () => {
   };
 
   return (
+    admin ?
     <>
       <div className={cx("sidebar")}>
         <div className={cx("sidebar-menu")}>
           <center className={cx("profile")}>
-            <img src={imgUser} alt="" />
-            <p>Cục Đá</p>
+            <img src={admin.avatar} alt="" />
+            <p>{admin.name}</p>
           </center>
           <li className={cx("item")}>
             <Link to="/Admin/Home" className={cx("menu-btn")}>
@@ -99,7 +100,7 @@ const NavAdmin = () => {
           </li>
         </div>
       </div>
-    </>
+    </> : null
   );
 };
 
