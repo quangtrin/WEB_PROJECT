@@ -14,17 +14,42 @@ import {
 import { useOutletContext } from "react-router-dom";
 import styles from "./NavAdmin.module.scss";
 import imgUser from "../../../imgs/user_default.png";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 const cx = classNames.bind(styles);
 
 const NavAdmin = ({ admin }) => {
-  const handleAutoUpdate = async () => {
-    const res = await axios.get("/api/admin/autoUpdateFilm", {
-      headers: {
-        Authorization: admin.token,
-      },
-    });
+  const handleAutoUpdate = () => {
+    Swal.fire({
+      title: "Bấm OK để tiếp tục",
+      showDenyButton: true,
+      confirmButtonText: "OK",
+      denyButtonText: `Cancel`,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          const res = axios.get("/api/admin/autoUpdateFilm", {
+            headers: {
+              Authorization: admin.token,
+            },
+          });
+          return res;
+        }
+      })
+      .then((res) => {
+        if (res.data) {
+          Swal.fire({
+            title: "Update thành công",
+            confirmButtonText: "OK",
+          });
+        } else {
+          Swal.fire({
+            title: "Update thất bại",
+            confirmButtonText: "OK",
+          });
+        }
+      });
   };
 
   return admin ? (
