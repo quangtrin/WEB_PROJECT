@@ -7,6 +7,7 @@ import axios from "axios";
 
 const cx = classNames.bind(styles);
 const AddFilm = () => {
+  const admin = useOutletContext();
   const [filmName, setFilmName] = useState("");
   const [year, setYear] = useState("");
   const [status, setStatus] = useState(0);
@@ -64,7 +65,11 @@ const AddFilm = () => {
       formData.append("description", description);
       formData.append("category", categorys?.join(" "));
       formData.append("image", avatar);
-      const res = await axios.post("/api/film/addFilm", formData);
+      const res = await axios.post("/api/film/addFilm", formData, {
+        headers: {
+          Authorization: admin.token
+        }
+      });
       if (res.data) {
         Swal.fire({
           icon: "success",
@@ -73,7 +78,7 @@ const AddFilm = () => {
           confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
         });
       }
-      else{
+      else {
         Swal.fire({
           title: "Thêm phim thất bại, xin hãy thử lại",
           icon: "warning",
@@ -83,8 +88,6 @@ const AddFilm = () => {
     }
 
   }
-
-  const adminToken = useOutletContext();
   return (
     <div>
       <div className={cx("main-container")}>
