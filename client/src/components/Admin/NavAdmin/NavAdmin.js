@@ -11,12 +11,24 @@ import {
   FaImage,
 } from "react-icons/fa";
 
+import { useOutletContext } from "react-router-dom";
 import styles from "./NavAdmin.module.scss";
 import imgUser from "../../../imgs/user_default.png";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
 const NavAdmin = () => {
+  const admin = useOutletContext();
+  const handleAutoUpdate = async () => {
+    const res = await axios.get("/api/admin/autoUpdateFilm", {
+      headers: {
+        Authorization: admin.token,
+      },
+    });
+    console.log(res);
+  };
+
   return (
     <>
       <div className={cx("sidebar")}>
@@ -51,6 +63,14 @@ const NavAdmin = () => {
                 <FaEye />
                 <span>Tổng quan</span>
               </Link>
+              <div
+                to="/Admin/ListFilm"
+                className={cx("sub-menu-btn")}
+                onClick={handleAutoUpdate}
+              >
+                <FaPlus />
+                <span>Auto Update</span>
+              </div>
             </div>
           </li>
           <li className={cx("item")} id="account">

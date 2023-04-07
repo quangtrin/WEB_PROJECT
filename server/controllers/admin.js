@@ -22,7 +22,6 @@ const adminController = {
     }
   },
   autoUpdateFilm: async (req, res) => {
-    if (req.params.passwordUpdate === process.env.PASSWORD_INSERT) {
       var valuesEpisodeNull = [];
       var valuesFilmNull = [];
       var sql = "SELECT film.filmID, episode_film.episodeID, film.filmName FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
@@ -76,7 +75,6 @@ const adminController = {
         }
         res.json("Update thành công");
       } catch (error) { console.log(error) };
-    } else res.json("Bạn không có quyền truy cập trang web này");
   },
 
   deleteFilmByFilmID: async (req, res) => {

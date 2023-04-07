@@ -27,7 +27,6 @@ const AdminLogin = ({ setIsAdminLogin }) => {
           password: password,
         })
         const token = res.data;
-        console.log(token);
         if (token) {
           localStorage.setItem("adminToken", token);
           setIsAdminLogin(true);

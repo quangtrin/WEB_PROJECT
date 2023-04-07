@@ -80,6 +80,10 @@
   padding: 20px;
   transition: 0.3s;
   transition-property: background;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .sidebar .sidebar-menu .item .sub-menu .sub-menu-btn:hover {
@@ -98,5 +102,3 @@
 .sidebar .sidebar-menu .item:hover .sub-menu {
   max-height: 500px;
 }
-
-
