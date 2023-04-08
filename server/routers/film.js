@@ -7,7 +7,6 @@ const film = (app) => {
     app.use("/api/film", router);
     router.get("/getFilm", filmController.getFilm);
     router.get("/getFilm/:name", filmController.getFilmByName);
-    router.post("/addFilm", filmController.addFilm);
     router.post("/addFilm", verifyToken, filmController.addFilm);
 }
 

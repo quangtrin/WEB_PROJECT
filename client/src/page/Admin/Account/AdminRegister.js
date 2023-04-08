@@ -57,14 +57,14 @@ const AddAccountAdmin = () => {
             Authorization: admin.token
           }
         });
-        if (res.data.change) { 
+        if (res.data.change) {
           Swal.fire({
             icon: "success",
             title: "Success",
             text: "Thêm tài khoản Admin thành công",
             confirmButtonText: '<div class="fa fa-thumbs-up"}>OK</div>',
           });
-        }else{
+        } else {
           Swal.fire({
             title: "Thêm Admin thất bại, xin hãy thử lại",
             icon: "warning",
@@ -157,6 +157,13 @@ const AddAccountAdmin = () => {
 
               <div className={cx("input-box")}>
                 <label>Avatar</label>
+                {file ? (
+                  <div className={cx("preview")}>
+                    <img src={URL.createObjectURL(file)} alt="preview-avatar" />
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <input
                   type="file"
                   id="file"

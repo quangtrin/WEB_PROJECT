@@ -23,7 +23,7 @@ const NavAdmin = ({admin}) => {
       <div className={cx("sidebar")}>
         <div className={cx("sidebar-menu")}>
           <center className={cx("profile")}>
-          <img src={admin.avatar} alt="" />
+            <img src={admin.avatar} alt="" />
             <p>{admin.name}</p>
           </center>
           <li className={cx("item")}>
