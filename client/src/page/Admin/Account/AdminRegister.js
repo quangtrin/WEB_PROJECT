@@ -1,12 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
-import { Button } from "antd";
 import React from "react";
 import classNames from "classnames/bind";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
 import styles from "./AccountAdmin.module.scss";
 import { useOutletContext } from "react-router-dom";
 import FormData from 'form-data';
@@ -20,7 +17,6 @@ const AddAccountAdmin = () => {
   const [rePassword, setRePassword] = useState("");
   const [isHidePass, setIsHidePass] = useState(true);
   const [isHideRePass, setIsHideRePass] = useState(true);
-  const [isChanging, setIsChanging] = useState(false);
   const [isEqualPassword, setIsEqualPassword] = useState(true);
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("");
@@ -49,7 +45,6 @@ const AddAccountAdmin = () => {
         setIsEqualPassword(false);
         return;
       }
-      setIsChanging(true);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("fileName", fileName);
@@ -79,7 +74,6 @@ const AddAccountAdmin = () => {
       } catch (ex) {
         console.log(ex);
       };
-      setIsChanging(false);
     }
   };
   useEffect(() => {

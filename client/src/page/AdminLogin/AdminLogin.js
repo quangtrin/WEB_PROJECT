@@ -26,7 +26,7 @@ const AdminLogin = ({ setIsAdminLogin }) => {
           account: account,
           password: password,
         })
-         const admin = res.data;
+        const admin = res.data;
         if (admin) {
           localStorage.setItem("adminToken", admin.adminToken);
           localStorage.setItem("adminName", admin.name);
