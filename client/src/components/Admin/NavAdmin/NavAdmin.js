@@ -40,12 +40,16 @@ const NavAdmin = ({ admin }) => {
       .then((res) => {
         if (res.data) {
           Swal.fire({
-            title: "Update thành công",
+            icon: "success",
+            title: "Success",
+            text: "Update thành công",
             confirmButtonText: "OK",
           });
         } else {
           Swal.fire({
-            title: "Update thất bại",
+            text: "Update thất bại",
+            icon: "error",
+            title: "ERROR",
             confirmButtonText: "OK",
           });
         }
