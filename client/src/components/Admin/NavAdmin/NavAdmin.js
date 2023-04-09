@@ -11,19 +11,57 @@ import {
   FaImage,
 } from "react-icons/fa";
 
+import { useOutletContext } from "react-router-dom";
 import styles from "./NavAdmin.module.scss";
 import imgUser from "../../../imgs/user_default.png";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
-const NavAdmin = ({admin}) => {
-  return (
-    admin ?
+const NavAdmin = ({ admin }) => {
+  const handleAutoUpdate = () => {
+    Swal.fire({
+      title: "Bấm OK để tiếp tục",
+      showDenyButton: true,
+      confirmButtonText: "OK",
+      denyButtonText: `Cancel`,
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          const res = axios.get("/api/admin/autoUpdateFilm", {
+            headers: {
+              Authorization: admin.token,
+            },
+          });
+          return res;
+        }
+      })
+      .then((res) => {
+        if (res.data) {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Update thành công",
+            confirmButtonText: "OK",
+          });
+        } else {
+          Swal.fire({
+            text: "Update thất bại",
+            icon: "error",
+            title: "ERROR",
+            confirmButtonText: "OK",
+          });
+        }
+      });
+  };
+
+  return admin ? (
     <>
       <div className={cx("sidebar")}>
         <div className={cx("sidebar-menu")}>
           <center className={cx("profile")}>
-            <img src={admin.avatar} alt="" />
+            <img src={admin.avatar || imgUser} alt="" />
             <p>{admin.name}</p>
           </center>
           <li className={cx("item")}>
@@ -52,6 +90,14 @@ const NavAdmin = ({admin}) => {
                 <FaEye />
                 <span>Tổng quan</span>
               </Link>
+              <div
+                to="/Admin/ListFilm"
+                className={cx("sub-menu-btn")}
+                onClick={handleAutoUpdate}
+              >
+                <FaPlus />
+                <span>Auto Update</span>
+              </div>
             </div>
           </li>
           <li className={cx("item")} id="account">
@@ -80,8 +126,8 @@ const NavAdmin = ({admin}) => {
           </li>
         </div>
       </div>
-    </> : null
-  );
+    </>
+  ) : null;
 };
 
 export default NavAdmin;
