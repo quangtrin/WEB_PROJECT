@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import styles from "./AccountAdmin.module.scss";
 import { useOutletContext } from "react-router-dom";
 import FormData from 'form-data';
+import defaluImg from "../../../imgs/user_default.png";
 
 const cx = classNames.bind(styles);
 const AddAccountAdmin = () => {
@@ -18,7 +19,7 @@ const AddAccountAdmin = () => {
   const [isHidePass, setIsHidePass] = useState(true);
   const [isHideRePass, setIsHideRePass] = useState(true);
   const [isEqualPassword, setIsEqualPassword] = useState(true);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("");
 
   const handleChangeAdminName = (e) => {
@@ -58,6 +59,11 @@ const AddAccountAdmin = () => {
           }
         });
         if (res.data.change) {
+          setFileName("");
+          setAdminName("");
+          setAccount("");
+          setPassword("");
+          setRePassword("");
           Swal.fire({
             icon: "success",
             title: "Success",
@@ -93,6 +99,7 @@ const AddAccountAdmin = () => {
                 <input
                   type="text"
                   id="adminName"
+                  value={adminName}
                   required
                   name="adminName"
                   placeholder="Nguyễn Văn A"
@@ -104,6 +111,7 @@ const AddAccountAdmin = () => {
                 <label>Email</label>
                 <input type="email"
                   id="email"
+                  value={account}
                   required
                   name="email"
                   placeholder="admin@gmail.com"
@@ -114,6 +122,7 @@ const AddAccountAdmin = () => {
                 <label>Mật khẩu</label>
                 <input type={isHidePass ? "password" : "text"}
                   id="password"
+                  value={password}
                   required
                   name="password"
                   className={cx("register_input")}
@@ -141,6 +150,7 @@ const AddAccountAdmin = () => {
                 <input
                   type={isHideRePass ? "password" : "text"}
                   id="rePassword"
+                  value={rePassword}
                   required
                   name="rePassword"
                   placeholder="*********"
