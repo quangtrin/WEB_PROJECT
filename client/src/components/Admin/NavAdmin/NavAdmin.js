@@ -101,7 +101,7 @@ const NavAdmin = ({ admin }) => {
             </div>
           </li>
           <li className={cx("item")} id="account">
-            <Link to="/Admin/AddAccountAdmin" className={cx("menu-btn")}>
+            <Link className={cx("menu-btn")}>
               <FaUser />
               <span>
                 Tài khoản <i className="fas fa-chevron-down drop-down" />
@@ -114,7 +114,11 @@ const NavAdmin = ({ admin }) => {
               </Link>
               <Link to="/Admin/ListAccountAdmin" className={cx("sub-menu-btn")}>
                 <FaUserTie />
-                <span>Quản trị viên</span>
+                <span>Admin</span>
+              </Link>
+              <Link to="/Admin/AdminRegister" className={cx("sub-menu-btn")}>
+                <FaUserTie />
+                <span>Thêm tài khoản Admin</span>
               </Link>
             </div>
           </li>

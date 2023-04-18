@@ -1,6 +1,7 @@
 import express from "express";
 import adminController from "../controllers/admin.js";
 import verifyToken from "../middleware/auth.js";
+
 const admin = (app) => {
   const router = express.Router();
   app.use("/api/admin", router);
@@ -9,6 +10,7 @@ const admin = (app) => {
   router.get("/autoUpdateFilm", verifyToken, adminController.autoUpdateFilm);
   router.get("/listAdminAccount", verifyToken, adminController.listAdminAccount);
   router.get("/listUserAccount", verifyToken, adminController.listUserAccount);
+  router.post("/uploadAvatarAdmin", verifyToken, adminController.uploadAvatarAdmin);
 };
 
 export default admin;

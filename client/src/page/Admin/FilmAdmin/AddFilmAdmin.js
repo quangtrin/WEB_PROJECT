@@ -88,6 +88,7 @@ const AddFilm = () => {
     }
 
   }
+
   return (
     <div>
       <div className={cx("main-container")}>
@@ -98,6 +99,13 @@ const AddFilm = () => {
                 <h1>Thêm mới phim</h1>
                 <div className={cx("input-box")}>
                   <label>Avatar</label>
+                  {avatar ? (
+                    <div className={cx("preview")}>
+                      <img src={URL.createObjectURL(avatar)} alt="preview-avatar" />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                   <input
                     type="file"
                     name="image"
@@ -224,13 +232,6 @@ const AddFilm = () => {
               </form>
             </section>
           </div>
-          {avatar ? (
-            <div className={cx("preview")}>
-              <img src={URL.createObjectURL(avatar)} alt="preview-avatar" />
-            </div>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
     </div>

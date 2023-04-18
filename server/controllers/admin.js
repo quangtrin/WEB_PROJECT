@@ -3,6 +3,8 @@ import filmData from "../FILE_URL/film.json"  assert { type: "json" };
 import episodeData from "../FILE_URL/episodeFilm.json"  assert { type: "json" };
 import * as dotenv from 'dotenv';
 import jsonwebtoken from "jsonwebtoken";
+import path from 'path';
+
 dotenv.config();
 const adminController = {
   login: async (req, res) => {
@@ -115,6 +117,32 @@ const adminController = {
       const [result] = await connect.query(sql);
       res.json(result)
     } catch (error) {
+      console.log(error);
+    }
+  },
+  uploadAvatarAdmin: async (req, res) => {
+    const { account, password, adminName } = req.body;
+    const __dirname = path.resolve();
+    const file = req.files.file;
+    const fileName = Date.now() + "_" + file.name;
+    const uploadPath = __dirname + "/uploads/" + fileName;
+    const url = fileName + " uploads";
+    var sql = "SELECT adminID FROM login_admin WHERE account = ? AND password = ?"
+    try {
+      const [accountConflict] = await connect.query(sql, [account, password]);
+      if (accountConflict[0] != null) res.json({ change: false });
+      else {
+        var sql = "INSERT INTO login_admin(account, password, adminName, avatar) VALUES (?, ?, ?, ?)";
+        file.mv(uploadPath, (err) => {
+          if (err) {
+            res.json({ change: false });
+          }
+        });
+        const [result] = await connect.query(sql, [account, password, adminName, url]);
+        res.json({ change: true })
+      }
+    }
+    catch (error) {
       console.log(error);
     }
   }

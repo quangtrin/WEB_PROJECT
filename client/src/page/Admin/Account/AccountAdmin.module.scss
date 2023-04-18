@@ -68,7 +68,7 @@ table thead tr {
     height: 30px;
     display: flex;
     cursor: pointer;
-    padding: 10px  20px;
+    padding: 10px 20px;
     background: #fff;
     border-radius: 10px;
     align-items: center;
@@ -83,7 +83,7 @@ table thead tr {
 
 .search input {
     width: 0;
-    outline:none;
+    outline: none;
     border: none;
     font-weight: 500;
     transition: 0.8s;
@@ -94,7 +94,7 @@ table thead tr {
     height: 30px;
     display: flex;
     cursor: pointer;
-    padding: 10px  20px;
+    padding: 10px 20px;
     background: #fff;
     border-radius: 10px;
     align-items: center;
@@ -102,33 +102,46 @@ table thead tr {
     width: 250px;
 }
 
+.preview {
+    width: 120px;
+    height: 120px;
+    max-width: 120px;
+    max-height: 120px;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
 .pagination {
-	padding: 5px 0;
-	text-align: center;
+    padding: 5px 0;
+    text-align: center;
 }
 
 .pagination a {
-	display: inline-block;
-	font-size: 16px;
-	font-weight: 700;
-	color: #3498DB;
-	height: 30px;
-	width: 30px;
-	line-height: 30px;
-	text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3498DB;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
 }
 
 .pagination a:hover {
-	border-color: #69a8d1;
+    border-color: #69a8d1;
 }
 
 .pagination span {
-	display: inline-block;
-	font-size: 16px;
-	font-weight: 700;
-	color: #3498DB;
-	padding-left: 10px;
-	padding-right: 15px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3498DB;
+    padding-left: 10px;
+    padding-right: 15px;
 }
 
 .container {
@@ -159,7 +172,27 @@ table thead tr {
     font-weight: bold;
     font-family: "Roboto", sans-serif;
     font-size: 18px;
-    
+
+}
+
+.input-box {
+    position: relative;
+
+    .hide_icon {
+        position: absolute;
+        top: 36px;
+        right: 16px;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.notify {
+    color: red;
+    text-align: left;
+    font-size: 1.6rem;
 }
 
 .form :where(.input-box input, .select-box) {
