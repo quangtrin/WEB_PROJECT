@@ -1,6 +1,6 @@
 import { connect } from "../db.js";
 import path from "path";
-
+import { backEndHost } from "../config/config.js";
 const filmController = {
     addFilm: async (req, res) => {
         const {
@@ -12,6 +12,7 @@ const filmController = {
             category,
         } = req.body;
         const fileName = Date.now() + "_" + req.files.image.name;
+        fileName.replace(" ", "_");
         const files = req.files.image;
         const __dirname = path.resolve();
         const uploadPath = __dirname + "\\uploads\\" + fileName;
@@ -34,6 +35,13 @@ const filmController = {
         var sql = "SELECT film.*, COUNT(DISTINCT episode_film.episodeID) as episodeCount, AVG(rate_film.rate) as point FROM film LEFT JOIN  episode_film ON film.filmID = episode_film.filmID LEFT JOIN rate_film ON film.filmID = rate_film.filmID  GROUP BY filmID order by COUNT(episode_film.filmID) DESC";
         try {
             const [result] = await connect.query(sql);
+            result.map((film) => {
+                const urlClone = film.url.split(" ");
+                if (urlClone[1]) {
+                    film.url = backEndHost.url + "/uploads/" + urlClone[0];
+                }
+                return film;
+            })
             res.json(result)
         } catch (error) {
             console.log(error);
@@ -45,6 +53,13 @@ const filmController = {
         var sql = "SELECT film.*, ROUND(AVG(rate), 2) as point FROM film LEFT JOIN rate_film ON rate_film.filmID = film.filmID WHERE filmName = " + "'" + filmName + "'" + "GROUP BY filmID";
         try {
             const [result] = await connect.query(sql);
+            result.map((film) => {
+                const urlClone = film.url.split(" ");
+                if (urlClone[1]) {
+                    film.url = backEndHost.url + "/uploads/" + urlClone[0];
+                }
+                return film;
+            })
             res.json(result[0]);
         } catch (error) { console.log(error) };
     },

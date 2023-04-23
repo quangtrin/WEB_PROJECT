@@ -10,6 +10,13 @@ const adminController = {
     var sql = "SELECT adminName, adminID, avatar FROM login_admin WHERE account = ? AND password = ?";
     try {
       const [admin] = await connect.query(sql, [account, password]);
+      admin.map((account) => {
+        const urlClone = account.avatar.split(" ");
+        if (urlClone[1]) {
+          account.avatar = backEndHost.avatar + "/uploads/" + urlClone[0];
+        }
+        return account;
+      })
       if (admin[0]) {
         const adminToken = "Bearer " + jsonwebtoken.sign(admin[0], process.env.PASSWORD_TOKEN, {
           expiresIn: "1800s"
@@ -26,59 +33,59 @@ const adminController = {
     }
   },
   autoUpdateFilm: async (req, res) => {
-      var valuesEpisodeNull = [];
-      var valuesFilmNull = [];
-      var sql = "SELECT film.filmID, episode_film.episodeID, film.filmName FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
-      try {
-        const [film] = await connect.query(sql);
-        filmData.map((newFilm) => {
-          const findFilm = film.find((oldFilm) => {
-            return oldFilm.filmName === newFilm.filmName;
-          })
-          if (!findFilm) {
-            const checkExist = valuesFilmNull.find((fi) => {
-              return fi[0] === newFilm.filmName;
-            })
-            if (!checkExist)
-              valuesFilmNull.push([newFilm.filmName, newFilm.status, newFilm.year, newFilm.duration, newFilm.description, newFilm.category, newFilm.url]);
-          }
+    var valuesEpisodeNull = [];
+    var valuesFilmNull = [];
+    var sql = "SELECT film.filmID, episode_film.episodeID, film.filmName FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
+    try {
+      const [film] = await connect.query(sql);
+      filmData.map((newFilm) => {
+        const findFilm = film.find((oldFilm) => {
+          return oldFilm.filmName === newFilm.filmName;
         })
-        if (valuesFilmNull[0] != null) {
-          try {
-            sql = "INSERT INTO film( filmName, status, year, duration, description, category, url ) VALUES ?";
-            const [statusInsertFilm] = await connect.query(sql, [valuesFilmNull]);
-          } catch (error) {
-            console.log(error)
-          }
+        if (!findFilm) {
+          const checkExist = valuesFilmNull.find((fi) => {
+            return fi[0] === newFilm.filmName;
+          })
+          if (!checkExist)
+            valuesFilmNull.push([newFilm.filmName, newFilm.status, newFilm.year, newFilm.duration, newFilm.description, newFilm.category, newFilm.url]);
         }
-        sql = "SELECT film.filmID, episode_film.episodeID, film.filmName FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
-        const [newFilm] = await connect.query(sql);
-        episodeData.map((episode) => {
-          const check = newFilm.find((fi) => {
-            return fi.filmName === episode.filmName && Number(fi.episodeID) === Number(episode.episodeID);
-          })
-          if (!check) {
-            const findFilm = newFilm.find((fi) => {
-              return fi.filmName === episode.filmName;
-            })
-            if (findFilm) {
-              const checkExist = valuesEpisodeNull.find((newEpisode) => {
-                return Number(newEpisode[1]) === Number(episode.episodeID) && Number(newEpisode[0]) === Number(findFilm.filmID);
-              })
-              if (!checkExist) valuesEpisodeNull.push([findFilm.filmID, episode.episodeID, episode.url]);
-            }
-          }
-        })
-        sql = "INSERT INTO episode_film(filmID, episodeID, url) VALUES ?"
+      })
+      if (valuesFilmNull[0] != null) {
         try {
-          if (valuesEpisodeNull[0] != null) {
-            const [statusInsertEpisode] = await connect.query(sql, [valuesEpisodeNull]);
-          }
+          sql = "INSERT INTO film( filmName, status, year, duration, description, category, url ) VALUES ?";
+          const [statusInsertFilm] = await connect.query(sql, [valuesFilmNull]);
         } catch (error) {
-          console.log(error);
+          console.log(error)
         }
-        res.json("Update thành công");
-      } catch (error) { console.log(error) };
+      }
+      sql = "SELECT film.filmID, episode_film.episodeID, film.filmName FROM film LEFT JOIN episode_film ON film.filmID = episode_film.filmID";
+      const [newFilm] = await connect.query(sql);
+      episodeData.map((episode) => {
+        const check = newFilm.find((fi) => {
+          return fi.filmName === episode.filmName && Number(fi.episodeID) === Number(episode.episodeID);
+        })
+        if (!check) {
+          const findFilm = newFilm.find((fi) => {
+            return fi.filmName === episode.filmName;
+          })
+          if (findFilm) {
+            const checkExist = valuesEpisodeNull.find((newEpisode) => {
+              return Number(newEpisode[1]) === Number(episode.episodeID) && Number(newEpisode[0]) === Number(findFilm.filmID);
+            })
+            if (!checkExist) valuesEpisodeNull.push([findFilm.filmID, episode.episodeID, episode.url]);
+          }
+        }
+      })
+      sql = "INSERT INTO episode_film(filmID, episodeID, url) VALUES ?"
+      try {
+        if (valuesEpisodeNull[0] != null) {
+          const [statusInsertEpisode] = await connect.query(sql, [valuesEpisodeNull]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      res.json("Update thành công");
+    } catch (error) { console.log(error) };
   },
 
   deleteFilmByFilmID: async (req, res) => {
@@ -104,6 +111,13 @@ const adminController = {
     var sql = "SELECT * FROM login_admin";
     try {
       const [result] = await connect.query(sql);
+      result.map((account) => {
+        const urlClone = account.url.split(" ");
+        if (urlClone[1]) {
+          account.url = backEndHost.url + "/uploads/" + urlClone[0];
+        }
+        return account;
+      })
       res.json(result)
     } catch (error) {
       console.log(error);
@@ -113,6 +127,13 @@ const adminController = {
     var sql = "SELECT * FROM login_user";
     try {
       const [result] = await connect.query(sql);
+      result.map((account) => {
+        const urlClone = account.avatar.split(" ");
+        if (urlClone[1]) {
+          account.avatar = backEndHost.avatar + "/uploads/" + urlClone[0];
+        }
+        return account;
+      })
       res.json(result)
     } catch (error) {
       console.log(error);
