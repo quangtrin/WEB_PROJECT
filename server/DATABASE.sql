@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for macos12 (x86_64)
 --
--- Host: localhost    Database: test
+-- Host: 127.0.0.1    Database:  main
 -- ------------------------------------------------------
--- Server version	8.0.31
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `comment` (
   KEY `commentParentID_idx` (`commentParentID`),
   KEY `film_idx` (`filmID`),
   KEY `episode_idx` (`episodeID`),
-  CONSTRAINT `commentParentID` FOREIGN KEY (`commentParentID`) REFERENCES `comment` (`commentID`),
+  CONSTRAINT `commentParentID` FOREIGN KEY (`commentParentID`) REFERENCES `comment` (`commentID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `episodeID` FOREIGN KEY (`episodeID`) REFERENCES `episode_film` (`episodeID`),
   CONSTRAINT `film` FOREIGN KEY (`filmID`) REFERENCES `film` (`filmID`),
   CONSTRAINT `userID` FOREIGN KEY (`userID`) REFERENCES `login_user` (`userID`)
@@ -65,7 +65,7 @@ CREATE TABLE `episode_film` (
   `url` text NOT NULL,
   PRIMARY KEY (`episodeID`,`filmID`),
   KEY `filmID_idx` (`filmID`),
-  CONSTRAINT `filmID` FOREIGN KEY (`filmID`) REFERENCES `film` (`filmID`)
+  CONSTRAINT `filmID` FOREIGN KEY (`filmID`) REFERENCES `film` (`filmID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,7 +119,7 @@ CREATE TABLE `like_comment` (
   `commentID` int NOT NULL,
   PRIMARY KEY (`userID`,`commentID`),
   KEY `commentID_idx` (`commentID`),
-  CONSTRAINT `fk_like_commentID` FOREIGN KEY (`commentID`) REFERENCES `comment` (`commentID`),
+  CONSTRAINT `fk_like_commentID` FOREIGN KEY (`commentID`) REFERENCES `comment` (`commentID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_like_userID` FOREIGN KEY (`userID`) REFERENCES `login_user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -150,7 +150,7 @@ CREATE TABLE `login_admin` (
   `ruleID` int DEFAULT NULL,
   PRIMARY KEY (`adminID`),
   KEY `ruleID_idx` (`ruleID`),
-  CONSTRAINT `ruleID` FOREIGN KEY (`ruleID`) REFERENCES `rule_admin` (`ruleID`)
+  CONSTRAINT `ruleID` FOREIGN KEY (`ruleID`) REFERENCES `rule_admin` (`ruleID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,7 +205,7 @@ CREATE TABLE `rate_film` (
   `rate` float DEFAULT NULL,
   PRIMARY KEY (`userID`,`filmID`),
   KEY `fk_filmID_idx` (`filmID`),
-  CONSTRAINT `fk_filmID` FOREIGN KEY (`filmID`) REFERENCES `film` (`filmID`),
+  CONSTRAINT `fk_filmID` FOREIGN KEY (`filmID`) REFERENCES `film` (`filmID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_userID` FOREIGN KEY (`userID`) REFERENCES `login_user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -251,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-29 20:36:38
+-- Dump completed on 2023-04-18 13:50:30
