@@ -3,10 +3,24 @@ import styles from "./AccountAdmin.module.scss";
 import { FaSearch } from "react-icons/fa";
 import TableAccountUser from './TableAccount/TableAccountUser';
 import { useOutletContext } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);
 const ListAccountUser = () => {
-  const adminToken = useOutletContext();
+  const admin = useOutletContext();
+  const [listUser, setListUser] = useState([]);
+  const getDataUser = async () => {
+    const res = await axios.get("/api/admin/listUserAccount", {
+      headers: {
+        Authorization: admin?.token,
+      },
+    })
+    setListUser(res.data);
+  }
+  useEffect(() => {
+    getDataUser();
+  }, [])
   return (
     <div>
       <div className={cx("main-container")}>
@@ -25,7 +39,7 @@ const ListAccountUser = () => {
               <table className={cx("table")}>
                 <thead>
                   <tr>
-                  <th>ID</th>
+                    <th>ID</th>
                     <th>Tên người dùng</th>
                     <th>Email</th>
                     <th>Password</th>
@@ -35,39 +49,26 @@ const ListAccountUser = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <TableAccountUser
-                    id={1}
-                    name={"Admin"}
-                    email={"binhtrinh8122002@gmail.com"}
-                    password={12345678}
-                    date={"08/12/2002"}
-                    dateRegister={"19:02 08/12/2002"}>
-                  </TableAccountUser>
-                  <TableAccountUser
-                    id={2}
-                    name={"Admin"}
-                    email={"binhtrinh8122002@gmail.com"}
-                    password={12345678}
-                    date={"08/12/2002"}
-                    dateRegister={"19:02 08/12/2002"}>
-                  </TableAccountUser>
-                  <TableAccountUser
-                    id={3}
-                    name={"Admin"}
-                    email={"binhtrinh8122002@gmail.com"}
-                    password={12345678}
-                    date={"08/12/2002"}
-                    dateRegister={"19:02 08/12/2002"}>
-                  </TableAccountUser>
+                  {listUser.map((user) => {
+                    return <TableAccountUser
+                      id={user.userID}
+                      name={user.userName}
+                      email={user.account}
+                      password={user.password}
+                      date={new Date(user.dateOfBirth).toLocaleDateString('en-GB', { timeZone: 'UTC' })}
+                      dateRegister={new Date(user.create_at).toLocaleDateString('en-GB', { timeZone: 'UTC' })}
+                    />
+                  })
+                  }
                 </tbody>
               </table>
               <div className={cx("pagination")}>
-                  <a class="active" href="#">1</a>
-                  <a href="#">2</a>
-                  <span>...</span>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                </div>
+                <a class="active" href="#">1</a>
+                <a href="#">2</a>
+                <span>...</span>
+                <a href="#">3</a>
+                <a href="#">4</a>
+              </div>
             </div>
           </section>
         </div>

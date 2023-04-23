@@ -3,10 +3,24 @@ import styles from "./AccountAdmin.module.scss";
 import { FaSearch } from "react-icons/fa";
 import TableAccountAdmin from './TableAccount/TableAccountAdmin';
 import { useOutletContext } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 const ListAccountAdmin = () => {
-  const adminToken = useOutletContext();
+  const admin = useOutletContext();
+  const [listAdminAccount, setListAdminAccount] = useState([]);
+  const getData = async () => {
+    const res = await axios.get("/api/admin/listAdminAccount", {
+      headers: {
+        Authorization: admin?.token,
+      },
+    })
+    setListAdminAccount(res.data);
+  }
+  useEffect(() => {
+    getData();
+  }, [])
   return (
     <div>
       <div className={cx("main-container")}>
@@ -34,36 +48,25 @@ const ListAccountAdmin = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <TableAccountAdmin
-                    id={1}
-                    name={"Admin"}
-                    email={"binhtrinh8122002@gmail.com"}
-                    password={12345678}
-                    date={"08/12/2002"}>
-                  </TableAccountAdmin>
-                  <TableAccountAdmin
-                    id={2}
-                    name={"Admin 1"}
-                    email={"binhtrinh8122002@gmail.com"}
-                    password={12345678}
-                    date={"08/12/2002"}>
-                  </TableAccountAdmin>
-                  <TableAccountAdmin
-                    id={3}
-                    name={"Admin 2"}
-                    email={"binhtrinh8122002@gmail.com"}
-                    password={12345678}
-                    date={"08/12/2002"}>
-                  </TableAccountAdmin>
+                  {listAdminAccount.map((admin) => {
+                    return <TableAccountAdmin
+                      id={admin.adminID}
+                      name={admin.adminName}
+                      email={admin.account}
+                      password={admin.password}
+                      date={new Date(admin.create_at).toLocaleDateString('en-GB', { timeZone: 'UTC' })}
+                    />
+                  })
+                  }
                 </tbody>
               </table>
               <div className={cx("pagination")}>
-                  <a class="active" href="#">1</a>
-                  <a href="#">2</a>
-                  <span>...</span>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                </div>
+                <a class="active" href="#">1</a>
+                <a href="#">2</a>
+                <span>...</span>
+                <a href="#">3</a>
+                <a href="#">4</a>
+              </div>
             </div>
           </section>
         </div>
