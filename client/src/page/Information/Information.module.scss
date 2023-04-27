@@ -1,0 +1,194 @@
+.body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #151515;
+    font-family: "Roboto", sans-serif;
+}
+
+.information {
+    padding-top: 80px;
+    padding-bottom: 30px;
+}
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    background-color: #242424;
+    padding: 20px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.container .title {
+    color: white;
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .header-title {
+    display: flex;
+}
+
+.back a {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    
+    margin-bottom: 10px;
+    background-color: #e58653;
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: -2%;
+    margin-left: 40%;
+    cursor: pointer;
+}
+
+.back a:hover {
+    background-color: #ea6016;
+    color: white;
+    border: 3px solid white;
+}
+
+.container .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    margin-bottom: -5px;
+    width: 100px;
+    border-radius: 5px;
+    background: #ea6016;
+}
+
+.avatar_user {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.image {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+}
+
+.image .profile-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+}
+
+.update_avatar a {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    padding: 3px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 3px solid #ea6016;
+    color: #ea6016;
+    font-size: 18px;
+    text-align: center;
+    margin-top: -10%;
+    margin-left: 4%;
+    cursor: pointer;
+}
+
+.update_avatar a:hover {
+    background-color: #ea6016;
+    color: white;
+    border: 3px solid white;
+}
+
+.text-data .name {
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.content form .user-details {
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+.category {
+    font-size: 16px;
+    color: white;
+    display: flex;
+    width: 80%;
+    margin: 14px 0;
+    justify-content: space-between;
+}
+
+.button {
+    height: 45px;
+    margin: 35px 0
+}
+
+.button button {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #ea6016;
+}
+
+form .button input:hover {
+    background-image: linear-gradient(90deg, #ea3c2a, #f80 50%, #ea3c2a);
+}
+
+@media(max-width: 584px) {
+    .container {
+        max-width: 100%;
+    }
+
+    form .user-details .input-box {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    form .category {
+        width: 100%;
+    }
+
+    .content form .user-details {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+
+    .user-details::-webkit-scrollbar {
+        width: 5px;
+    }
+}
+
+@media(max-width: 459px) {
+    .container .content .category {
+        flex-direction: column;
+    }
+}

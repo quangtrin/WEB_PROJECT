@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./page/Login/Login";
+import Infomation from "./page/Information/Information";
 import Register from "./page/Register/Register";
 import Home from "./page/Home/Home";
 import ListEpisode from "./page/ListEpisode/ListEpisode";
@@ -47,6 +48,7 @@ function App() {
       <Route path="/" element={<Home user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/:page" element={<Home user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/ListEpisode" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
+      <Route path="/Infomation" element={<Infomation user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/ListEpisode/:filmName" element={<ListEpisode user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/WatchFilm/:filmName" element={<WatchFilm user={user} setIsSignUp={setIsSignUp} />} />
       <Route path="/Register" element={<Register />} />
