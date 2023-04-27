@@ -13,7 +13,7 @@
     background-color: #fff;
     padding: 25px 30px;
     border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(234, 96, 22, 0.35);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .container .title {
@@ -30,7 +30,7 @@
     height: 3px;
     width: 80px;
     border-radius: 5px;
-    background: rgb(234, 96, 22);
+    background: #3498db;
 }
 
 .content form .user-details {
@@ -71,10 +71,7 @@ form .input-box span.details {
     transition: all 0.3s ease;
 }
 
-.user-details .input-box input:focus,
-.user-details .input-box input:valid {
-    border-color: #ea6016;
-}
+
 
 form .gender-details .gender-title {
     font-size: 16px;
@@ -114,7 +111,7 @@ form .gender-details .gender-title {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
-fieldset {
+.fieldset {
     display: flex;
     justify-content: space-between;
 }
@@ -167,12 +164,11 @@ form .button input {
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: #ea6016;
+    background: #3498db;
 }
 
 form .button input:hover {
-    /* transform: scale(0.99); */
-    background: #d44e06;
+    background: #8fc5e9;
 }
 
 @media(max-width: 584px) {

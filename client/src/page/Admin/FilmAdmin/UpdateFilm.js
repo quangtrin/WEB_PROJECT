@@ -1,7 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./UpdateFilm.module.scss";
 import { useOutletContext } from "react-router-dom";
-import InputBox from "./TableFilm/InputBox";
 
 const cx = classNames.bind(styles);
 const UpdateAdmin = () => {
@@ -116,7 +115,7 @@ const UpdateAdmin = () => {
                             </div>
                             <div className={cx("radio-box")}>
                                 <label>Trạng thái</label>
-                                <fieldset>
+                                <fieldset className={cx("fieldset")}>
                                     <div className={cx("input")}>
                                         <input
                                             type="radio"
