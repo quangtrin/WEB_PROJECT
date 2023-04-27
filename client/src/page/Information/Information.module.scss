@@ -29,6 +29,33 @@
     position: relative;
 }
 
+.container .header-title {
+    display: flex;
+}
+
+.back a {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    
+    margin-bottom: 10px;
+    background-color: #e58653;
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: -2%;
+    margin-left: 40%;
+    cursor: pointer;
+}
+
+.back a:hover {
+    background-color: #ea6016;
+    color: white;
+    border: 3px solid white;
+}
+
 .container .title::before {
     content: "";
     position: absolute;

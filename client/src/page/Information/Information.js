@@ -4,6 +4,8 @@ import { FaPen } from "react-icons/fa";
 import InputBox from "./InputBox/InputBox";
 import styles from "./Information.module.scss";
 
+import {FaArrowLeft} from "react-icons/fa";
+
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
@@ -17,6 +19,7 @@ const Information = ({ user, setIsSignUp }) => {
                 <div className={cx("information")}>
                     <div className={cx("container")}>
                         <div className={cx("title")}>Thông tin người dùng</div>
+                        <div className={cx("back")}><a href="#"><FaArrowLeft /></a></div>   
                         <div className={cx("avatar_user")}>
                             <div className={cx("image")}>
                                 <img src={userDefault} alt="" className={cx("profile-img")} />
