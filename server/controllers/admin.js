@@ -112,9 +112,9 @@ const adminController = {
     try {
       const [result] = await connect.query(sql);
       result.map((account) => {
-        const urlClone = account.url.split(" ");
+        const urlClone = account.avatar.split(" ");
         if (urlClone[1]) {
-          account.url = backEndHost.url + "/uploads/" + urlClone[0];
+          account.avatar = backEndHost.avatar + "/uploads/" + urlClone[0];
         }
         return account;
       })
