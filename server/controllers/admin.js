@@ -11,8 +11,8 @@ const adminController = {
     try {
       const [admin] = await connect.query(sql, [account, password]);
       admin.map((account) => {
-        const urlClone = account.avatar.split(" ");
-        if (urlClone[1]) {
+        const urlClone = account.avatar?.split(" ");
+        if (urlClone && urlClone[1]) {
           account.avatar = backEndHost.avatar + "/uploads/" + urlClone[0];
         }
         return account;
